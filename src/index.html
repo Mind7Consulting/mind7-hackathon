@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reflex7 — Mes parcours</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="icon" href="/assets/img/vigie-guide.png">
+</head>
+<body>
+<header class="topbar" id="topbar"></header>
+
+<main>
+  <div class="workspace-layout">
+    <aside class="side-nav" aria-label="Navigation du parcours">
+      <div class="side-nav-label">Mon espace</div>
+      <a class="side-nav-link active" href="/" aria-current="page"><span class="side-nav-icon">▦</span> Modules</a>
+      <a class="side-nav-link" href="/fiches.html"><span class="side-nav-icon">▤</span> Fiches mémo</a>
+      <a class="side-nav-link" href="/quiz.html"><span class="side-nav-icon">?</span> Quiz situations</a>
+    </aside>
+    <div class="workspace-content">
+  <section class="hero anim" id="hero"></section>
+
+  <div id="offline-notice" class="notice mb-2 hidden">
+    Mode local : la progression est stockée dans ce navigateur uniquement. En production sur Azure Static Web Apps,
+    l'authentification Entra ID et l'enregistrement centralisé prennent le relais automatiquement.
+  </div>
+
+  <section class="evolution-section mb-2" aria-labelledby="evolution-title">
+    <div class="section-heading evolution-heading">
+      <div><h2 id="evolution-title">Mon évolution</h2><p class="small muted">Un aperçu simple de ce que vous avez déjà construit.</p></div>
+    </div>
+    <div class="evolution-grid">
+      <article class="card evolution-card evolution-progress-card" id="evolution-progress"></article>
+      <article class="card evolution-card" id="evolution-recent"></article>
+      <article class="card evolution-card" id="evolution-themes"></article>
+      <article class="card evolution-card" id="evolution-regularity"></article>
+      <article class="card evolution-card evolution-goal-card" id="evolution-goal"></article>
+    </div>
+  </section>
+
+  <h2 style="font-size:1.15rem;margin:0 0 14px">Modules disponibles</h2>
+  <div class="catalog-toolbar mb-2">
+    <label class="search-field"><span aria-hidden="true">⌕</span><input type="search" id="module-search" placeholder="Rechercher un module…" aria-label="Rechercher un module"></label>
+    <div class="segmented" role="group" aria-label="Filtrer les modules par statut">
+      <button class="filter-btn active" data-filter="all">Tous <span id="count-all"></span></button>
+      <button class="filter-btn" data-filter="todo">À commencer <span id="count-todo"></span></button>
+      <button class="filter-btn" data-filter="progress">En cours <span id="count-progress"></span></button>
+      <button class="filter-btn" data-filter="done">Terminés <span id="count-done"></span></button>
+    </div>
+    <p class="small muted" id="filter-summary" aria-live="polite"></p>
+  </div>
+  <section class="grid grid-2" id="modules"></section>
+    </div>
+  </div>
+</main>
+<nav class="mobile-bottom-nav" aria-label="Navigation mobile">
+  <a class="active" href="/" aria-current="page"><span>▦</span>Modules</a>
+  <a href="/fiches.html"><span>▤</span>Fiches</a>
+  <a href="/quiz.html"><span>?</span>Quiz</a>
+</nav>
+
+<footer>Reflex7 · Contenus relus par l'équipe Sécurité · Usage pédagogique uniquement</footer>
+
+<script src="/assets/js/api.js"></script>
+<script>
+(async function () {
+  const user = await LMS.renderHeader('home');
+  if (!user) return;
+
+  if (LMS.isOffline()) document.getElementById('offline-notice').classList.remove('hidden');
+
+  const content = await LMS.getContent();
+  const progress = await LMS.getMyProgress();
+  const mascot = await LMS.mascot();
+  const quizContent = await LMS.getQuizContent();
+  const quizResult = await LMS.getQuizResult(quizContent.id || 'situations');
+
+  const total = content.modules.length;
+  const done = content.modules.filter(m => progress[m.id] && progress[m.id].passed).length;
+  const scores = content.modules.map(m => progress[m.id]).filter(Boolean).map(r => r.score);
+  const avg = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : null;
+  const pct = total ? Math.round(done / total * 100) : 0;
+
+  const escapeHtml = value => String(value || '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+  const categoryStats = (quizResult && quizResult.categoryStats) || {};
+  const activityDates = [
+    ...content.modules.map(module => progress[module.id] && progress[module.id].completedAt).filter(Boolean),
+    quizResult && (quizResult.lastAttemptAt || quizResult.completedAt)
+  ].filter(Boolean).map(value => new Date(value));
+  const lastVisitKey = 'lms.home.lastVisit';
+  const lastVisit = Number(localStorage.getItem(lastVisitKey) || 0);
+  const now = Date.now();
+  const newModules = lastVisit
+    ? content.modules.filter(module => progress[module.id] && progress[module.id].passed && new Date(progress[module.id].completedAt).getTime() > lastVisit)
+    : [];
+  localStorage.setItem(lastVisitKey, String(now));
+
+  const themeDefinitions = [
+    { label: 'Phishing', category: 'phishing', moduleIds: ['cyber-phishing-mobile'] },
+    { label: 'MFA', category: 'mfa', moduleIds: ['cyber-mots-de-passe'] },
+    { label: 'Signalement', category: 'signalement', moduleIds: ['cyber-signaler-incident'] },
+    { label: 'Données clients', category: 'donnees-client', moduleIds: ['cyber-donnees-clients'] },
+    { label: 'IA générative', category: 'ia', moduleIds: ['cyber-ia-generative'] }
+  ];
+  const themeState = theme => {
+    const stats = categoryStats[theme.category];
+    const moduleResult = theme.moduleIds.map(id => progress[id]).find(Boolean);
+    if (!stats && !moduleResult) return { label: 'À découvrir', className: 'discover' };
+    const ratio = stats && stats.answered ? stats.correct / stats.answered : (moduleResult ? moduleResult.score / 100 : 0);
+    if (ratio < .65) return { label: 'À consolider', className: 'reinforce' };
+    if (ratio >= .9) return { label: 'Solide', className: 'solid' };
+    return { label: 'Acquis', className: 'acquired' };
+  };
+  const weekStart = date => {
+    const value = new Date(date); value.setHours(0, 0, 0, 0);
+    const day = value.getDay() || 7; value.setDate(value.getDate() - day + 1); return value;
+  };
+  const currentWeek = weekStart(now);
+  const weeks = Array.from({ length: 8 }, (_, index) => {
+    const start = new Date(currentWeek); start.setDate(start.getDate() - (7 - index) * 7);
+    const end = new Date(start); end.setDate(end.getDate() + 7);
+    return { active: activityDates.some(date => date >= start && date < end), label: `Semaine ${index + 1}` };
+  });
+  const weakestTheme = themeDefinitions.map(theme => ({ theme, state: themeState(theme) })).find(item => item.state.label === 'À consolider');
+  const nextEssential = content.modules.find(module => module.level === 'Essentiel' && (!progress[module.id] || !progress[module.id].passed));
+  const goalTheme = weakestTheme ? weakestTheme.theme : null;
+
+  document.getElementById('evolution-progress').innerHTML = `
+    <div class="evolution-card-head"><span class="evolution-icon blue">↗</span><div><div class="eyebrow">Votre parcours</div><h3>Progression globale</h3></div></div>
+    <div class="evolution-big-number">${pct}<span>%</span></div>
+    <div class="evolution-bar"><i style="width:${pct}%"></i></div>
+    <p class="evolution-caption"><strong>${done} module${done > 1 ? 's' : ''} validé${done > 1 ? 's' : ''}</strong> sur ${total}<br>${total - done} module${total - done > 1 ? 's' : ''} à découvrir</p>`;
+  document.getElementById('evolution-recent').innerHTML = `
+    <div class="evolution-card-head"><span class="evolution-icon green">✓</span><div><div class="eyebrow">Depuis votre dernière visite</div><h3>Évolution récente</h3></div></div>
+    <ul class="evolution-list">${newModules.length ? `<li><b>✓</b> ${newModules.length} nouveau${newModules.length > 1 ? 'x' : ''} module${newModules.length > 1 ? 's' : ''} validé${newModules.length > 1 ? 's' : ''}</li>` : '<li><b>•</b> Continuez à votre rythme, votre prochaine étape vous attend.</li>'}${quizResult ? `<li><b>↑</b> ${quizResult.score} bonne${quizResult.score > 1 ? 's' : ''} réponse${quizResult.score > 1 ? 's' : ''} sur votre dernière série de ${quizResult.total} situations</li>` : '<li><b>•</b> Votre première série de situations vous attend.</li>'}</ul>`;
+  document.getElementById('evolution-themes').innerHTML = `
+    <div class="evolution-card-head"><span class="evolution-icon amber">✦</span><div><div class="eyebrow">Vos réflexes</div><h3>Par thème</h3></div></div>
+    <div class="theme-list">${themeDefinitions.map(theme => { const state = themeState(theme); return `<div class="theme-row"><span>${theme.label}</span><b class="theme-status ${state.className}">${state.label}</b></div>`; }).join('')}</div>`;
+  document.getElementById('evolution-regularity').innerHTML = `
+    <div class="evolution-card-head"><span class="evolution-icon purple">◷</span><div><div class="eyebrow">Votre rythme</div><h3>Régularité</h3></div></div>
+    <p class="evolution-caption">8 dernières semaines</p><div class="week-grid">${weeks.map(week => `<span class="week-dot ${week.active ? 'active' : ''}" title="${week.label} : ${week.active ? 'activité réalisée' : 'aucune activité enregistrée'}" aria-label="${week.label} : ${week.active ? 'active' : 'aucune activité'}"></span>`).join('')}</div><p class="small muted evolution-legend">Une semaine est active dès qu’une activité pédagogique est réalisée.</p>`;
+  document.getElementById('evolution-goal').innerHTML = goalTheme
+    ? `<div class="evolution-card-head"><span class="evolution-icon coral">→</span><div><div class="eyebrow">Votre prochain réflexe</div><h3>Un petit objectif</h3></div></div><p class="goal-text">Répondez à 5 situations sur <strong>${escapeHtml(goalTheme.label.toLowerCase())}</strong>.</p><p class="small muted">Environ 2 minutes · <a href="/quiz.html?category=${encodeURIComponent(goalTheme.category)}&limit=5">Commencer maintenant →</a></p>`
+    : `<div class="evolution-card-head"><span class="evolution-icon coral">→</span><div><div class="eyebrow">Votre prochain réflexe</div><h3>Un petit objectif</h3></div></div><p class="goal-text">${nextEssential ? `Découvrez « ${escapeHtml(nextEssential.title)} ».` : 'Faites une nouvelle série de situations pour entretenir vos réflexes.'}</p><p class="small muted">Environ 2 minutes · <a href="${nextEssential ? `/cours.html?m=${encodeURIComponent(nextEssential.id)}` : '/quiz.html'}">Commencer maintenant →</a></p>`;
+
+  const prenom = user.name.split('@')[0].split('.')[0];
+  const hello = prenom === 'mode' ? 'vous' : prenom.charAt(0).toUpperCase() + prenom.slice(1);
+
+  // La mascotte adapte sa pose et son message à l'avancement réel.
+  const allDone = done === total && total > 0;
+  const heroPose = await LMS.pose(allDone ? 'bravo' : 'guide');
+  const nextModule = content.modules.find(module => !progress[module.id] || !progress[module.id].passed);
+  const nextTitle = nextModule ? `« ${nextModule.title} »` : '';
+  const needsRetry = content.modules.find(module => progress[module.id] && !progress[module.id].passed);
+  const heroMsg = allDone
+    ? 'Tout le parcours est validé. Vous avez les bons réflexes en main — bravo, et merci d’avoir pris ce temps.'
+    : needsRetry && done > 0
+      ? `Beau début : ${done} module${done > 1 ? 's' : ''} validé${done > 1 ? 's' : ''}. Vous étiez tout près sur un autre ; on peut le reprendre tranquillement, sans pression.`
+      : done > 0
+        ? `Vous avez déjà validé ${done} module${done > 1 ? 's' : ''} sur ${total}. C’est une bonne base. Pour la suite, ${nextTitle} vous attend — quelques minutes suffisent.`
+        : `On commence doucement ? ${nextTitle} vous donnera les premiers repères, en quelques minutes. ${await LMS.welcomeLine()}`;
+
+  const moduleStatus = module => {
+    const result = progress[module.id];
+    return !result ? 'todo' : (result.passed ? 'done' : 'progress');
+  };
+
+  document.getElementById('hero').innerHTML = `
+    <img src="${heroPose}" alt="${mascot.name}, la mascotte de Mind7">
+    <div class="hero-txt">
+      <div class="hero-name">${mascot.name} · ${mascot.tagline}</div>
+      <h2>Bonjour ${hello}, on continue ?</h2>
+      <p>${heroMsg}</p>
+    </div>`;
+
+  function paintCatalog(filter) {
+    const query = document.getElementById('module-search').value.toLowerCase().trim();
+    const visible = content.modules.filter(m => {
+      const searchable = `${m.title} ${m.summary} ${m.level}`.toLowerCase();
+      return (filter === 'all' || moduleStatus(m) === filter) && (!query || searchable.includes(query));
+    });
+    document.getElementById('modules').innerHTML = visible.length ? visible.map(m => {
+      const res = progress[m.id];
+      return `
+      <a class="mod-card" href="/cours.html?m=${encodeURIComponent(m.id)}">
+        <div class="mod-meta">
+          ${LMS.statusBadge(res)}
+          <span class="badge">${m.duration} min</span>
+          <span class="badge">${m.level}</span>
+          ${m.aiGenerated ? '<span class="badge ai">Rédigé avec l\'IA · relu</span>' : ''}
+        </div>
+        <h3>${m.title}</h3>
+        <p>${m.summary}</p>
+        <span class="btn" style="align-self:flex-start">
+          ${res ? (res.passed ? 'Revoir le module' : 'Repasser le quiz') : 'Commencer'} →
+        </span>
+      </a>`;
+    }).join('') : '<div class="card empty grid-empty">Aucun module ne correspond à ce filtre.</div>';
+    document.getElementById('filter-summary').textContent = `${visible.length} module${visible.length > 1 ? 's' : ''} affiché${visible.length > 1 ? 's' : ''}`;
+  }
+
+  const counts = content.modules.reduce((all, module) => {
+    all[moduleStatus(module)]++;
+    return all;
+  }, { todo: 0, progress: 0, done: 0 });
+  document.getElementById('count-all').textContent = `(${content.modules.length})`;
+  document.getElementById('count-todo').textContent = `(${counts.todo})`;
+  document.getElementById('count-progress').textContent = `(${counts.progress})`;
+  document.getElementById('count-done').textContent = `(${counts.done})`;
+  document.querySelectorAll('.filter-btn').forEach(button => {
+    button.onclick = () => {
+      document.querySelectorAll('.filter-btn').forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+      paintCatalog(button.dataset.filter);
+    };
+  });
+  document.getElementById('module-search').oninput = () => {
+    const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+    paintCatalog(activeFilter);
+  };
+  paintCatalog('all');
+
+})();
+</script>
+</body>
+</html>

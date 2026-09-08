@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "auth": {
+    "rolesSource": "/api/getroles",
+    "identityProviders": {
+      "azureActiveDirectory": {
+        "registration": {
+          "openIdIssuer": "https://login.microsoftonline.com/<TENANT_ID>/v2.0",
+          "clientIdSettingName": "AAD_CLIENT_ID",
+          "clientSecretSettingName": "AAD_CLIENT_SECRET"
+        }
+      }
+    }
+  },
+  "routes": [
+    { "route": "/admin.html", "allowedRoles": ["admin"] },
+    { "route": "/api/admin/*", "allowedRoles": ["admin"] },
+    { "route": "/api/getroles", "allowedRoles": ["anonymous"] },
+    { "route": "/api/*", "allowedRoles": ["authenticated"] },
+    { "route": "/.auth/login/github", "statusCode": 404 },
+    { "route": "/.auth/login/twitter", "statusCode": 404 },
+    { "route": "/login", "rewrite": "/.auth/login/aad" },
+    { "route": "/logout", "redirect": "/.auth/logout" },
+    { "route": "/*", "allowedRoles": ["authenticated"] }
+  ],
+  "responseOverrides": {
+    "401": { "statusCode": 302, "redirect": "/.auth/login/aad" },
+    "403": { "rewrite": "/403.html", "statusCode": 403 },
+    "404": { "rewrite": "/404.html", "statusCode": 404 }
+  },
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/assets/*", "/content/*", "/api/*", "/*.css", "/*.js", "/*.json", "/*.png"]
+  },
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "geolocation=(), microphone=(), camera=()",
+    "Strict-Transport-Security": "max-age=63072000; includeSubDomains"
+  },
+  "mimeTypes": { ".json": "application/json", ".png": "image/png" }
+}

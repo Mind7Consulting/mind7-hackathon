@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reflex7 — Quiz situations</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="icon" href="/assets/img/vigie-guide.png">
+</head>
+<body>
+<header class="topbar" id="topbar"></header>
+
+<main>
+  <div class="workspace-layout">
+    <aside class="side-nav" aria-label="Navigation du parcours">
+      <div class="side-nav-label">Mon espace</div>
+      <a class="side-nav-link" href="/"><span class="side-nav-icon">▦</span> Modules</a>
+      <a class="side-nav-link" href="/fiches.html"><span class="side-nav-icon">▤</span> Fiches mémo</a>
+      <a class="side-nav-link active" href="/quiz.html" aria-current="page"><span class="side-nav-icon">?</span> Quiz situations</a>
+    </aside>
+
+    <div class="workspace-content">
+      <div class="page-head">
+        <h1>Quiz situations</h1>
+        <p>Un réflexe à tester en quelques secondes. Ce quiz ne modifie pas votre progression officielle.</p>
+      </div>
+      <section class="quiz-intro-card anim">
+        <img src="/assets/img/vigie-guide.png" alt="Vigie" class="quiz-intro-art">
+        <div><div class="eyebrow">Mise en situation</div><h2>Risque ou pas de risque ?</h2><p>Choisissez la réponse qui vous semble juste, puis lisez l'explication avant de passer au cas suivant.</p></div>
+      </section>
+      <div class="quiz-session-head">
+        <div class="quiz-progress-wrap">
+          <span class="q-num" id="progress-label">Situation 1 sur 8</span>
+          <div class="quiz-progress"><i id="quiz-progress-bar"></i></div>
+        </div>
+        <div class="quiz-scoreboard"><span class="badge" id="score-label">Score : 0 / 0</span><span class="quiz-streak" id="streak-label">Série : 0</span></div>
+      </div>
+      <section id="scenario">
+        <article class="card quiz-start-card anim">
+          <div class="quiz-start-mark">✦</div>
+          <div class="eyebrow">Prêt à tester vos réflexes ?</div>
+          <h2>Une série courte, un nouveau tirage à chaque fois</h2>
+          <p class="muted" id="review-hint">Chaque série contient jusqu'à 10 situations tirées au hasard dans la bibliothèque. Répondez, découvrez l'explication, puis recommencez pour vous entraîner.</p>
+          <button class="btn" id="start-quiz">Commencer le quiz →</button>
+        </article>
+      </section>
+    </div>
+  </div>
+</main>
+<nav class="mobile-bottom-nav" aria-label="Navigation mobile">
+  <a href="/"><span>▦</span>Modules</a>
+  <a href="/fiches.html"><span>▤</span>Fiches</a>
+  <a class="active" href="/quiz.html" aria-current="page"><span>?</span>Quiz</a>
+</nav>
+
+<footer>Reflex7 · Quiz d'entraînement · Usage pédagogique uniquement</footer>
+
+<script src="/assets/js/api.js"></script>
+<script>
+(async function () {
+  const user = await LMS.renderHeader('home');
+  if (!user) return;
+
+  const bravo = await LMS.pose('bravo');
+  const oups = await LMS.pose('oups');
+  const quiz = await LMS.getQuizContent();
+  const previousResult = await LMS.getQuizResult(quiz.id || 'situations');
+  const scenarios = quiz.scenarios || [];
+  const passScore = Number(quiz.passScore) || 75;
+  const reviewConfig = quiz.review || {};
+  const maxPerSeries = Math.min(10, Math.max(1, Number(reviewConfig.maxPerSeries) || 10));
+  const requestedLimit = Number(new URLSearchParams(location.search).get('limit')) || maxPerSeries;
+  const seriesLimit = Math.min(maxPerSeries, Math.max(1, requestedLimit));
+  const staleAfterDays = Math.max(1, Number(reviewConfig.staleAfterDays) || 14);
+  const errorWeight = Math.max(0, Number(reviewConfig.errorWeight) || 4);
+  const staleWeight = Math.max(0, Number(reviewConfig.staleWeight) || 2);
+  const requestedCategory = new URLSearchParams(location.search).get('category');
+  let deck = [];
+  let current = 0;
+  let answered = 0;
+  let score = 0;
+  let streak = 0;
+  let bestStreak = 0;
+  let round = 0;
+  let saveMessage = '';
+  let sessionStats = {};
+
+  const reviewCategory = Object.entries((previousResult && previousResult.categoryStats) || {})
+    .map(([category, stats]) => {
+      const errorRate = stats.answered ? (stats.answered - stats.correct) / stats.answered : 0;
+      const age = stats.lastPracticedAt ? (Date.now() - new Date(stats.lastPracticedAt).getTime()) / 864e5 : staleAfterDays * 2;
+      return { category, priority: errorRate * errorWeight + (age >= staleAfterDays ? staleWeight : age >= staleAfterDays / 2 ? staleWeight / 2 : 0) };
+    })
+    .sort((a, b) => b.priority - a.priority)[0];
+  if (!requestedCategory && reviewCategory && reviewCategory.priority >= 2) {
+    const label = reviewCategory.category.replace(/-/g, ' ');
+    document.getElementById('review-hint').textContent = `Révision recommandée : quelques situations sur ${label} pour consolider ce réflexe, sans refaire exactement la même série.`;
+  }
+
+  function shuffle(items) {
+    for (let index = items.length - 1; index > 0; index--) {
+      const randomIndex = Math.floor(Math.random() * (index + 1));
+      [items[index], items[randomIndex]] = [items[randomIndex], items[index]];
+    }
+    return items;
+  }
+
+  function escapeHtml(value) {
+    return String(value || '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+  }
+
+  function startRound() {
+    const pool = requestedCategory ? scenarios.filter(item => item.category === requestedCategory) : scenarios;
+    deck = drawReviewDeck(pool.length >= seriesLimit ? pool : scenarios, seriesLimit);
+    current = 0;
+    answered = 0;
+    score = 0;
+    streak = 0;
+    round++;
+    saveMessage = '';
+    sessionStats = {};
+    paint();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function reviewWeight(item) {
+    const stats = (previousResult && previousResult.categoryStats || {})[item.category];
+    if (!stats) return 2;
+    const errorRate = stats.answered ? (stats.answered - stats.correct) / stats.answered : 0;
+    const daysSincePractice = stats.lastPracticedAt ? (Date.now() - new Date(stats.lastPracticedAt).getTime()) / 864e5 : staleAfterDays * 2;
+    return 1 + errorRate * errorWeight + (daysSincePractice >= staleAfterDays ? staleWeight : daysSincePractice >= staleAfterDays / 2 ? staleWeight / 2 : 0);
+  }
+
+  function drawReviewDeck(source, limit) {
+    const pool = [...source];
+    const result = [];
+    while (pool.length && result.length < Math.min(limit, pool.length)) {
+      const totalWeight = pool.reduce((sum, item) => sum + reviewWeight(item), 0);
+      let cursor = Math.random() * totalWeight;
+      let selected = 0;
+      for (let index = 0; index < pool.length; index++) {
+        cursor -= reviewWeight(pool[index]);
+        if (cursor <= 0) { selected = index; break; }
+      }
+      result.push(pool.splice(selected, 1)[0]);
+    }
+    return result;
+  }
+
+  function paint() {
+    if (!deck.length) {
+      document.getElementById('scenario').innerHTML = '<div class="card empty">Aucun scénario disponible pour le moment.</div>';
+      return;
+    }
+    if (current >= deck.length) {
+      const percent = Math.round(score / deck.length * 100);
+      const passed = percent >= passScore;
+      document.getElementById('progress-label').textContent = 'Quiz terminé';
+      document.getElementById('quiz-progress-bar').style.width = '100%';
+      document.getElementById('score-label').textContent = `Score : ${score} / ${deck.length}`;
+      document.getElementById('streak-label').textContent = `Série max : ${bestStreak}`;
+      document.getElementById('scenario').innerHTML = `
+        <article class="card center quiz-result anim">
+          <img src="${passed ? bravo : oups}" alt="Vigie" class="vigie-result">
+          <div class="score-ring" style="background:${passed ? 'var(--ok-bg)' : 'var(--warn-bg)'};color:${passed ? 'var(--ok)' : 'var(--warn)'}">${percent}%</div>
+          <div class="quiz-result-burst">Tirage #${round} · série max ${bestStreak}</div>
+          <h2>${passed ? 'Bons réflexes' : 'Encore un petit entraînement'}</h2>
+          <p class="muted">Vous avez identifié correctement ${score} situation${score > 1 ? 's' : ''} sur ${deck.length}.</p>
+          <p class="small muted">${saveMessage}</p>
+          <button class="btn" id="restart">Nouveau tirage</button>
+        </article>`;
+      document.getElementById('restart').onclick = startRound;
+      return;
+    }
+
+    const item = deck[current];
+    document.getElementById('progress-label').textContent = `Situation ${current + 1} sur ${deck.length}`;
+    document.getElementById('quiz-progress-bar').style.width = `${Math.round(current / deck.length * 100)}%`;
+    document.getElementById('score-label').textContent = `Score : ${score} / ${answered}`;
+    document.getElementById('streak-label').textContent = `Série : ${streak}`;
+    document.getElementById('scenario').innerHTML = `
+      <article class="card scenario-card anim">
+        <div class="q-num">Observez la situation</div>
+        <h2>${escapeHtml(item.text)}</h2>
+        <div class="scenario-actions">
+          <button class="scenario-choice risk" data-risk="true"><span>!</span> C'est risqué</button>
+          <button class="scenario-choice safe" data-risk="false"><span>✓</span> Ce n'est pas risqué</button>
+        </div>
+        <div id="scenario-feedback"></div>
+      </article>`;
+
+    document.querySelectorAll('.scenario-choice').forEach(button => {
+      button.onclick = () => {
+        const choice = button.dataset.risk === 'true';
+        const correct = choice === item.risk;
+        answered++;
+        if (correct) {
+          score++;
+          streak++;
+          bestStreak = Math.max(bestStreak, streak);
+        } else {
+          streak = 0;
+        }
+        const category = item.category || 'general';
+        const categoryStat = sessionStats[category] || { answered: 0, correct: 0, lastPracticedAt: null, lastErrorAt: null };
+        categoryStat.answered++;
+        if (correct) categoryStat.correct++;
+        categoryStat.lastPracticedAt = new Date().toISOString();
+        if (!correct) categoryStat.lastErrorAt = categoryStat.lastPracticedAt;
+        sessionStats[category] = categoryStat;
+        document.querySelectorAll('.scenario-choice').forEach(itemButton => itemButton.disabled = true);
+        document.getElementById('scenario-feedback').innerHTML = `
+          <div class="vigie-react anim">
+            <img src="${correct ? bravo : oups}" alt="Vigie">
+            <div class="explain ${correct ? 'ok' : 'ko'}"><b>${correct ? '✓ Bien vu !' : '✕ À retenir'}</b>${escapeHtml(item.explanation)}</div>
+          </div>
+          <div class="row" style="justify-content:flex-end"><button class="btn mt-1" id="next-scenario">${current === deck.length - 1 ? 'Voir mon score' : 'Situation suivante →'}</button></div>`;
+        document.getElementById('next-scenario').onclick = async () => {
+          if (current === deck.length - 1) {
+            document.getElementById('next-scenario').disabled = true;
+            const saved = await LMS.saveQuizResult({ quizId: quiz.id || 'situations', score, total: deck.length, passScore, categoryStats: sessionStats });
+            saveMessage = LMS.isOffline()
+              ? 'Résultat conservé localement. Il sera visible dans le reporting après connexion à l\'API.'
+              : `Résultat transmis au reporting admin · meilleure tentative : ${saved.score}/${saved.total}.`;
+          }
+          current++;
+          paint();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        document.getElementById('score-label').textContent = `Score : ${score} / ${answered}`;
+      };
+    });
+  }
+
+  document.getElementById('progress-label').textContent = `${seriesLimit} situation${seriesLimit > 1 ? 's' : ''} dans cette série`;
+  document.getElementById('score-label').textContent = 'Prêt ?';
+  document.getElementById('streak-label').textContent = 'Série : 0';
+  document.getElementById('start-quiz').onclick = startRound;
+})();
+</script>
+</body>
+</html>

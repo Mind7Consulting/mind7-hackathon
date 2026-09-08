@@ -1,0 +1,697 @@
+{
+  "version": "2.1",
+  "updatedAt": "2026-09-08",
+  "id": "situations",
+  "title": "Quiz flash - Réflexes Cyber",
+  "instructions": "Pour chaque situation, évaluez le comportement décrit, et non uniquement le danger initial. Choisissez « C'est risqué » si l'action aggrave ou ignore le risque. Choisissez « Ce n'est pas risqué » si la réaction décrite est le bon réflexe. La correction précise toujours le signal d'alerte et la conduite à tenir.",
+  "passScore": 75,
+  "review": {
+    "maxPerSeries": 10,
+    "staleAfterDays": 14,
+    "errorWeight": 4,
+    "staleWeight": 2
+  },
+  "portalSecurityUrl": "https://mind7.atlassian.net/servicedesk/customer/portal/1",
+  "scenarios": [
+    {
+      "id": "mail-micr0soft-eu",
+      "category": "phishing",
+      "difficulty": "facile",
+      "text": "Un message signé « Microsoft 365 » vient de bonjour@micr0soft.eu et vous demande de confirmer votre mot de passe avant 17 h.",
+      "risk": true,
+      "explanation": "C'est risqué. Dans « micr0soft.eu », le deuxième « o » de Microsoft a été remplacé par le chiffre zéro. L'urgence et la demande de mot de passe renforcent l'alerte. Ne sélectionnez pas le lien, ne répondez pas et signalez le message. Si vous avez déjà agi, ouvrez immédiatement un ticket dans le Portail Sécurité Mind7."
+    },
+    {
+      "id": "mail-microsoftonline-legitime",
+      "category": "phishing",
+      "difficulty": "difficile",
+      "text": "Vous recevez un message de no-reply@microsoftonline.com. Comme le domaine semble connu, vous approuvez immédiatement la demande MFA reçue au même moment.",
+      "risk": true,
+      "explanation": "C'est risqué. Une adresse plausible ne justifie jamais une validation MFA que vous n'avez pas déclenchée. L'expéditeur peut être usurpé ou le message peut utiliser un service légitime à mauvais escient. Refusez la demande MFA, changez votre mot de passe depuis le portail officiel et signalez l'événement."
+    },
+    {
+      "id": "mail-sous-domaine-piege",
+      "category": "phishing",
+      "difficulty": "difficile",
+      "text": "Le lien affiché est https://microsoft.com.securite-compte.net. Vous considérez qu'il appartient à Microsoft parce que « microsoft.com » apparaît au début.",
+      "risk": true,
+      "explanation": "C'est risqué. Le domaine réel se lit juste avant la première barre oblique : ici, c'est « securite-compte.net ». « microsoft.com » n'est qu'un sous-domaine choisi pour tromper. N'ouvrez pas le lien et passez par l'adresse officielle saisie vous-même."
+    },
+    {
+      "id": "mail-reply-to-different",
+      "category": "phishing",
+      "difficulty": "difficile",
+      "text": "Un e-mail vient de facturation@fournisseur-connu.fr, mais le champ « Répondre à » indique paiement-urgent@gmail.com. Vous répondez avec les coordonnées demandées.",
+      "risk": true,
+      "explanation": "C'est risqué. Un champ « Répondre à » différent, surtout vers une messagerie grand public, peut détourner la conversation vers l'attaquant. Vérifiez la demande avec le fournisseur via un contact déjà connu et signalez le message."
+    },
+    {
+      "id": "mail-domaine-mind7-tiret",
+      "category": "phishing",
+      "difficulty": "facile",
+      "text": "Vous recevez une demande de document depuis direction@mind7-securite.com et l'envoyez, car le nom « Mind7 » figure dans l'adresse.",
+      "risk": true,
+      "explanation": "C'est risqué. La présence du nom de l'entreprise ne prouve rien. « mind7-securite.com » est un domaine distinct du domaine professionnel attendu. Vérifiez l'adresse complète, contactez la personne par le canal habituel et signalez la tentative."
+    },
+    {
+      "id": "mail-affichage-nom",
+      "category": "phishing",
+      "difficulty": "facile",
+      "text": "Dans Outlook, l'expéditeur apparaît sous le nom « Stéphane HUGOT », mais l'adresse réelle est contact-direction@outlook.com. Vous transférez le fichier demandé.",
+      "risk": true,
+      "explanation": "C'est risqué. Le nom affiché est librement modifiable. L'adresse réelle ne correspond pas au canal professionnel attendu. Ne transmettez rien et vérifiez la demande directement avec la personne par un autre canal."
+    },
+    {
+      "id": "mail-piece-jointe-html",
+      "category": "phishing",
+      "difficulty": "standard",
+      "text": "Un message de livraison contient une pièce jointe « Bon_de_livraison.html ». Vous l'ouvrez parce qu'il ne s'agit ni d'un fichier .exe ni d'un document Office.",
+      "risk": true,
+      "explanation": "C'est risqué. Un fichier HTML peut afficher une fausse page de connexion et voler les informations saisies. Une extension inhabituelle ou inattendue doit être traitée avec prudence. N'ouvrez pas la pièce jointe et signalez le message."
+    },
+    {
+      "id": "mail-double-extension",
+      "category": "phishing",
+      "difficulty": "facile",
+      "text": "Une pièce jointe s'appelle « facture_septembre.pdf.exe ». Vous l'ouvrez parce que vous voyez « .pdf » dans le nom.",
+      "risk": true,
+      "explanation": "C'est risqué. La véritable extension est la dernière : « .exe ». Le mot « .pdf » fait seulement partie du nom. Ne lancez jamais ce type de fichier et signalez immédiatement le message."
+    },
+    {
+      "id": "mail-qr-code",
+      "category": "phishing",
+      "difficulty": "standard",
+      "text": "Un e-mail vous demande de scanner un QR code avec votre téléphone pour renouveler votre accès Microsoft 365.",
+      "risk": true,
+      "explanation": "C'est risqué. Un QR code masque l'adresse de destination et déplace l'ouverture vers le téléphone, où les contrôles sont moins visibles. N'utilisez pas le QR code. Ouvrez le service depuis votre favori ou son adresse officielle et signalez le message."
+    },
+    {
+      "id": "mail-lien-appui-long",
+      "category": "phishing",
+      "difficulty": "facile",
+      "text": "Sur mobile, vous faites un appui long sur un lien. L'adresse affichée ne correspond pas au service annoncé, alors vous fermez le message et le signalez.",
+      "risk": false,
+      "explanation": "Bon réflexe. L'appui long permet d'inspecter l'adresse avant ouverture. Comme le domaine ne correspond pas au service annoncé, vous n'ouvrez pas le lien et vous le signalez."
+    },
+    {
+      "id": "mail-typo-domaine",
+      "category": "phishing",
+      "difficulty": "standard",
+      "text": "Vous recevez une invitation de partage depuis notifications@sharep0int-online.com. Le message reprend le logo Microsoft et le nom d'un collègue.",
+      "risk": true,
+      "explanation": "C'est risqué. « sharep0int » contient un zéro à la place de la lettre « o » et le domaine n'est pas une preuve de partage Microsoft légitime. Le logo et le nom d'un collègue peuvent être copiés. Vérifiez le partage depuis Microsoft 365, sans utiliser le lien reçu."
+    },
+    {
+      "id": "mail-urgence-salaire",
+      "category": "phishing",
+      "difficulty": "facile",
+      "text": "Un message prétend que votre salaire sera bloqué ce soir si vous ne mettez pas à jour vos coordonnées bancaires via un formulaire.",
+      "risk": true,
+      "explanation": "C'est risqué. La menace d'une conséquence immédiate cherche à empêcher la vérification. Ne saisissez aucune donnée. Contactez les RH par leur canal habituel et signalez le message."
+    },
+    {
+      "id": "mail-verification-portail",
+      "category": "phishing",
+      "difficulty": "facile",
+      "text": "Après avoir reçu un message inhabituel sur votre compte Microsoft 365, vous fermez le mail et ouvrez vous-même le portail habituel depuis votre favori.",
+      "risk": false,
+      "explanation": "Bon réflexe. Vous ne vous fiez pas au lien reçu et vous vérifiez l'information depuis un point d'entrée connu. Si le message paraît frauduleux, signalez-le également."
+    },
+    {
+      "id": "mail-conversation-detournee",
+      "category": "phishing",
+      "difficulty": "difficile",
+      "text": "Dans une conversation réelle avec un fournisseur, un nouveau message vous demande soudainement de payer sur un autre IBAN.",
+      "risk": true,
+      "explanation": "C'est risqué. Une boîte mail compromise peut servir à détourner une conversation existante. Toute modification bancaire doit être vérifiée par téléphone avec un interlocuteur connu, en utilisant un numéro déjà enregistré, puis signalée en cas de doute."
+    },
+    {
+      "id": "mail-desabonnement-phishing",
+      "category": "phishing",
+      "difficulty": "standard",
+      "text": "Vous pensez qu'un e-mail est frauduleux, mais vous sélectionnez « Se désabonner » en bas du message pour ne plus le recevoir.",
+      "risk": true,
+      "explanation": "C'est risqué. Dans un message frauduleux, le lien de désabonnement peut mener vers un site malveillant ou confirmer que votre adresse est active. Utilisez le bouton de signalement Outlook, puis supprimez le message après les consignes reçues."
+    },
+    {
+      "id": "mfa-number-matching",
+      "category": "mfa",
+      "difficulty": "standard",
+      "text": "Vous vous connectez vous-même à Microsoft 365. L'écran affiche le nombre 42 et l'application d'authentification vous demande de saisir 42.",
+      "risk": false,
+      "explanation": "Cette situation est normale si vous avez vous-même lancé la connexion, que le service et l'emplacement correspondent à votre action. La correspondance de numéro relie la demande MFA à la connexion en cours. Refusez dès qu'un élément ne correspond pas."
+    },
+    {
+      "id": "mfa-number-inattendu",
+      "category": "mfa",
+      "difficulty": "facile",
+      "text": "Sans être en train de vous connecter, vous recevez une demande Authenticator qui affiche un nombre à saisir.",
+      "risk": true,
+      "explanation": "C'est risqué. Une demande MFA non sollicitée peut signifier qu'un tiers possède déjà votre mot de passe. Refusez-la, changez votre mot de passe depuis le portail officiel et signalez immédiatement l'événement dans le Portail Sécurité Mind7."
+    },
+    {
+      "id": "mfa-refusee-et-signalee",
+      "category": "mfa",
+      "difficulty": "standard",
+      "text": "Vous recevez une notification MFA que vous n'avez pas déclenchée. Vous la refusez, changez votre mot de passe depuis le portail officiel, puis signalez immédiatement l'événement.",
+      "risk": false,
+      "explanation": "Votre réaction est correcte. La notification inattendue est un signal d'incident, mais vous ne l'approuvez pas : vous la refusez, sécurisez votre compte depuis le portail officiel et alertez l'équipe sécurité. Le piège consiste à confondre le danger initial avec l'action évaluée. Ici, la demande MFA est dangereuse, mais votre réaction ne l'est pas."
+    },
+    {
+      "id": "mfa-code-support",
+      "category": "mfa",
+      "difficulty": "facile",
+      "text": "Une personne se présentant comme le support vous demande le code à six chiffres affiché dans Authenticator pour vérifier votre identité.",
+      "risk": true,
+      "explanation": "C'est une tentative de fraude. Un code MFA est un secret temporaire qui permet de finaliser une connexion. Le Support IT ne doit jamais vous demander de le communiquer. Raccrochez et contactez le support via son canal habituel."
+    },
+    {
+      "id": "mfa-approbation-fatigue",
+      "category": "mfa",
+      "difficulty": "facile",
+      "text": "Après dix notifications MFA successives, vous en approuvez une pour qu'elles s'arrêtent.",
+      "risk": true,
+      "explanation": "C'est précisément le mécanisme de la fatigue MFA. En approuvant, vous pouvez donner accès à l'attaquant. Refusez toutes les demandes, changez immédiatement votre mot de passe depuis le portail officiel et signalez l'incident."
+    },
+    {
+      "id": "mot-passe-partage-manager",
+      "category": "mots-de-passe",
+      "difficulty": "facile",
+      "text": "Votre manager vous demande votre mot de passe afin de consulter un dossier pendant votre absence.",
+      "risk": true,
+      "explanation": "C'est risqué, même si la demande vient réellement de votre manager. Un mot de passe est personnel et ne se partage jamais. Faites accorder les droits nécessaires au dossier ou utilisez une délégation prévue à cet effet."
+    },
+    {
+      "id": "mot-passe-unique-coffre",
+      "category": "mots-de-passe",
+      "difficulty": "facile",
+      "text": "Vous générez un mot de passe unique dans le gestionnaire validé par l'entreprise et vous ne le réutilisez sur aucun autre service.",
+      "risk": false,
+      "explanation": "Bon réflexe. Un mot de passe unique empêche qu'une fuite sur un service compromette automatiquement vos autres comptes. Le gestionnaire permet de conserver cette unicité sans devoir tout mémoriser."
+    },
+    {
+      "id": "mot-passe-client-mind7",
+      "category": "mots-de-passe",
+      "difficulty": "facile",
+      "text": "Vous utilisez le même mot de passe pour votre compte client et votre compte Mind7 afin de ne pas l'oublier.",
+      "risk": true,
+      "explanation": "C'est risqué. Si l'un des deux environnements est compromis, l'attaquant essaiera le même mot de passe sur l'autre. Utilisez un mot de passe unique pour chaque service et stockez-le dans le gestionnaire autorisé."
+    },
+    {
+      "id": "mot-passe-postit",
+      "category": "mots-de-passe",
+      "difficulty": "facile",
+      "text": "Votre phrase de passe est longue, mais elle est écrite sur un post-it collé sous le clavier.",
+      "risk": true,
+      "explanation": "C'est risqué. La longueur ne protège pas un secret visible physiquement. Conservez vos mots de passe dans le gestionnaire validé, jamais sur un papier accessible près du poste."
+    },
+    {
+      "id": "incident-clic-sans-saisie",
+      "category": "signalement",
+      "difficulty": "facile",
+      "text": "Vous avez sélectionné un lien suspect, mais vous n'avez rien saisi. Vous décidez de ne rien signaler puisqu'aucun mot de passe n'a été communiqué.",
+      "risk": true,
+      "explanation": "C'est risqué. Le site peut avoir déclenché un téléchargement, collecté des informations techniques ou confirmé que votre adresse est active. Signalez immédiatement ce que vous avez fait dans le Portail Sécurité Mind7, même sans saisie d'identifiants."
+    },
+    {
+      "id": "incident-ticket-factuel",
+      "category": "signalement",
+      "difficulty": "facile",
+      "text": "Dans le Portail Sécurité Mind7, vous indiquez l'heure, le message observé, le lien sélectionné et le fait que vous n'avez saisi aucun identifiant.",
+      "risk": false,
+      "explanation": "Bon réflexe. Ces informations factuelles permettent d'adapter rapidement la réponse. Il n'est pas nécessaire d'identifier l'attaquant ou de produire une analyse technique."
+    },
+    {
+      "id": "incident-secret-ticket",
+      "category": "signalement",
+      "difficulty": "facile",
+      "text": "Pour aider le support, vous copiez dans le ticket le mot de passe que vous avez saisi sur le faux site.",
+      "risk": true,
+      "explanation": "C'est risqué. Un ticket ne doit jamais contenir de mot de passe, de code MFA, de clé API ou de secret. Indiquez seulement qu'un secret a été saisi, puis changez-le immédiatement depuis le portail officiel et suivez les consignes du support."
+    },
+    {
+      "id": "incident-suppression-preuve",
+      "category": "signalement",
+      "difficulty": "standard",
+      "text": "Après avoir signalé un e-mail suspect, vous le supprimez définitivement et videz la corbeille avant que l'équipe sécurité ne vous réponde.",
+      "risk": true,
+      "explanation": "C'est risqué. La suppression peut faire disparaître des éléments utiles à l'analyse. Utilisez le bouton de signalement ou suivez les consignes reçues, sans chercher à effacer vous-même les traces."
+    },
+    {
+      "id": "incident-portail-indisponible",
+      "category": "signalement",
+      "difficulty": "standard",
+      "text": "Le Portail Sécurité Mind7 est indisponible. Vous envoyez immédiatement les faits à support-it@mind7.fr, sans inclure de secret.",
+      "risk": false,
+      "explanation": "Bon réflexe. L'adresse support-it@mind7.fr sert de canal de secours lorsque le portail n'est pas disponible. Pour une situation grave ou active, complétez par un contact direct via le canal interne habituel."
+    },
+    {
+      "id": "incident-doute-raisonnable",
+      "category": "signalement",
+      "difficulty": "facile",
+      "text": "Votre poste ouvre brièvement une fenêtre inconnue puis elle disparaît. Vous ouvrez un ticket même si vous n'êtes pas certain qu'il s'agisse d'un incident.",
+      "risk": false,
+      "explanation": "Bon réflexe. Vous n'avez pas à confirmer la cause avant de signaler. Décrivez simplement ce que vous avez vu, l'heure et les actions effectuées. L'équipe sécurité qualifiera l'événement."
+    },
+    {
+      "id": "incident-perte-badge",
+      "category": "signalement",
+      "difficulty": "facile",
+      "text": "Vous constatez la perte de votre badge en rentrant chez vous et vous attendez le lendemain pour vérifier s'il est au bureau.",
+      "risk": true,
+      "explanation": "C'est risqué. Un badge perdu est un accès physique potentiellement utilisable. Signalez la perte immédiatement pour permettre sa désactivation, même s'il peut être retrouvé ensuite."
+    },
+    {
+      "id": "incident-faux-positif",
+      "category": "signalement",
+      "difficulty": "facile",
+      "text": "Vous avez signalé un message qui s'avère légitime. Vous considérez malgré tout que le signalement était utile.",
+      "risk": false,
+      "explanation": "Exact. Un signalement de bonne foi peut aboutir à une fausse alerte. Le bon comportement consiste à faire vérifier un doute, pas à attendre d'avoir une certitude technique."
+    },
+    {
+      "id": "teams-faux-collegue",
+      "category": "ingenierie-sociale",
+      "difficulty": "standard",
+      "text": "Un collègue vous écrit sur Teams pour demander en urgence un export client. Le ton est inhabituel. Vous l'appelez sur son numéro habituel avant toute action.",
+      "risk": false,
+      "explanation": "Bon réflexe. Un compte Teams peut être compromis. La vérification par un autre canal, avec un numéro déjà connu, permet de confirmer l'identité sans dépendre du compte potentiellement compromis."
+    },
+    {
+      "id": "appel-numero-standard",
+      "category": "ingenierie-sociale",
+      "difficulty": "facile",
+      "text": "Le numéro affiché correspond au standard de l'entreprise. Vous communiquez donc votre code MFA à l'appelant qui dit appartenir au support.",
+      "risk": true,
+      "explanation": "C'est risqué. Le numéro affiché peut être usurpé et un code MFA ne se communique jamais. Raccrochez et rappelez le support via un numéro ou un canal que vous connaissez déjà."
+    },
+    {
+      "id": "linkedin-fichier-mission",
+      "category": "ingenierie-sociale",
+      "difficulty": "standard",
+      "text": "Un recruteur LinkedIn vous envoie un fichier ZIP contenant une présentation de mission très attractive. Vous l'ouvrez sur votre poste professionnel.",
+      "risk": true,
+      "explanation": "C'est risqué. Une offre attractive et inattendue peut servir de prétexte à l'ouverture d'un fichier malveillant. N'ouvrez pas l'archive sur le poste professionnel et vérifiez l'identité du recruteur et de l'entreprise."
+    },
+    {
+      "id": "visiteur-accompagne",
+      "category": "physique",
+      "difficulty": "facile",
+      "text": "Une personne sans badge dit être attendue par la direction. Vous l'accompagnez à l'accueil au lieu de lui ouvrir directement l'accès.",
+      "risk": false,
+      "explanation": "Bon réflexe. Une personne légitime peut être orientée et prise en charge. Vous restez courtois sans contourner le contrôle d'accès."
+    },
+    {
+      "id": "talonnage-politesse",
+      "category": "physique",
+      "difficulty": "facile",
+      "text": "Une personne chargée de cartons vous suit à l'entrée. Vous retenez la porte sans vérifier son badge pour l'aider.",
+      "risk": true,
+      "explanation": "C'est risqué. Le talonnage exploite la politesse pour contourner le contrôle d'accès. Aidez la personne autrement, mais laissez chaque personne utiliser son propre badge ou passer par l'accueil."
+    },
+    {
+      "id": "demande-confidentielle-dirigeant",
+      "category": "ingenierie-sociale",
+      "difficulty": "facile",
+      "text": "Une personne se présentant comme un dirigeant demande par SMS l'achat urgent de cartes cadeaux et exige que l'opération reste confidentielle.",
+      "risk": true,
+      "explanation": "C'est un scénario classique de fraude. L'urgence, l'autorité, le canal inhabituel et la confidentialité sont plusieurs signaux combinés. N'effectuez aucun achat, vérifiez directement avec la personne et signalez la tentative."
+    },
+    {
+      "id": "appel-client-verification",
+      "category": "ingenierie-sociale",
+      "difficulty": "standard",
+      "text": "Un client vous appelle depuis un nouveau numéro et demande des détails sur un incident. Vous vérifiez son identité et son besoin via les contacts habituels avant de répondre.",
+      "risk": false,
+      "explanation": "Bon réflexe. Le numéro et la voix ne suffisent pas à établir l'identité. La vérification par les coordonnées habituelles évite de divulguer des informations à un imposteur."
+    },
+    {
+      "id": "client-envoi-mind7",
+      "category": "donnees-client",
+      "difficulty": "facile",
+      "text": "Vous vous envoyez un fichier client sur votre adresse Mind7 pour le reprendre sur votre autre poste.",
+      "risk": true,
+      "explanation": "C'est risqué. L'adresse Mind7 se trouve dans un autre périmètre. Les données du client restent dans l'environnement autorisé par le client, sauf autorisation formelle et canal prévu."
+    },
+    {
+      "id": "client-synthese-anonyme",
+      "category": "donnees-client",
+      "difficulty": "standard",
+      "text": "Pour une réunion interne, vous recréez une synthèse sans nom, sans capture d'écran et sans donnée brute du client.",
+      "risk": false,
+      "explanation": "Bon réflexe, à condition que la synthèse ne permette pas de réidentifier des personnes ou de révéler une information confidentielle. Vous faites circuler l'analyse utile, pas les données qui l'ont produite."
+    },
+    {
+      "id": "client-photo-tableau",
+      "category": "donnees-client",
+      "difficulty": "facile",
+      "text": "Vous photographiez avec votre téléphone personnel un tableau blanc présentant l'architecture du client pour ne pas perdre les notes.",
+      "risk": true,
+      "explanation": "C'est risqué. La photographie crée une copie sur un équipement et potentiellement dans un cloud personnel. Utilisez uniquement les outils et les méthodes autorisés par le client."
+    },
+    {
+      "id": "client-capture-ecran",
+      "category": "donnees-client",
+      "difficulty": "standard",
+      "text": "Vous faites une capture d'écran d'une application client, puis vous masquez seulement le logo avant de la partager en interne.",
+      "risk": true,
+      "explanation": "C'est insuffisant. La capture peut encore contenir des noms, identifiants, données métier, adresses ou éléments d'architecture. Ne partagez pas de copie brute. Produisez une synthèse dédiée et anonymisée."
+    },
+    {
+      "id": "client-lien-public",
+      "category": "donnees-client",
+      "difficulty": "facile",
+      "text": "Vous partagez un document client avec l'option « Toute personne disposant du lien », puis vous prévoyez de supprimer le lien demain.",
+      "risk": true,
+      "explanation": "C'est risqué. Pendant toute sa durée de validité, le lien peut être transmis à des personnes non prévues. Utilisez un partage nominatif, limité aux personnes autorisées, avec une expiration adaptée si le client le permet."
+    },
+    {
+      "id": "client-partage-nominatif",
+      "category": "donnees-client",
+      "difficulty": "facile",
+      "text": "Vous partagez un document avec les seules personnes autorisées, après avoir vérifié leurs adresses et le périmètre du client.",
+      "risk": false,
+      "explanation": "Bon réflexe. Le partage nominatif limite l'accès. Vérifiez néanmoins le contenu, les destinataires, la durée nécessaire et les règles du client avant l'envoi."
+    },
+    {
+      "id": "client-script-reutilise",
+      "category": "donnees-client",
+      "difficulty": "standard",
+      "text": "Vous reprenez chez le client B un script développé pendant une mission pour le client A, car vous en êtes l'auteur.",
+      "risk": true,
+      "explanation": "C'est risqué. Le fait d'avoir écrit le script ne prouve pas que vous en détenez les droits ni qu'il ne contient aucun élément propre au client A. Obtenez une validation explicite avant toute réutilisation."
+    },
+    {
+      "id": "client-incident-procedure",
+      "category": "donnees-client",
+      "difficulty": "difficile",
+      "text": "Vous détectez une vulnérabilité chez un client et vous la signalez selon sa procédure, puis vous informez votre manager Mind7 de l'existence de l'incident sans sortir les détails techniques.",
+      "risk": false,
+      "explanation": "Bon réflexe. Le traitement technique reste dans le périmètre et la procédure du client. Mind7 peut être informé de la situation sans recevoir inutilement les données ou détails sensibles du client."
+    },
+    {
+      "id": "fin-mission-acces",
+      "category": "donnees-client",
+      "difficulty": "facile",
+      "text": "Votre mission se termine. Vous demandez la révocation de vos accès et supprimez les éventuelles données locales selon les instructions du client.",
+      "risk": false,
+      "explanation": "Bon réflexe. La fin de mission doit fermer les accès et supprimer les copies qui ne sont plus nécessaires, conformément aux consignes et aux engagements du client."
+    },
+    {
+      "id": "ia-code-client-public",
+      "category": "ia",
+      "difficulty": "facile",
+      "text": "Vous retirez le nom du client puis collez 15 lignes de son code dans un outil d'IA public pour corriger une erreur.",
+      "risk": true,
+      "explanation": "C'est risqué. Retirer le nom du client ne supprime ni la logique métier, ni les noms techniques, ni les éléments confidentiels. La petite taille de l'extrait ne change pas la transmission à un tiers. Utilisez uniquement les outils autorisés par le client et par Mind7."
+    },
+    {
+      "id": "ia-cle-api",
+      "category": "ia",
+      "difficulty": "facile",
+      "text": "Vous fournissez une clé API à un assistant IA afin qu'il puisse reproduire l'erreur rencontrée.",
+      "risk": true,
+      "explanation": "C'est risqué. Une clé API est un secret donnant potentiellement accès à un service ou à des données. Ne la saisissez dans aucun assistant. Révoquez-la si elle a déjà été exposée et signalez l'incident."
+    },
+    {
+      "id": "ia-donnees-fictives",
+      "category": "ia",
+      "difficulty": "standard",
+      "text": "Pour demander de l'aide sur un traitement, vous remplacez les données réelles par un petit exemple fictif qui ne reprend aucune information client.",
+      "risk": false,
+      "explanation": "Bon réflexe. Un exemple réellement fictif réduit le risque de divulgation. Vérifiez qu'il ne conserve aucun nom, identifiant, valeur, structure sensible ou secret issu de l'environnement réel."
+    },
+    {
+      "id": "ia-copilot-tout-autorise",
+      "category": "ia",
+      "difficulty": "standard",
+      "text": "Vous utilisez Copilot avec votre compte professionnel et considérez que tout contenu client peut donc y être collé.",
+      "risk": true,
+      "explanation": "C'est faux. La protection de l'outil ne remplace ni le contrat client, ni la classification des données, ni le principe de minimisation. En mission, utilisez uniquement les outils et les contenus explicitement autorisés par le client."
+    },
+    {
+      "id": "ia-reference-norme",
+      "category": "ia",
+      "difficulty": "facile",
+      "text": "Une IA vous fournit un numéro précis de contrôle ISO 27001. Vous vérifiez la référence dans la source officielle avant de l'utiliser.",
+      "risk": false,
+      "explanation": "Bon réflexe. Une IA peut produire une référence plausible mais erronée. La vérification dans une source fiable reste indispensable avant transmission ou intégration dans un livrable."
+    },
+    {
+      "id": "ia-cv-reel",
+      "category": "ia",
+      "difficulty": "standard",
+      "text": "Vous collez le CV complet d'un candidat dans un outil d'IA pour obtenir un résumé plus rapide.",
+      "risk": true,
+      "explanation": "C'est risqué. Un CV contient des données personnelles. N'utilisez que les outils, finalités et traitements autorisés, en limitant strictement les données transmises. En cas de doute, demandez validation avant traitement."
+    },
+    {
+      "id": "mobilite-partage-connexion",
+      "category": "mobilite",
+      "difficulty": "facile",
+      "text": "Dans un café, vous utilisez le partage de connexion de votre téléphone et vous évitez d'ouvrir un document client sensible.",
+      "risk": false,
+      "explanation": "Bon réflexe. Le partage de connexion évite le Wi-Fi public, mais il ne protège pas des regards ou des conversations entendues. Reporter l'ouverture d'un document sensible reste parfois la meilleure décision."
+    },
+    {
+      "id": "mobilite-wifi-https",
+      "category": "mobilite",
+      "difficulty": "standard",
+      "text": "Dans un hôtel, vous utilisez le Wi-Fi ouvert pour consulter des données professionnelles parce que le navigateur affiche un cadenas.",
+      "risk": true,
+      "explanation": "C'est risqué. Le cadenas indique que la connexion au site est chiffrée, pas que le réseau ou le site sont légitimes. Privilégiez le partage de connexion et respectez les moyens d'accès imposés par le client."
+    },
+    {
+      "id": "mobilite-client-acces",
+      "category": "mobilite",
+      "difficulty": "standard",
+      "text": "Chez un client, vous utilisez uniquement le moyen d'accès qu'il fournit et vous respectez ses consignes, même si elles diffèrent des habitudes Mind7.",
+      "risk": false,
+      "explanation": "Bon réflexe. Dans l'environnement du client, ses règles et ses moyens d'accès autorisés s'appliquent. En cas de contradiction ou de doute, faites clarifier la situation avant d'agir."
+    },
+    {
+      "id": "mobilite-ecran-train",
+      "category": "mobilite",
+      "difficulty": "difficile",
+      "text": "Dans le train, vous ouvrez une liste nominative client avec un filtre de confidentialité, car cela suffit à supprimer tout risque.",
+      "risk": true,
+      "explanation": "C'est risqué. Un filtre réduit l'angle de vision, mais ne protège ni d'une personne derrière vous, ni d'une photo, ni d'une conversation visible à l'écran. Certains documents sensibles ne doivent pas être ouverts dans un lieu public."
+    },
+    {
+      "id": "mobilite-appel-wagon",
+      "category": "mobilite",
+      "difficulty": "facile",
+      "text": "Vous reportez un appel portant sur un incident client parce que vous êtes dans un wagon entouré de voyageurs.",
+      "risk": false,
+      "explanation": "Bon réflexe. Les informations prononcées peuvent être entendues. Un sujet sensible doit être traité dans un environnement où la confidentialité de la conversation est maîtrisée."
+    },
+    {
+      "id": "mobilite-borne-usb",
+      "category": "mobilite",
+      "difficulty": "facile",
+      "text": "À l'aéroport, vous branchez votre téléphone professionnel sur une borne USB publique avec un câble trouvé sur place.",
+      "risk": true,
+      "explanation": "C'est risqué. Un port USB peut permettre des échanges de données. Utilisez votre propre chargeur sur une prise secteur ou une batterie externe."
+    },
+    {
+      "id": "mobilite-vol-weekend",
+      "category": "mobilite",
+      "difficulty": "facile",
+      "text": "Votre ordinateur est volé le samedi. Vous ouvrez immédiatement un ticket sécurité et contactez directement le Support IT via le canal interne habituel.",
+      "risk": false,
+      "explanation": "Bon réflexe. Le signalement immédiat permet d'engager rapidement les mesures de protection. N'attendez ni le lundi ni le dépôt de plainte pour alerter."
+    },
+    {
+      "id": "mobilite-ordinateur-voiture",
+      "category": "mobilite",
+      "difficulty": "facile",
+      "text": "Vous laissez votre ordinateur professionnel dans le coffre fermé de votre voiture pendant un rendez-vous.",
+      "risk": true,
+      "explanation": "C'est risqué. Un coffre ne protège pas contre le vol du véhicule ou son effraction. Gardez l'équipement avec vous ou utilisez une solution de conservation explicitement autorisée."
+    },
+    {
+      "id": "logiciel-conversion-en-ligne",
+      "category": "outils",
+      "difficulty": "facile",
+      "text": "Pour convertir rapidement un document client, vous le déposez sur un site gratuit trouvé dans un moteur de recherche.",
+      "risk": true,
+      "explanation": "C'est risqué. Vous transmettez le document à un service tiers dont les conditions et la conservation sont inconnues. Utilisez un outil validé ou demandez au Support IT une solution adaptée."
+    },
+    {
+      "id": "logiciel-portail-valide",
+      "category": "outils",
+      "difficulty": "facile",
+      "text": "Vous avez besoin d'un outil. Vous vérifiez d'abord s'il est déjà fourni ou validé, puis vous sollicitez le Support IT si nécessaire.",
+      "risk": false,
+      "explanation": "Bon réflexe. Cela évite d'introduire un logiciel non maîtrisé et permet d'utiliser une solution couverte, maintenue et adaptée aux données traitées."
+    },
+    {
+      "id": "usb-trouvee",
+      "category": "materiel",
+      "difficulty": "facile",
+      "text": "Vous trouvez une clé USB dans les locaux et vous la branchez quelques secondes pour identifier son propriétaire.",
+      "risk": true,
+      "explanation": "C'est risqué. Une clé inconnue peut exécuter ou contenir un logiciel malveillant. Ne la branchez sur aucun poste. Remettez-la au Support IT."
+    },
+    {
+      "id": "usb-client-autorisee",
+      "category": "materiel",
+      "difficulty": "standard",
+      "text": "Un client vous fournit une clé USB pour la mission. Avant de l'utiliser, vous vérifiez qu'elle est autorisée par sa procédure et par le poste concerné.",
+      "risk": false,
+      "explanation": "Bon réflexe. L'origine connue ne suffit pas toujours : les règles du client et les restrictions du poste doivent être respectées. N'utilisez pas le support si son usage n'est pas explicitement prévu."
+    },
+    {
+      "id": "session-deux-minutes",
+      "category": "poste",
+      "difficulty": "facile",
+      "text": "Vous quittez votre poste pendant deux minutes et vous verrouillez la session.",
+      "risk": false,
+      "explanation": "Bon réflexe. Quelques secondes suffisent pour consulter une messagerie, copier un document ou agir sous votre identité. Verrouillez le poste à chaque absence."
+    },
+    {
+      "id": "session-domicile",
+      "category": "poste",
+      "difficulty": "facile",
+      "text": "À domicile, vous laissez votre session ouverte pendant que vous allez déjeuner, car seules des personnes de confiance sont présentes.",
+      "risk": true,
+      "explanation": "C'est risqué. Le poste professionnel reste réservé à son utilisateur et doit être verrouillé dès que vous vous éloignez, quel que soit le lieu."
+    },
+    {
+      "id": "imprimante-document",
+      "category": "poste",
+      "difficulty": "facile",
+      "text": "Vous imprimez un document confidentiel, puis vous allez le récupérer plus tard lorsque l'imprimante est libre.",
+      "risk": true,
+      "explanation": "C'est risqué. Le document peut être lu, emporté ou mélangé à d'autres impressions. Récupérez-le immédiatement et détruisez-le dans le dispositif prévu lorsqu'il n'est plus nécessaire."
+    },
+    {
+      "id": "mise-a-jour-reporte",
+      "category": "poste",
+      "difficulty": "standard",
+      "text": "Une mise à jour de sécurité demande un redémarrage. Vous choisissez un créneau dans la journée pour l'appliquer sans interrompre une présentation en cours.",
+      "risk": false,
+      "explanation": "Bon réflexe. Vous conciliez continuité de travail et correction rapide. Ne reportez pas indéfiniment une mise à jour de sécurité."
+    },
+    {
+      "id": "crise-fichiers-renommes",
+      "category": "crise",
+      "difficulty": "facile",
+      "text": "Plusieurs fichiers deviennent soudainement illisibles et portent une extension inconnue. Vous redémarrez le poste pour voir si le problème disparaît.",
+      "risk": true,
+      "explanation": "C'est risqué. Cela peut correspondre à un chiffrement malveillant. Un redémarrage ou un nettoyage peut détruire des traces utiles. Ouvrez immédiatement un ticket sécurité, contactez directement le Support IT et appliquez ses consignes."
+    },
+    {
+      "id": "crise-client-question",
+      "category": "crise",
+      "difficulty": "standard",
+      "text": "Pendant un incident en cours, un client vous demande ce qui s'est passé. Vous lui dites que sa question est transmise et qu'une personne habilitée reviendra vers lui.",
+      "risk": false,
+      "explanation": "Bon réflexe. La communication de crise doit être cohérente et fondée sur des faits validés. Vous ne niez pas, vous ne spéculez pas et vous transmettez la demande aux personnes habilitées."
+    },
+    {
+      "id": "crise-reseaux-sociaux",
+      "category": "crise",
+      "difficulty": "facile",
+      "text": "Vous publiez sur votre compte privé que Mind7 rencontre « un petit souci informatique », sans donner de détail.",
+      "risk": true,
+      "explanation": "C'est risqué. Même vague et publiée sur un compte personnel, cette information peut être reprise, inquiéter des clients ou renseigner un attaquant. Ne communiquez pas à l'extérieur sans validation."
+    },
+    {
+      "id": "crise-service-revient",
+      "category": "crise",
+      "difficulty": "facile",
+      "text": "Le service recommence à répondre. Vous attendez néanmoins l'annonce officielle avant de vous reconnecter.",
+      "risk": false,
+      "explanation": "Bon réflexe. Un service peut sembler disponible alors que les opérations de confinement ou de restauration ne sont pas terminées. Le retour à la normale doit être confirmé par le canal officiel."
+    },
+    {
+      "id": "destinataire-auto-complete",
+      "category": "confidentialite",
+      "difficulty": "facile",
+      "text": "Avant d'envoyer un fichier RH, vous contrôlez chaque adresse proposée automatiquement par Outlook et vérifiez la pièce jointe.",
+      "risk": false,
+      "explanation": "Bon réflexe. L'autocomplétion peut proposer un homonyme ou un ancien contact. Une vérification finale du destinataire, du contenu et des droits de partage évite une divulgation accidentelle."
+    },
+    {
+      "id": "destinataire-erreur",
+      "category": "confidentialite",
+      "difficulty": "standard",
+      "text": "Après l'envoi, vous découvrez qu'un document est parti au mauvais destinataire. Vous lui demandez seulement de le supprimer et vous considérez l'incident clos.",
+      "risk": true,
+      "explanation": "C'est insuffisant. La demande de suppression est utile, mais elle ne prouve pas que le document n'a pas été lu, copié ou transféré. Signalez immédiatement l'erreur dans le Portail Sécurité Mind7 et suivez les consignes."
+    },
+    {
+      "id": "bcc-clients",
+      "category": "confidentialite",
+      "difficulty": "standard",
+      "text": "Vous envoyez une information à de nombreux contacts externes et placez leurs adresses dans le champ Cci afin qu'elles ne soient pas visibles entre elles.",
+      "risk": false,
+      "explanation": "C'est le bon réflexe si l'envoi collectif est autorisé et pertinent. Vérifiez aussi la liste, le contenu, la finalité et l'outil utilisé. Pour une communication sensible ou régulière, utilisez le canal interne prévu."
+    },
+    {
+      "id": "copie-collegue-inutile",
+      "category": "confidentialite",
+      "difficulty": "facile",
+      "text": "Vous ajoutez plusieurs collègues en copie d'un e-mail contenant des données personnelles, simplement « pour information ».",
+      "risk": true,
+      "explanation": "C'est risqué. Chaque destinataire doit avoir un besoin réel de connaître l'information. Limitez la diffusion aux seules personnes nécessaires et retirez les données qui ne sont pas utiles."
+    },
+    {
+      "id": "faux-domaine-punycode",
+      "category": "phishing",
+      "difficulty": "difficile",
+      "text": "L'adresse du lien semble presque identique au site attendu, mais une lettre a une forme légèrement différente. Vous ouvrez le service depuis votre favori au lieu d'utiliser ce lien.",
+      "risk": false,
+      "explanation": "Bon réflexe. Certains domaines utilisent des caractères visuellement proches pour imiter une adresse légitime. Le favori ou l'adresse officielle saisie directement évite de dépendre du lien reçu."
+    },
+    {
+      "id": "partage-client-expiration",
+      "category": "partage",
+      "difficulty": "standard",
+      "text": "Vous accordez un accès nominatif à un prestataire autorisé et vous définissez une date d'expiration correspondant à la durée réelle du besoin.",
+      "risk": false,
+      "explanation": "Bon réflexe. L'accès est limité à une personne identifiée et à une durée utile. Vérifiez également que le propriétaire du document et les règles du client autorisent ce partage."
+    },
+    {
+      "id": "partage-ancien-invite",
+      "category": "partage",
+      "difficulty": "standard",
+      "text": "Vous réutilisez un ancien lien de partage externe parce que le prestataire a déjà travaillé avec Mind7 l'année précédente.",
+      "risk": true,
+      "explanation": "C'est risqué. Un besoin ancien ne justifie pas un accès actuel. Vérifiez l'identité, le sponsor, le périmètre et la durée du nouveau besoin avant de réaccorder un accès."
+    },
+    {
+      "id": "calendrier-invitation-fichier",
+      "category": "phishing",
+      "difficulty": "standard",
+      "text": "Une invitation de calendrier inconnue contient un lien « Consulter le document ». Vous sélectionnez le lien parce qu'une invitation est moins suspecte qu'un e-mail.",
+      "risk": true,
+      "explanation": "C'est risqué. Une invitation de calendrier peut contenir le même type de lien frauduleux qu'un e-mail. Vérifiez l'organisateur et ouvrez le service depuis son point d'entrée officiel."
+    },
+    {
+      "id": "notification-navigateur",
+      "category": "phishing",
+      "difficulty": "facile",
+      "text": "Un site affiche « Votre ordinateur est infecté, appelez immédiatement ce numéro ». Vous fermez l'onglet sans appeler et ouvrez un ticket si le comportement persiste.",
+      "risk": false,
+      "explanation": "Bon réflexe. Ce type de message cherche souvent à provoquer un appel vers un faux support. Ne téléphonez pas au numéro affiché, n'installez rien et signalez les symptômes persistants."
+    },
+    {
+      "id": "code-source-secret",
+      "category": "secrets",
+      "difficulty": "standard",
+      "text": "Avant de partager un extrait de configuration dans un ticket, vous retirez les mots de passe mais laissez une clé privée et un jeton d'accès.",
+      "risk": true,
+      "explanation": "C'est risqué. Une clé privée et un jeton sont également des secrets. Ne les transmettez pas. Révoquez-les s'ils ont déjà été exposés et signalez l'incident."
+    },
+    {
+      "id": "appel-enregistrement",
+      "category": "confidentialite",
+      "difficulty": "standard",
+      "text": "Un interlocuteur externe demande l'autorisation d'enregistrer une réunion contenant des informations client. Vous acceptez sans vérifier les règles du client.",
+      "risk": true,
+      "explanation": "C'est risqué. L'enregistrement crée une nouvelle copie et peut déclencher des exigences contractuelles ou de confidentialité. Vérifiez l'autorisation du client et informez clairement les participants avant tout enregistrement."
+    }
+  ]
+}

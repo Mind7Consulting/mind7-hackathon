@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reflex7 — Module</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="icon" href="/assets/img/vigie-guide.png">
+</head>
+<body>
+<header class="topbar" id="topbar"></header>
+
+<main style="max-width:760px">
+  <a href="/" class="small muted" style="text-decoration:none">← Retour aux modules</a>
+  <div class="page-head mt-1">
+    <h1 id="title">…</h1>
+    <p id="sub"></p>
+  </div>
+  <div class="steps" id="steps"></div>
+  <div id="stage"></div>
+</main>
+
+<footer>Reflex7 · Aucune réponse individuelle n'est conservée, seul le score final est enregistré</footer>
+
+<script src="/assets/js/api.js"></script>
+<script>
+(async function () {
+  const user = await LMS.renderHeader();
+  if (!user) return;
+
+  const id = new URLSearchParams(location.search).get('m');
+  const mod = await LMS.getModule(id);
+  const stage = document.getElementById('stage');
+  const P = {
+    guide: await LMS.pose('guide'),
+    bravo: await LMS.pose('bravo'),
+    oups: await LMS.pose('oups')
+  };
+  const mascot = await LMS.mascot();
+
+  if (!mod) {
+    stage.innerHTML = `<div class="card empty"><img src="${P.oups}" alt="">Module introuvable.<br><a href="/">Revenir au catalogue</a></div>`;
+    return;
+  }
+
+  document.getElementById('title').textContent = mod.title;
+  document.getElementById('sub').textContent = mod.summary;
+
+  const nbSteps = mod.lessons.length + 1;   // leçons + bloc quiz
+  let step = 0;
+  const answers = [];
+
+  function paintSteps() {
+    document.getElementById('steps').innerHTML =
+      Array.from({ length: nbSteps }, (_, i) => `<i class="${i <= step ? 'done' : ''}"></i>`).join('');
+  }
+
+  /* ---------- Leçons ---------- */
+  function renderLesson() {
+    const l = mod.lessons[step];
+    const last = step === mod.lessons.length - 1;
+    stage.innerHTML = `
+      <article class="card lesson anim">
+        <div class="q-num">Étape ${step + 1} sur ${mod.lessons.length}</div>
+        <h2>${l.title}</h2>
+        ${l.vigie ? `
+          <div class="vigie">
+            <img src="${P.guide}" alt="${mascot.name}">
+            <div class="bubble"><b>${mascot.name}</b>${l.vigie}</div>
+          </div>` : ''}
+        ${LMS.mdToHtml(l.body)}
+        <div class="row between mt-2">
+          <button class="btn ghost" id="prev" ${step === 0 ? 'disabled' : ''}>← Précédent</button>
+          <button class="btn" id="next">${last ? 'Passer au quiz →' : 'Continuer →'}</button>
+        </div>
+      </article>`;
+    document.getElementById('prev').onclick = () => { step--; paintSteps(); renderLesson(); scrollTop(); };
+    document.getElementById('next').onclick = () => {
+      step++;
+      paintSteps();
+      if (step < mod.lessons.length) renderLesson(); else renderQuiz(0);
+      scrollTop();
+    };
+    paintSteps();
+  }
+
+  /* ---------- Quiz ---------- */
+  function renderQuiz(qi) {
+    const q = mod.quiz[qi];
+    stage.innerHTML = `
+      <article class="card anim">
+        <div class="q-num">Question ${qi + 1} sur ${mod.quiz.length}</div>
+        <div class="q-text">${q.question}</div>
+        <div class="choices" id="choices">
+          ${q.choices.map((c, i) => `
+            <button class="choice" data-i="${i}">
+              <span class="mark">${String.fromCharCode(65 + i)}</span>
+              <span>${c}</span>
+            </button>`).join('')}
+        </div>
+        <div id="feedback"></div>
+      </article>`;
+
+    document.querySelectorAll('.choice').forEach(btn => {
+      btn.onclick = () => {
+        const chosen = +btn.dataset.i;
+        const ok = chosen === q.answer;
+        answers.push(ok);
+
+        document.querySelectorAll('.choice').forEach((b, i) => {
+          b.disabled = true;
+          if (i === q.answer) b.classList.add('correct');
+          else if (i === chosen) b.classList.add('wrong');
+        });
+
+        const last = qi === mod.quiz.length - 1;
+        // La mascotte réagit : félicitation ou encouragement, jamais de reproche.
+        document.getElementById('feedback').innerHTML = `
+          <div class="vigie-react anim">
+            <img src="${ok ? P.bravo : P.oups}" alt="${mascot.name}">
+            <div class="explain ${ok ? 'ok' : 'ko'}">
+              <b>${ok ? '✓ Bien vu !' : '✕ Pas tout à fait'}</b>
+              ${q.explanation}
+            </div>
+          </div>
+          <div class="row" style="justify-content:flex-end">
+            <button class="btn mt-1" id="nextq">${last ? 'Voir mon résultat →' : 'Question suivante →'}</button>
+          </div>`;
+
+        document.getElementById('nextq').onclick = () => {
+          if (last) renderResult(); else renderQuiz(qi + 1);
+          scrollTop();
+        };
+      };
+    });
+  }
+
+  /* ---------- Résultat ---------- */
+  async function renderResult() {
+    const good = answers.filter(Boolean).length;
+    const score = good / mod.quiz.length * 100;
+    const passed = score >= mod.passScore;
+
+    const tone = passed ? 'ok' : (score >= 50 ? 'warn' : 'err');
+    const colors = {
+      ok: ['var(--ok-bg)', 'var(--ok)'],
+      warn: ['var(--warn-bg)', 'var(--warn)'],
+      err: ['var(--err-bg)', 'var(--err)']
+    }[tone];
+
+    const reco = passed ? mod.recommendations.high
+               : score >= 50 ? mod.recommendations.medium
+               : mod.recommendations.low;
+
+    const vigieSays = passed
+      ? 'Module validé, et surtout : ces réflexes sont maintenant les vôtres.'
+      : (score >= 50
+          ? 'Vous n\'êtes pas loin. Un passage rapide sur la section indiquée et c\'est bon.'
+          : 'Aucun souci, on reprend tranquillement. C\'est fait pour ça.');
+
+    stage.innerHTML = `
+      <article class="card center anim">
+        <img class="vigie-result" src="${passed ? P.bravo : P.oups}" alt="${mascot.name}">
+        <div class="score-ring" style="background:${colors[0]};color:${colors[1]}">${Math.round(score)}%</div>
+        <h2 class="mt-0">${passed ? 'Module validé' : (score >= 50 ? 'Presque !' : 'À retravailler')}</h2>
+        <p class="muted">${good} bonne${good > 1 ? 's' : ''} réponse${good > 1 ? 's' : ''} sur ${mod.quiz.length}
+           · seuil de réussite : ${mod.passScore}%</p>
+        <div class="bubble mt-2" style="text-align:left">
+          <b>${mascot.name}</b>${vigieSays}
+        </div>
+        <div class="explain" style="text-align:left;border-left-color:${colors[1]}">
+          <b>Recommandation</b>${reco}
+        </div>
+        <div class="row mt-2" style="justify-content:center">
+          <button class="btn ghost" id="again">Refaire le quiz</button>
+          ${passed ? `<a class="btn ghost" href="/recap.html?m=${encodeURIComponent(mod.id)}">Voir ma fiche mémo</a>` : ''}
+          <a class="btn" href="/">Retour aux modules</a>
+        </div>
+        <p class="small muted mt-2" id="saveinfo">Enregistrement en cours…</p>
+      </article>`;
+
+    document.getElementById('again').onclick = () => {
+      answers.length = 0; step = 0; paintSteps(); renderQuiz(0); scrollTop();
+    };
+
+    paintSteps();
+    try {
+      await LMS.saveResult({ moduleId: mod.id, score, passed });
+      document.getElementById('saveinfo').textContent = LMS.isOffline()
+        ? 'Résultat enregistré localement (mode local).'
+        : 'Résultat enregistré. Seuls le module, le score et la date sont conservés.';
+    } catch {
+      document.getElementById('saveinfo').textContent = 'Résultat non enregistré — réessayez plus tard.';
+    }
+  }
+
+  function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+  renderLesson();
+})();
+</script>
+</body>
+</html>

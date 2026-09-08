@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reflex7 — Fiche mémo</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="icon" href="/assets/img/vigie-guide.png">
+</head>
+<body>
+<header class="topbar" id="topbar"></header>
+
+<main>
+  <a href="/fiches.html" class="small muted" style="text-decoration:none">← Retour aux fiches mémo</a>
+  <div id="stage" class="mt-1"></div>
+</main>
+<nav class="mobile-bottom-nav" aria-label="Navigation mobile">
+  <a href="/"><span>▦</span>Modules</a>
+  <a class="active" href="/fiches.html" aria-current="page"><span>▤</span>Fiches</a>
+  <a href="/quiz.html"><span>?</span>Quiz</a>
+</nav>
+
+<footer>Reflex7 · Fiche mémo personnelle · Usage pédagogique uniquement</footer>
+
+<script src="/assets/js/api.js"></script>
+<script>
+(async function () {
+  const user = await LMS.renderHeader('home');
+  if (!user) return;
+
+  const id = new URLSearchParams(location.search).get('m');
+  const stage = document.getElementById('stage');
+  const mod = await LMS.getModule(id);
+  const progress = await LMS.getMyProgress();
+  const recapContent = await LMS.getRecaps();
+  const guide = await LMS.pose('guide');
+  const bravo = await LMS.pose('bravo');
+  const mascot = await LMS.mascot();
+
+  if (!mod) {
+    stage.innerHTML = `<div class="card empty"><img src="${await LMS.pose('oups')}" alt="">Module introuvable.<br><a href="/">Revenir au catalogue</a></div>`;
+    return;
+  }
+
+  if (!progress[mod.id] || !progress[mod.id].passed) {
+    stage.innerHTML = `
+      <div class="card empty">
+        <img src="${guide}" alt="${mascot.name}">
+        <h1>Fiche mémo verrouillée</h1>
+        <p>Validez le module « ${escapeHtml(mod.title)} » pour débloquer cette fiche.</p>
+        <a class="btn" href="/cours.html?m=${encodeURIComponent(mod.id)}">Commencer le module →</a>
+      </div>`;
+    return;
+  }
+
+  const recap = Object.assign({}, recapContent.defaults || {}, (recapContent.modules || {})[mod.id] || {});
+
+  function escapeHtml(value) {
+    return String(value || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  }
+
+  const lessons = (recap.lessonIndexes || [0, 1, 2]).map(index => mod.lessons[index]).filter(Boolean);
+  const result = progress[mod.id];
+
+  stage.innerHTML = `
+    <section class="recap-hero anim">
+      <div class="recap-hero-art"><img src="${bravo}" alt="${mascot.name}, félicitations"></div>
+      <div>
+        <div class="eyebrow">${escapeHtml(recap.eyebrow)}</div>
+        <h1>${escapeHtml(mod.title)}</h1>
+        <p>${escapeHtml(recap.summary || mod.summary)}</p>
+        <span class="badge ok">Validé · ${result.score}%</span>
+      </div>
+    </section>
+
+    <section class="recap-callout">
+      <span class="recap-icon">✦</span>
+      <div><strong>${escapeHtml(recap.calloutTitle || 'Le réflexe à garder')}</strong><p>${escapeHtml(mod.lessons[0].vigie || 'Ralentir, vérifier, signaler.')}</p></div>
+    </section>
+
+    <section class="recap-grid">
+      ${lessons.map((lesson, index) => `
+        <article class="recap-point">
+          <div class="recap-number">${index + 1}</div>
+          <div class="recap-point-content"><h2>${escapeHtml(lesson.title)}</h2><p class="recap-vigie">${escapeHtml(lesson.vigie || '')}</p><p class="recap-summary">${escapeHtml((recap.lessonSummaries || [])[index] || 'Retenez le réflexe principal de cette étape.')}</p></div>
+        </article>`).join('')}
+    </section>
+
+    <section class="card recap-checklist">
+      <div class="row between"><div><div class="eyebrow">${escapeHtml(recap.checklistEyebrow || "Avant d'agir")}</div><h2>${escapeHtml(recap.checklistTitle || 'Le mini-check réflexe')}</h2></div><img src="${guide}" alt="${mascot.name}" class="recap-guide"></div>
+      <div class="checklist-items">
+        ${(recap.checklist || []).map((item, index) => `<span><b>${String(index + 1).padStart(2, '0')}</b> ${escapeHtml(item)}</span>`).join('')}
+      </div>
+    </section>
+
+    <div class="row recap-actions">
+      <button class="btn ghost" id="print-recap" type="button">Imprimer la fiche</button>
+      <a class="btn ghost" href="/cours.html?m=${encodeURIComponent(mod.id)}">Revoir le module</a>
+      <a class="btn" href="/fiches.html">Voir toutes mes fiches</a>
+    </div>`;
+    document.getElementById('print-recap').onclick = () => window.print();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-09-08",
+  "defaults": {
+    "summary": "Les réflexes essentiels, en une page.",
+    "lockedSummary": "Validez le module pour débloquer votre fiche.",
+    "eyebrow": "Fiche mémo · module validé",
+    "calloutTitle": "Le réflexe à garder",
+    "checklistTitle": "Le mini-check réflexe",
+    "checklistEyebrow": "Avant d'agir",
+    "checklist": ["Je ralentis", "Je vérifie par le bon canal", "Je signale au moindre doute"],
+    "lessonSummaries": ["Retenez l'idée principale de cette étape.", "Appliquez ce réflexe dans vos situations courantes.", "En cas de doute, vérifiez puis signalez."],
+    "lessonIndexes": [0, 1, 2]
+  },
+  "modules": {
+    "intro-bienvenue": {
+      "summary": "Le mode d'emploi de Réflexes Cyber, en un coup d'oeil.",
+      "calloutTitle": "Le réflexe à retenir",
+      "lessonSummaries": [
+        "Réflexes Cyber propose des modules courts pour reconnaître les situations à risque et adopter les bons gestes.",
+        "Un module combine micro-cours, quiz corrigé et fiche mémo débloquée après validation.",
+        "Les filtres de l'accueil et de la bibliothèque permettent de retrouver rapidement ce qui est à faire ou déjà acquis."
+      ],
+      "checklist": ["Je choisis le bon filtre", "Je valide pour débloquer la fiche", "Je reviens réviser quand nécessaire"]
+    },
+    "cyber-phishing-mobile": {
+      "summary": "Les signaux qui doivent vous faire ralentir sur mobile.",
+      "calloutTitle": "Le réflexe mobile",
+      "lessonSummaries": [
+        "Sur mobile, l'attention est fragmentée et l'adresse réelle d'un expéditeur est moins visible.",
+        "Vérifiez l'adresse complète, l'urgence du message et toute demande d'identifiants.",
+        "Ne cliquez pas dans l'urgence : ouvrez vous-même le service officiel et signalez le message suspect."
+      ],
+      "checklist": ["Je vérifie l'adresse réelle", "Je ne clique pas dans l'urgence", "Je signale le message suspect"]
+    },
+    "cyber-mots-de-passe": {
+      "summary": "Les règles essentielles pour protéger ses comptes.",
+      "calloutTitle": "Le réflexe compte",
+      "lessonSummaries": [
+        "Une phrase de passe longue est plus solide qu'un mot de passe court rempli de substitutions prévisibles.",
+        "Un service doit avoir un mot de passe unique ; le gestionnaire évite la réutilisation.",
+        "Une demande MFA inattendue se refuse et se signale : elle peut indiquer un mot de passe compromis."
+      ],
+      "checklist": ["Un service, un mot de passe", "Je refuse une MFA inattendue", "Je signale toute suspicion"]
+    },
+    "cyber-hygiene-informatique": {
+      "summary": "Les gestes quotidiens qui réduisent les incidents courants.",
+      "lessonSummaries": [
+        "Les incidents viennent souvent de petits relâchements : système non mis à jour, session ouverte ou sauvegarde absente.",
+        "Installez les mises à jour, verrouillez votre poste dès que vous partez et gardez vos appareils à jour.",
+        "Utilisez les espaces d'entreprise, privilégiez une connexion maîtrisée et ne branchez jamais une clé inconnue."
+      ],
+      "checklist": ["Je mets à jour", "Je verrouille ma session", "Je signale les supports inconnus"]
+    },
+    "cyber-signaler-incident": {
+      "summary": "Savoir quoi signaler, par quel canal et sans attendre.",
+      "lessonSummaries": [
+        "Plus un incident est signalé tôt, plus les conséquences peuvent être limitées.",
+        "Mail suspect, clic, MFA inattendue, perte de matériel ou partage erroné : le doute suffit pour signaler.",
+        "Décrivez les faits, l'heure et ce que vous avez fait ; ne supprimez pas les traces et ne transmettez aucun secret."
+      ],
+      "checklist": ["Je signale vite", "Je décris les faits", "Je ne nettoie pas les traces"]
+    },
+    "cyber-ingenierie-sociale": {
+      "summary": "Reconnaître la manipulation, quel que soit le canal.",
+      "lessonSummaries": [
+        "L'ingénierie sociale exploite la confiance, la serviabilité et la pression plutôt qu'une faille technique.",
+        "Urgence, autorité, familiarité et curiosité deviennent préoccupantes lorsqu'elles se combinent.",
+        "Ralentissez, vérifiez par un autre canal et accompagnez les visiteurs inconnus au lieu de les laisser circuler."
+      ],
+      "checklist": ["Je ralentis", "Je vérifie autrement", "Je signale la tentative"]
+    },
+    "cyber-ia-generative": {
+      "summary": "Utiliser l'IA sans transformer une conversation en fuite de données.",
+      "lessonSummaries": [
+        "Un outil d'IA public est un tiers : y coller un contenu client revient à le transmettre hors du périmètre.",
+        "Les outils validés offrent un cadre différent, mais ne rendent pas toutes les données saisissables.",
+        "L'IA propose ; vous vérifiez les faits, le code, les références et les contraintes du client avant de livrer."
+      ],
+      "checklist": ["Je vérifie l'outil", "Je retire les données sensibles", "Je relis le résultat"]
+    },
+    "cyber-donnees-clients": {
+      "summary": "Garder les données clients dans le bon périmètre.",
+      "lessonSummaries": [
+        "Les données du client restent dans son environnement : ne les copiez pas vers un poste, cloud ou compte personnel.",
+        "Pour partager, préférez un accès nominatif avec expiration et anonymisez les synthèses internes.",
+        "En fin de mission, supprimez les copies locales et faites révoquer les accès explicitement."
+      ],
+      "checklist": ["Je respecte le périmètre", "Je partage nominativement", "Je nettoie en fin de mission"]
+    },
+    "cyber-en-cas-de-crise": {
+      "summary": "Savoir quoi faire, et surtout quoi éviter, pendant une crise.",
+      "lessonSummaries": [
+        "En crise, votre rôle est de ne pas aggraver : signalez, restez joignable et n'improvisez pas.",
+        "Ne redémarrez pas un poste concerné et prévoyez des canaux de secours si les outils habituels sont indisponibles.",
+        "La communication externe est centralisée ; attendez le signal officiel avant de vous reconnecter."
+      ],
+      "checklist": ["Je signale directement", "Je ne manipule rien", "J'attends les consignes"]
+    },
+    "mission-deux-environnements": {
+      "summary": "Maintenir une frontière nette entre l'environnement client et celui de l'entreprise.",
+      "lessonSummaries": [
+        "Les données client restent chez le client, même si votre adresse professionnelle semble pratique pour finir un livrable.",
+        "Ce qui remonte en interne est votre analyse anonymisée, pas les extractions, captures ou documents confidentiels.",
+        "Séparez les missions et terminez par la suppression des données et la révocation des accès."
+      ],
+      "checklist": ["Je sépare les périmètres", "J'anonymise les synthèses", "Je clôture la mission"]
+    },
+    "mission-teletravail-mobilite": {
+      "summary": "Travailler à distance sans exposer les données ni le matériel.",
+      "lessonSummaries": [
+        "En mission, le client définit les conditions de télétravail ; une validation est nécessaire, surtout depuis l'étranger.",
+        "À domicile comme dans les lieux publics, protégez l'écran, les conversations et la connexion.",
+        "En cas de perte ou de vol, signalez immédiatement l'appareil, le badge ou les documents concernés."
+      ],
+      "checklist": ["Je vérifie l'autorisation", "Je protège mon environnement", "Je signale immédiatement"]
+    }
+  }
+}

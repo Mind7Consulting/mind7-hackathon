@@ -1,0 +1,14 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "STORAGE_CONNECTION": "UseDevelopmentStorage=true",
+    "AZURITE": "1",
+    "TABLE_NAME": "lmsProgress",
+    "CONTENT_TABLE_NAME": "lmsContent",
+    "QUIZ_TABLE_NAME": "lmsQuiz",
+    "ADMIN_UPNS": "prenom.nom@votre-domaine.fr",
+    "RETENTION_MONTHS": "24"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "lms-api",
+  "version": "1.1.0",
+  "description": "API Reflex7 — Azure Functions (Node.js v4)",
+  "main": "src/functions/*.js",
+  "scripts": { "start": "func start" },
+  "dependencies": {
+    "@azure/functions": "^4.5.0",
+    "@azure/data-tables": "^13.3.0",
+    "@azure/identity": "^4.4.0"
+  }
+}

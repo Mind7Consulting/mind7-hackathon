@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reflex7 — Administration</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="icon" href="/assets/img/vigie-guide.png">
+</head>
+<body>
+<header class="topbar" id="topbar"></header>
+
+<main>
+  <div class="page-head">
+    <h1>Administration</h1>
+    <p>Suivi de la progression des collaborateurs sur le thème Cybersécurité.</p>
+  </div>
+
+  <div id="guard"></div>
+
+  <div id="board" class="hidden">
+    <div class="admin-layout">
+      <aside class="admin-nav" aria-label="Navigation de l'administration">
+        <div class="side-nav-label">Administration</div>
+        <a href="#kpis"><span>◈</span> Vue d'ensemble</a>
+        <a href="#module-management"><span>✎</span> Gestion des modules</a>
+        <a href="#quiz-report"><span>★</span> Reporting des quiz</a>
+        <a href="#module-completion"><span>▥</span> Complétion par module</a>
+        <a href="#collaborators"><span>♙</span> Collaborateurs</a>
+      </aside>
+      <div class="admin-content">
+    <section class="card module-manager mb-2" id="module-management">
+      <div class="row between">
+        <div>
+          <h2 style="font-size:1.15rem;margin:0 0 4px">Gestion des modules</h2>
+          <p class="small muted" style="margin:0">Créez, modifiez ou retirez un module du catalogue publié.</p>
+        </div>
+        <button class="btn" id="new-module">Nouveau module</button>
+      </div>
+      <div id="module-manager-message" class="small mt-1"></div>
+      <div id="module-list" class="module-list mt-1"></div>
+      <div id="module-editor" class="hidden mt-1">
+        <label for="module-json"><strong>Contenu du module</strong></label>
+        <p class="small muted" style="margin:4px 0 8px">Le contenu est validé à l’enregistrement. Les champs attendus sont décrits dans le README.</p>
+        <textarea id="module-json" class="module-json" spellcheck="false"></textarea>
+        <div class="row mt-1">
+          <button class="btn" id="save-module">Enregistrer le module</button>
+          <button class="btn ghost" id="cancel-module">Annuler</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-3 mb-2" id="kpis" aria-label="Vue d'ensemble" style="scroll-margin-top:90px"></section>
+
+    <section class="admin-quiz-report mb-2" id="quiz-report">
+      <div class="row between mb-1">
+        <div>
+          <h2 style="font-size:1.15rem;margin:0 0 4px">Reporting des quiz</h2>
+          <p class="small muted" style="margin:0">Meilleur score conservé · réponses individuelles non enregistrées</p>
+        </div>
+      </div>
+      <div class="grid grid-3" id="quiz-kpis"></div>
+      <div class="table-wrap mt-1"><table id="quiz-table"></table></div>
+      <p class="small muted mt-1" id="quiz-foot"></p>
+    </section>
+
+    <h2 id="module-completion" style="font-size:1.15rem;margin:0 0 14px;scroll-margin-top:90px">Complétion par module</h2>
+    <section class="grid grid-2 mb-2" id="bymodule"></section>
+
+    <div class="row between mb-2" id="collaborators" style="scroll-margin-top:90px">
+      <h2 style="font-size:1.15rem;margin:0">Détail par collaborateur</h2>
+      <div class="row">
+        <input type="search" id="q" placeholder="Rechercher un collaborateur…" style="min-width:230px">
+        <select id="filter">
+          <option value="all">Tous les statuts</option>
+          <option value="done">Parcours complet</option>
+          <option value="partial">En cours</option>
+          <option value="none">Non commencé</option>
+        </select>
+        <button class="btn ghost" id="export">Exporter CSV</button>
+      </div>
+    </div>
+    <div class="table-wrap"><table id="table"></table></div>
+    <p class="small muted mt-1" id="foot"></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>Données à finalité pédagogique et de conformité · Usage disciplinaire exclu · Conservation 24 mois</footer>
+
+<script src="/assets/js/api.js"></script>
+<script>
+(async function () {
+  const user = await LMS.renderHeader('admin');
+  if (!user) return;
+
+  const guard = document.getElementById('guard');
+  const oups = await LMS.pose('oups');
+
+  if (!user.isAdmin) {
+    guard.innerHTML = `<div class="card empty"><img src="${oups}" alt="">Accès réservé aux administrateurs de Mind7.<br><a href="/">Retour à mes parcours</a></div>`;
+    return;
+  }
+
+  let data;
+  try {
+    data = await LMS.getAdminOverview();
+  } catch (e) {
+    guard.innerHTML = `<div class="card empty"><img src="${oups}" alt="">Impossible de charger les données d'administration.<br><span class="small">${e.message}</span></div>`;
+    return;
+  }
+
+  document.getElementById('board').classList.remove('hidden');
+
+  const content = await LMS.getContent();
+  const modules = content.modules;
+  const users = data.users || [];
+
+  /* ---- Reporting des quiz ---- */
+  const quizRows = users.flatMap(user => (user.quizResults || []).map(result => ({
+    name: user.name,
+    score: result.total ? Math.round(result.score / result.total * 100) : 0,
+    passed: !!result.passed,
+    attempts: result.attempts || 1,
+    completedAt: result.completedAt,
+    quizId: result.quizId || 'situations'
+  })));
+  const quizScores = quizRows.map(row => row.score);
+  const quizAverage = quizScores.length ? Math.round(quizScores.reduce((sum, score) => sum + score, 0) / quizScores.length) : null;
+  const quizPassed = quizRows.filter(row => row.passed).length;
+  const quizAverageAttempts = quizRows.length ? (quizRows.reduce((sum, row) => sum + row.attempts, 0) / quizRows.length).toFixed(1) : null;
+  document.getElementById('quiz-kpis').innerHTML = `
+    <div class="card kpi"><div class="val">${quizRows.length}</div><div class="lbl">Participant(s)</div></div>
+    <div class="card kpi"><div class="val">${quizAverage === null ? '—' : quizAverage + '%'}</div><div class="lbl">Meilleur score moyen</div></div>
+    <div class="card kpi"><div class="val">${quizRows.length ? Math.round(quizPassed / quizRows.length * 100) + '%' : '—'}</div><div class="lbl">Taux de réussite · ${quizAverageAttempts === null ? '—' : quizAverageAttempts + ' tentatives moy.'}</div></div>
+    `;
+  document.getElementById('quiz-table').innerHTML = `
+    <thead><tr><th>Collaborateur</th><th>Quiz</th><th>Meilleur score</th><th>Statut</th><th>Tentatives</th><th>Dernière activité</th></tr></thead>
+    <tbody>${quizRows.length ? quizRows.sort((a, b) => a.name.localeCompare(b.name)).map(row => `
+      <tr><td>${row.name}</td><td>${row.quizId === 'situations' ? 'Quiz situations' : row.quizId}</td><td><strong>${row.score}%</strong></td><td><span class="badge ${row.passed ? 'ok' : 'warn'}">${row.passed ? 'Réussi' : 'À poursuivre'}</span></td><td>${row.attempts}</td><td class="small muted">${row.completedAt ? new Date(row.completedAt).toLocaleDateString('fr-FR') : '—'}</td></tr>`).join('') : '<tr><td colspan="6" class="empty">Aucune participation enregistrée pour le moment.</td></tr>'}</tbody>`;
+  document.getElementById('quiz-foot').textContent = quizRows.length ? `${quizRows.length} participation(s) affichée(s). Seul le meilleur score par collaborateur et par quiz est conservé.` : 'Les résultats apparaîtront après la première session terminée.';
+
+  /* ---- Gestion du catalogue ---- */
+  const moduleList = document.getElementById('module-list');
+  const moduleEditor = document.getElementById('module-editor');
+  const moduleJson = document.getElementById('module-json');
+  const moduleMessage = document.getElementById('module-manager-message');
+
+  function showModuleMessage(text, error) {
+    moduleMessage.textContent = text;
+    moduleMessage.className = 'small mt-1 ' + (error ? 'err-text' : 'ok-text');
+  }
+
+  function paintModuleManager() {
+    moduleList.innerHTML = '';
+    modules.forEach(module => {
+      const item = document.createElement('div');
+      item.className = 'module-admin-item';
+      item.innerHTML = `<div><strong></strong><span class="small muted"></span></div><div class="row"><button class="btn ghost edit-module">Modifier</button><button class="btn danger delete-module">Supprimer</button></div>`;
+      item.querySelector('strong').textContent = module.title;
+      item.querySelector('span').textContent = `${module.id} · ${module.lessons.length} leçon(s) · ${module.quiz.length} question(s)`;
+      item.querySelector('.edit-module').onclick = () => {
+        moduleJson.value = JSON.stringify(module, null, 2);
+        moduleEditor.classList.remove('hidden');
+        moduleJson.focus();
+      };
+      item.querySelector('.delete-module').onclick = async () => {
+        if (!window.confirm(`Supprimer le module « ${module.title} » du catalogue ?`)) return;
+        try {
+          await LMS.deleteAdminModule(module.id);
+          showModuleMessage('Module supprimé. Rechargement du tableau…');
+          window.location.reload();
+        } catch (e) { showModuleMessage(e.message, true); }
+      };
+      moduleList.appendChild(item);
+    });
+  }
+
+  document.getElementById('new-module').onclick = () => {
+    moduleJson.value = JSON.stringify({
+      id: 'cyber-nouveau-module', themeId: 'cyber', title: 'Nouveau module', summary: '', duration: 5,
+      level: 'Essentiel', passScore: 80, aiGenerated: false, reviewedBy: '',
+      lessons: [{ title: '', vigie: '', body: '' }],
+      quiz: [{ question: '', choices: ['', ''], answer: 0, explanation: '' }],
+      recommendations: { high: '', medium: '', low: '' }
+    }, null, 2);
+    moduleEditor.classList.remove('hidden');
+    moduleJson.focus();
+  };
+  document.getElementById('cancel-module').onclick = () => moduleEditor.classList.add('hidden');
+  document.getElementById('save-module').onclick = async () => {
+    let module;
+    try { module = JSON.parse(moduleJson.value); }
+    catch (e) { showModuleMessage('JSON invalide : ' + e.message, true); return; }
+    try {
+      await LMS.saveAdminModule(module);
+      showModuleMessage('Module enregistré. Rechargement du tableau…');
+      window.location.reload();
+    } catch (e) { showModuleMessage(e.message, true); }
+  };
+  paintModuleManager();
+
+  if (data.demo) {
+    guard.innerHTML = '<div class="notice mb-2">Mode local : jeu de données de démonstration. En production, les résultats proviennent de l\'API et du stockage Azure.</div>';
+  }
+
+  /* ---- Indexation ---- */
+  const rows = users.map(u => {
+    const byMod = {};
+    (u.results || []).forEach(r => { byMod[r.moduleId] = r; });
+    const done = modules.filter(m => byMod[m.id] && byMod[m.id].passed).length;
+    const scores = modules.map(m => byMod[m.id]).filter(Boolean).map(r => r.score);
+    return {
+      name: u.name,
+      byMod,
+      done,
+      avg: scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : null,
+      status: done === modules.length ? 'done' : (scores.length ? 'partial' : 'none'),
+      last: (u.results || []).map(r => r.completedAt).sort().pop() || null
+    };
+  });
+
+  /* ---- KPI globaux ---- */
+  const nbUsers = rows.length;
+  const fullyDone = rows.filter(r => r.status === 'done').length;
+  const notStarted = rows.filter(r => r.status === 'none').length;
+  const allScores = rows.map(r => r.avg).filter(v => v !== null);
+  const globalAvg = allScores.length ? Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length) : null;
+  const completion = nbUsers ? Math.round(fullyDone / nbUsers * 100) : 0;
+
+  document.getElementById('kpis').innerHTML = `
+    <div class="card kpi">
+      <div class="val">${completion}%</div>
+      <div class="lbl">Taux de complétion du parcours</div>
+      <div class="bar mt-1 ${completion === 100 ? 'ok' : ''}"><i style="width:${completion}%"></i></div>
+    </div>
+    <div class="card kpi">
+      <div class="val">${globalAvg === null ? '—' : globalAvg + '%'}</div>
+      <div class="lbl">Score moyen · ${nbUsers} collaborateur${nbUsers > 1 ? 's' : ''}</div>
+    </div>
+    <div class="card kpi">
+      <div class="val">${notStarted}</div>
+      <div class="lbl">Non commencé — à relancer</div>
+    </div>`;
+
+  /* ---- Par module ---- */
+  document.getElementById('bymodule').innerHTML = modules.map(m => {
+    const res = rows.map(r => r.byMod[m.id]).filter(Boolean);
+    const ok = res.filter(r => r.passed).length;
+    const pct = nbUsers ? Math.round(ok / nbUsers * 100) : 0;
+    const avg = res.length ? Math.round(res.reduce((a, b) => a + b.score, 0) / res.length) : null;
+    return `
+      <div class="card">
+        <div class="row between">
+          <strong>${m.title}</strong>
+          <span class="badge ${pct >= 90 ? 'ok' : pct >= 50 ? 'warn' : 'err'}">${pct}%</span>
+        </div>
+        <div class="bar mt-1 ${pct === 100 ? 'ok' : ''}"><i style="width:${pct}%"></i></div>
+        <p class="small muted mt-1" style="margin-bottom:0">
+          ${ok}/${nbUsers} validé${ok > 1 ? 's' : ''} · score moyen ${avg === null ? '—' : avg + '%'} · seuil ${m.passScore}%
+        </p>
+      </div>`;
+  }).join('');
+
+  /* ---- Tableau ---- */
+  function paint() {
+    const q = document.getElementById('q').value.toLowerCase().trim();
+    const f = document.getElementById('filter').value;
+    const list = rows
+      .filter(r => !q || r.name.toLowerCase().includes(q))
+      .filter(r => f === 'all' || r.status === f)
+      .sort((a, b) => a.done - b.done || a.name.localeCompare(b.name));
+
+    document.getElementById('table').innerHTML = `
+      <thead><tr>
+        <th>Collaborateur</th>
+        ${modules.map(m => `<th title="${m.title}">${m.title.length > 22 ? m.title.slice(0, 21) + '…' : m.title}</th>`).join('')}
+        <th>Progression</th>
+        <th>Moyenne</th>
+        <th>Dernière activité</th>
+      </tr></thead>
+      <tbody>
+        ${list.length ? list.map(r => `
+          <tr>
+            <td><div class="row" style="gap:9px"><div class="avatar" style="width:26px;height:26px;font-size:.7rem;flex-shrink:0">${LMS.initials(r.name)}</div>${r.name}</div></td>
+            ${modules.map(m => `<td>${LMS.statusBadge(r.byMod[m.id])}</td>`).join('')}
+            <td style="min-width:110px">
+              <div class="bar ${r.done === modules.length ? 'ok' : ''}"><i style="width:${Math.round(r.done / modules.length * 100)}%"></i></div>
+              <span class="small muted">${r.done}/${modules.length}</span>
+            </td>
+            <td><strong>${r.avg === null ? '—' : r.avg + '%'}</strong></td>
+            <td class="small muted">${r.last ? new Date(r.last).toLocaleDateString('fr-FR') : '—'}</td>
+          </tr>`).join('')
+        : `<tr><td colspan="${modules.length + 4}" class="empty">Aucun résultat pour ce filtre.</td></tr>`}
+      </tbody>`;
+
+    document.getElementById('foot').textContent =
+      `${list.length} ligne(s) affichée(s) sur ${rows.length}. Données limitées au module, au score et à la date.`;
+  }
+
+  document.getElementById('q').oninput = paint;
+  document.getElementById('filter').onchange = paint;
+  document.querySelectorAll('.admin-nav a').forEach(link => {
+    link.onclick = () => {
+      document.querySelectorAll('.admin-nav a').forEach(item => item.classList.remove('active'));
+      link.classList.add('active');
+    };
+  });
+
+  document.getElementById('export').onclick = () => {
+    const head = ['Collaborateur', ...modules.map(m => m.title), 'Modules valides', 'Moyenne', 'Derniere activite'];
+    const lines = rows.map(r => [
+      r.name,
+      ...modules.map(m => r.byMod[m.id] ? (r.byMod[m.id].passed ? 'Valide ' + r.byMod[m.id].score + '%' : 'Echec ' + r.byMod[m.id].score + '%') : 'Non commence'),
+      r.done + '/' + modules.length,
+      r.avg === null ? '' : r.avg + '%',
+      r.last ? new Date(r.last).toLocaleDateString('fr-FR') : ''
+    ]);
+    const csv = [head, ...lines].map(l => l.map(v => `"${String(v).replace(/"/g, '""')}"`).join(';')).join('\n');
+    const url = URL.createObjectURL(new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'sensibilisation-cyber-' + new Date().toISOString().slice(0, 10) + '.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  paint();
+})();
+</script>
+</body>
+</html>

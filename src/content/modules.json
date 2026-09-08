@@ -1,0 +1,1128 @@
+{
+  "version": "1.4",
+  "updatedAt": "2026-09-08",
+  "mascot": {
+    "name": "Vigie",
+    "tagline": "Votre copilote sécurité",
+    "poses": {
+      "guide": "/assets/img/vigie-guide.png",
+      "bravo": "/assets/img/vigie-bravo.png",
+      "oups": "/assets/img/vigie-oups.png"
+    },
+    "welcome": [
+      "Bonjour ! Cinq minutes aujourd'hui, c'est un réflexe de plus pour demain.",
+      "Content de vous revoir. On continue là où vous vous étiez arrêté ?",
+      "La sécurité, ce n'est pas une affaire d'experts. C'est une affaire d'habitudes."
+    ]
+  },
+  "themes": [
+    {
+      "id": "intro",
+      "label": "Prise en main",
+      "description": "Comment fonctionne l'Réflexes Cyber et ce qu'on attend de vous.",
+      "icon": "👋"
+    },
+    {
+      "id": "cyber",
+      "label": "Cybersécurité",
+      "description": "Les réflexes essentiels pour protéger vos données et celles de nos clients.",
+      "icon": "🔐"
+    },
+    {
+      "id": "mission",
+      "label": "En mission",
+      "description": "Intervenir chez un client sans exposer ses données ni sortir du cadre contractuel.",
+      "icon": "🧭"
+    }
+  ],
+  "modules": [
+    {
+      "id": "intro-bienvenue",
+      "themeId": "intro",
+      "title": "Prendre en main Réflexes Cyber",
+      "summary": "Naviguer dans vos modules, suivre votre progression et retrouver les fiches mémo débloquées.",
+      "duration": 4,
+      "level": "Découverte",
+      "passScore": 80,
+      "aiGenerated": true,
+      "reviewedBy": "Équipe Sécurité",
+      "lessons": [
+        {
+          "title": "Votre espace de sensibilisation",
+          "vigie": "Bienvenue ! Quelques minutes ici, et vous repartez avec un réflexe de plus.",
+          "body": "**Réflexes Cyber** est votre espace de sensibilisation à la sécurité. Il rassemble des modules courts, concrets et accessibles depuis votre ordinateur ou votre téléphone.\n\nChaque module part d'une situation réelle : un message inhabituel, une demande urgente, un fichier client, un déplacement ou un incident. L'objectif n'est pas de vous piéger ni de vous transformer en spécialiste, mais de vous donner des repères simples pour décider au bon moment.\n\nDepuis l'accueil, vous pouvez voir les modules disponibles, leur statut et les fiches mémo déjà débloquées. La navigation **Mon espace** vous permet aussi d'accéder aux modules, aux fiches mémo, au **Quiz situations** et au **Classement**."
+        },
+        {
+          "title": "Un module, puis sa fiche mémo",
+          "vigie": "Vous apprenez dans le module, puis vous gardez l'essentiel dans la fiche.",
+          "body": "Chaque module suit la même structure :\n\n**1. Le micro-cours.** Quelques étapes de lecture, avec les explications de Vigie. Vous avancez avec *Continuer* et pouvez revenir en arrière.\n\n**2. Le quiz du module.** Chaque réponse est corrigée immédiatement et accompagnée d'une explication. Le but est de comprendre, pas de répondre vite.\n\n**3. Le résultat.** Votre meilleur score est conservé. Le seuil de réussite est de 80 % ; si vous ne l'atteignez pas, vous pouvez recommencer immédiatement.\n\n**4. La fiche mémo.** Dès que le module est validé, une fiche récapitulative se débloque dans **Fiches mémo**. Elle reprend le réflexe principal, les points clés et une checklist illustrée par Vigie.\n\n**5. Le Quiz situations.** C'est un entraînement séparé, rejouable à volonté : jusqu'à 10 situations sont tirées au hasard à chaque série et vous choisissez si l'action est risquée ou non."
+        },
+        {
+          "title": "Lire votre progression",
+          "vigie": "Le filtre de l'accueil vous montre exactement où vous en êtes.",
+          "body": "L'accueil vous permet de piloter votre parcours en un coup d'œil.\n\n**À commencer** regroupe les modules jamais ouverts. **En cours** regroupe ceux dont le quiz a été tenté mais qui ne sont pas encore validés. **Terminés** affiche les modules réussis.\n\nDans **Fiches mémo**, vous pouvez filtrer les fiches **Toutes**, **Débloquées** ou **Verrouillées**. Une fiche est débloquée uniquement après validation du module correspondant.\n\nLe statut ne remplace pas le contenu : un module terminé peut toujours être revu, et sa fiche mémo reste disponible. Votre progression sert uniquement à vous aider à retrouver le bon point d'entrée."
+        },
+        {
+          "title": "Votre routine",
+          "vigie": "Un module, une fiche mémo, puis le réflexe de signaler quand quelque chose cloche.",
+          "body": "Pour tirer le meilleur parti de Réflexes Cyber :\n\n**Commencez par les modules Essentiel.** Ils constituent le socle commun et peuvent être suivis à votre rythme.\n\n**Gardez vos fiches mémo.** Après validation, elles sont disponibles dans **Fiches mémo**. Utilisez-les avant une mission, un déplacement ou simplement quand vous voulez rafraîchir un réflexe.\n\n**Entraînez-vous dans Quiz situations.** Chaque réponse correcte rapporte de l'XP ; les séries répétées permettent d'ancrer les réflexes. Le **Classement** affiche l'XP cumulée des collaborateurs : il s'agit d'un jeu d'émulation, sans enjeu RH ni disciplinaire.\n\n**Revenez régulièrement.** Les contenus peuvent évoluer en fonction des risques observés et des outils utilisés.\n\n**Signalez sans attendre d'être certain.** Mail étrange, notification MFA inattendue, perte de matériel ou partage envoyé au mauvais destinataire : ouvrez le **Portail Sécurité**. Si le portail est indisponible, écrivez à **support-it@mind7.fr**."
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Vous obtenez 60 % à un quiz. Que se passe-t-il ?",
+          "choices": [
+            "Le score est définitif et figure dans mon dossier",
+            "Le résultat est transmis à mon manager pour suivi",
+            "Je dois attendre 30 jours avant de pouvoir réessayer",
+            "Le module reste à repasser, je peux le refaire immédiatement autant de fois que nécessaire"
+          ],
+          "answer": 3,
+          "explanation": "Le seuil est de 80 %. En dessous, vous refaites le quiz aussi souvent que vous le souhaitez, sans délai. Seule votre meilleure tentative est conservée : un échec n'a aucune conséquence."
+        },
+        {
+          "question": "Parmi ces données, laquelle N'EST PAS enregistrée par la plateforme ?",
+          "choices": [
+            "Le détail de vos réponses question par question",
+            "Votre meilleur score",
+            "Le nom du module suivi",
+            "La date de réalisation"
+          ],
+          "answer": 0,
+          "explanation": "Les réponses individuelles ne sont jamais conservées — pas plus que le temps de lecture, l'adresse IP ou le terminal. Seuls le module, le score, le statut et la date sont enregistrés."
+        },
+        {
+          "question": "Quand la fiche mémo d'un module devient-elle disponible ?",
+          "choices": [
+            "Dès que le module est ouvert une première fois",
+            "Après avoir répondu à la première question",
+            "Après validation du module, avec un score d'au moins 80 %",
+            "Uniquement à la fin de l'année"
+          ],
+          "answer": 2,
+          "explanation": "La fiche mémo est débloquée après validation du module. Elle reste ensuite accessible depuis la section Fiches mémo de l'accueil, même si vous souhaitez simplement revoir le cours."
+        },
+        {
+          "question": "Vous avez cliqué sur un lien suspect et vous vous demandez si c'était une erreur. Que faites-vous ?",
+          "choices": [
+            "J'en parle à un collègue pour avoir son avis d'abord",
+            "J'attends de voir si quelque chose d'anormal se produit",
+            "Je signale immédiatement, même sans certitude",
+            "Je ne signale que si j'ai saisi des identifiants"
+          ],
+          "answer": 2,
+          "explanation": "On signale sur le doute, pas sur la certitude. Un signalement effectué par précaution permet une vérification rapide ; un incident signalé tardivement peut avoir davantage de conséquences. Aucun signalement de bonne foi n'est sanctionné."
+        },
+        {
+          "question": "Comment fonctionne le Quiz situations ?",
+          "choices": [
+            "Une seule série fixe, à faire une fois",
+            "Jusqu'à 10 situations tirées au hasard, rejouables avec de l'XP à gagner",
+            "Un examen obligatoire qui remplace les modules",
+            "Un classement basé sur le nombre de réponses données"
+          ],
+          "answer": 1,
+          "explanation": "Le Quiz situations est un entraînement séparé des modules : jusqu'à 10 scénarios sont mélangés à chaque série, la correction est immédiate et l'XP gagnée alimente le classement."
+        }
+      ],
+      "recommendations": {
+        "high": "Vous avez tout compris du fonctionnement. Enchaînez avec « Hygiène informatique et bonnes pratiques », puis testez le Quiz situations.",
+        "medium": "Revoyez la section « Un module, puis sa fiche mémo », puis refaites le quiz.",
+        "low": "Reprenez le module depuis le début : il présente les modules, les fiches mémo et les entraînements disponibles."
+      }
+    },
+    {
+      "id": "cyber-hygiene-informatique",
+      "themeId": "cyber",
+      "title": "Hygiène informatique et bonnes pratiques",
+      "summary": "Les gestes quotidiens qui évitent la majorité des incidents : mises à jour, verrouillage, sauvegardes, réseaux et clés USB.",
+      "duration": 7,
+      "level": "Essentiel",
+      "passScore": 80,
+      "aiGenerated": true,
+      "reviewedBy": "Équipe Sécurité",
+      "lessons": [
+        {
+          "title": "Pourquoi parler d'hygiène ?",
+          "vigie": "L'hygiène informatique, c'est comme se laver les mains : peu spectaculaire, très efficace.",
+          "body": "Le mot n'est pas choisi au hasard. En médecine, l'hygiène désigne les gestes simples et répétés qui évitent l'essentiel des infections — sans être médecin, sans matériel sophistiqué.\n\nEn informatique, c'est exactement pareil. **De nombreux incidents n'exploite pas une faille exotique**, mais une accumulation de petits relâchements : un système pas à jour, une session laissée ouverte, une sauvegarde jamais testée, un logiciel installé « juste pour dépanner ».\n\nCe module ne parle donc pas d'attaques spectaculaires. Il parle des cinq ou six gestes qui, appliqués tous les jours, ferment la porte à la plupart des scénarios. Aucun n'est technique. Tous demandent un peu de régularité."
+        },
+        {
+          "title": "Mettre à jour, verrouiller",
+          "vigie": "Windows + L. Trois touches, deux secondes, zéro excuse.",
+          "body": "**Les mises à jour ne sont pas une corvée administrative.** Une mise à jour de sécurité corrige une faille connue — donc publiquement documentée, donc déjà intégrée aux outils d'attaque. Repousser une mise à jour d'un mois, c'est laisser une porte ouverte dont l'adresse est publique.\n\nLa règle : quand le redémarrage est proposé, on le fait dans la journée. Pas « la semaine prochaine ». Cela vaut pour le poste de travail, mais aussi pour **le navigateur et le smartphone**, souvent oubliés alors qu'ils manipulent autant de données professionnelles.\n\n**Le verrouillage de session** relève du même esprit. Quitter son poste sans verrouiller, c'est laisser sa messagerie, ses documents et ses accès clients à disposition de quiconque passe. En clientèle, dans un espace partagé ou un train, le risque n'a rien de théorique.\n\nLe réflexe tient en un raccourci : **Windows + L** sur PC, **Ctrl + Cmd + Q** sur Mac. Même pour deux minutes."
+        },
+        {
+          "title": "Sauvegardes, réseaux et clés USB",
+          "vigie": "Une sauvegarde jamais restaurée n'est pas une sauvegarde. C'est une intention.",
+          "body": "**Les sauvegardes.** Le meilleur moyen de retrouver ses fichiers après une panne, un vol ou un rançongiciel est de travailler dans les espaces d'entreprise prévus à cet effet, comme OneDrive, SharePoint ou Teams, plutôt que de conserver l'unique copie sur le bureau local du poste.\n\nRetenez le principe : **une sauvegarde dont on n'a jamais testé la restauration n'a pas encore prouvé qu'elle fonctionne.**\n\n**Les réseaux.** Un Wi-Fi public de gare, d'hôtel ou de café est un réseau que vous ne maîtrisez pas. Pour un usage professionnel, privilégiez le **partage de connexion de votre téléphone**. Dans un environnement client, respectez les consignes de sécurité et utilisez les moyens d'accès fournis ou imposés par le client. En cas de doute, n'accédez pas aux données sensibles et demandez conseil au Support IT ou à votre interlocuteur client.\n\nNe rejoignez jamais un réseau ouvert uniquement parce que son nom ressemble à celui du lieu. Vérifiez toujours le réseau officiel auprès de l'établissement.\n\n**Les clés USB.** Une clé trouvée ou reçue d'une source inconnue peut contenir un logiciel malveillant. Ne la branchez pas sur votre poste. Remettez-la à l'équipe IT ou suivez les consignes du client si vous êtes dans son environnement."
+        },
+        {
+          "title": "Logiciels, poste propre et signalement",
+          "vigie": "Installer un outil « juste pour dépanner », c'est ajouter une porte que personne ne surveille.",
+          "body": "**Les installations sauvages.** Télécharger un utilitaire gratuit pour convertir un PDF ou compresser une image part toujours d'une bonne intention. Le problème : ces outils s'installent en dehors de tout contrôle, ne sont pas mis à jour, et sont un canal de diffusion classique de logiciels indésirables. C'est ce qu'on appelle le *shadow IT*. Le bon réflexe : passer par le portail d'entreprise, ou demander à l'IT — il existe presque toujours une alternative déjà validée.\n\n**Le poste propre.** Un écran non verrouillé, un document confidentiel oublié sur l'imprimante, un mot de passe sur un post-it : ces fuites ne relèvent d'aucune technique. Elles sont pourtant parmi les plus fréquentes en audit.\n\n**Le signalement.** C'est le geste qui conditionne tous les autres. Un comportement anormal du poste, un fichier qui disparaît, une fenêtre inhabituelle : mieux vaut dix signalements sans suite qu'un incident découvert trois semaines trop tard.\n\nUne seule chose à retenir : **signaler n'est jamais reproché. Le silence, lui, coûte cher.**\n\nPour tout doute ou incident : <a href=\"https://mind7.atlassian.net/servicedesk/customer/portal/1\" target=\"_blank\" rel=\"noopener noreferrer\">Ouvrir le portail Sécurité</a>."
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Une mise à jour de sécurité est proposée sur votre poste. Que faites-vous ?",
+          "choices": [
+            "J'attends que l'IT me le demande explicitement",
+            "Je ne fais rien, l'antivirus me protège",
+            "Je reporte, je suis en clientèle cette semaine",
+            "Je l'installe dans la journée, en choisissant un créneau adapté"
+          ],
+          "answer": 3,
+          "explanation": "Une mise à jour de sécurité corrige une faille déjà publique, donc déjà connue des attaquants. Le délai entre la publication et l'installation est exactement la fenêtre d'exposition. On choisit son créneau, mais on ne repousse pas."
+        },
+        {
+          "question": "Vous quittez votre poste deux minutes pour un café. Faut-il verrouiller la session ?",
+          "choices": [
+            "Oui",
+            "Non"
+          ],
+          "answer": 0,
+          "explanation": "sans exception de durée. Windows + L sur PC, Ctrl + Cmd + Q sur Mac. Deux minutes suffisent largement à consulter une messagerie ou à copier un document."
+        },
+        {
+          "question": "Quel est le rempart le plus efficace contre un rançongiciel ?",
+          "choices": [
+            "Le pare-feu du poste",
+            "Une sauvegarde saine, récente et dont la restauration a été testée",
+            "Un antivirus à jour",
+            "Un mot de passe très long"
+          ],
+          "answer": 1,
+          "explanation": "L'antivirus et le pare-feu réduisent la probabilité, mais ne garantissent rien. Seule une sauvegarde saine permet de repartir sans payer. Et tant que la restauration n'a pas été testée, on ne sait pas si la sauvegarde fonctionne."
+        },
+        {
+          "question": "Vous êtes en gare et devez consulter un document client. Quelle est la bonne pratique ?",
+          "choices": [
+            "J'utilise le partage de connexion de mon téléphone et je reporte l'accès si le document est sensible",
+            "Je rejoins le premier Wi-Fi ouvert disponible",
+            "Je me connecte au réseau dont le nom ressemble à celui de la gare",
+            "Le Wi-Fi public convient dès lors que le site utilise HTTPS"
+          ],
+          "answer": 0,
+          "explanation": "Un réseau public reste un environnement que vous ne maîtrisez pas. Privilégiez le partage de connexion et évitez de consulter un document sensible dans un lieu public. Dans un environnement client, appliquez également les consignes et les moyens d'accès fournis par le client."
+        },
+        {
+          "question": "Vous trouvez une clé USB sur le parking de l'entreprise. Que faites-vous ?",
+          "choices": [
+            "Je la branche sur un poste isolé, c'est plus prudent",
+            "Je la remets à l'équipe IT sans la brancher",
+            "Je la branche pour identifier le propriétaire",
+            "Je la jette à la poubelle"
+          ],
+          "answer": 1,
+          "explanation": "Le scénario de la clé abandonnée reste efficace parce qu'il exploite la curiosité et la bonne volonté. Aucun poste n'est « assez isolé » pour justifier le risque. On la remet à l'IT, qui saura l'analyser."
+        },
+        {
+          "question": "Vous avez besoin d'un outil pour convertir un fichier. Quelle démarche ?",
+          "choices": [
+            "J'utilise un site en ligne en y déposant le fichier client",
+            "Je télécharge le premier utilitaire gratuit trouvé en ligne",
+            "J'emprunte la licence d'un collègue",
+            "Je passe par le portail d'entreprise ou je demande à l'IT"
+          ],
+          "answer": 3,
+          "explanation": "Les utilitaires gratuits installés hors contrôle (shadow IT) ne sont pas mis à jour et servent régulièrement de canal de diffusion. Déposer un fichier client sur un site en ligne constitue en outre une sortie de données. Il existe presque toujours une alternative déjà validée."
+        }
+      ],
+      "recommendations": {
+        "high": "Vos réflexes quotidiens sont solides. Module suivant suggéré : « Le phishing sur mobile ».",
+        "medium": "Revoyez la section « Sauvegardes, réseaux et clés USB », puis refaites le quiz.",
+        "low": "Reprenez le micro-cours depuis le début : ces gestes sont la base de tous les autres modules."
+      }
+    },
+    {
+      "id": "cyber-phishing-mobile",
+      "themeId": "cyber",
+      "title": "Le phishing sur mobile",
+      "summary": "Pourquoi le smartphone est un angle mort, et comment garder les bons réflexes sur un petit écran.",
+      "duration": 6,
+      "level": "Essentiel",
+      "passScore": 80,
+      "aiGenerated": true,
+      "reviewedBy": "Équipe Sécurité",
+      "lessons": [
+        {
+          "title": "Le mobile, un angle mort",
+          "vigie": "Sur mobile, le geste qui protège le plus — survoler un lien — n'existe tout simplement pas.",
+          "body": "Sur un ordinateur, survoler un lien avec la souris affiche sa destination réelle. **Sur mobile, ce geste n'existe pas.** C'est une différence minuscule qui change tout : le principal moyen de vérifier un lien avant de cliquer disparaît.\n\nÀ cela s'ajoute le contexte d'usage. On consulte ses mails en marchant, entre deux réunions, dans les transports. L'attention est fragmentée, et l'écran n'affiche qu'une fraction de l'information : le nom d'expéditeur est visible, l'adresse réelle est masquée.\n\nLe smartphone mérite donc une vigilance particulière : le contexte d'usage et le petit écran rendent les indices moins visibles."
+        },
+        {
+          "title": "Les 3 signaux qui restent visibles",
+          "vigie": "Nom d'expéditeur, urgence, demande d'identifiants. Trois indices, toujours accessibles.",
+          "body": "Même sur un petit écran, trois indices restent toujours accessibles.\n\n**1. L'adresse réelle de l'expéditeur.** Le nom affiché (« Microsoft Sécurité », « Direction RH ») est librement modifiable par l'attaquant. Appuyez sur le nom pour révéler l'adresse complète. Une adresse en `@microsoft-securite-alerte.net` n'est pas Microsoft.\n\n**2. L'urgence anormale.** « Sous 2 heures », « dernier avertissement », « votre compte sera suspendu ». L'urgence est un levier psychologique : elle vise à court-circuiter la réflexion. Aucun processus interne légitime ne vous met sous pression de cette façon.\n\n**3. La demande d'identifiants.** Aucun service informatique, aucun prestataire, aucune banque ne vous demandera jamais votre mot de passe ou votre code MFA par mail ou par message."
+        },
+        {
+          "title": "Le réflexe : ne rien faire dans l'instant",
+          "vigie": "Si un message crée de l'urgence, l'urgence elle-même est le signal d'alerte.",
+          "body": "Les clics impulsifs surviennent souvent très vite après la réception. La compromission n'est presque jamais un problème de connaissance — c'est un problème de vitesse de réaction.\n\nLe bon réflexe tient en une phrase : **si un message crée de l'urgence, cette urgence est elle-même le signal d'alerte.**\n\nEn pratique :\n- Ne cliquez pas, ne répondez pas, ne transférez pas.\n- Si vous devez vraiment vérifier, ouvrez le service en tapant vous-même l'adresse dans le navigateur. Jamais via le lien du message.\n- Appui long sur un lien pour afficher l'URL complète avant toute action."
+        },
+        {
+          "title": "Le geste : signaler",
+          "vigie": "Signaler n'est pas déranger. C'est protéger les collègues qui recevront le même message.",
+          "body": "Signaler n'est pas déranger. C'est ce qui permet à l'équipe sécurité d'analyser le message et, si nécessaire, de protéger les autres collaborateurs.\n\n**Si vous n'avez ni cliqué ni répondu** : utilisez le bouton de signalement intégré à Outlook lorsqu'il est disponible.\n\n**Si vous avez cliqué, téléchargé une pièce jointe, saisi des identifiants, validé une demande MFA ou si le bouton Outlook n'est pas disponible** : ouvrez immédiatement un ticket via le **Portail Sécurité** : <a href=\"https://mind7.atlassian.net/servicedesk/customer/portal/1\" target=\"_blank\" rel=\"noopener noreferrer\">Ouvrir le portail Sécurité</a>. Si le portail est indisponible, écrivez à **support-it@mind7.fr**.\n\nNe répondez pas à l'expéditeur et ne transférez pas le message à vos collègues. Si vous avez saisi un mot de passe ou validé une demande MFA, indiquez-le clairement dans le ticket et contactez sans attendre le Support IT par le canal direct interne habituel."
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Sur mobile, comment vérifier la destination réelle d'un lien avant de cliquer ?",
+          "choices": [
+            "En faisant un appui long sur le lien pour afficher l'URL complète",
+            "En regardant si le message affiche un cadenas",
+            "Ce n'est pas possible sur mobile",
+            "En survolant le lien avec le doigt"
+          ],
+          "answer": 0,
+          "explanation": "Un appui long affiche l'URL complète. Le survol n'existe pas sur un écran tactile : c'est précisément ce qui rend le mobile plus risqué que le poste de travail."
+        },
+        {
+          "question": "Vous recevez à 8h12 : « Votre compte sera suspendu dans 2h, confirmez ici ». Que faites-vous ?",
+          "choices": [
+            "Je transfère le message à un collègue pour avoir son avis",
+            "Je clique pour vérifier rapidement, avant la suspension",
+            "Je ne clique pas, je signale, puis je vérifie via le portail officiel que je saisis moi-même",
+            "J'ignore le message et je le supprime"
+          ],
+          "answer": 2,
+          "explanation": "Le délai court est un levier de pression délibéré. Aucune action immédiate : on signale, puis on vérifie en passant par l'adresse officielle saisie soi-même. Supprimer sans signaler prive l'équipe sécurité de l'information."
+        },
+        {
+          "question": "L'expéditeur affiche « Microsoft Sécurité ». Est-ce une garantie d'authenticité ?",
+          "choices": [
+            "Oui",
+            "Non"
+          ],
+          "answer": 1,
+          "explanation": ". Le nom affiché est librement modifiable par l'expéditeur. Seule l'adresse réelle, visible en appuyant sur le nom, a une valeur de vérification."
+        },
+        {
+          "question": "Vous avez cliqué sur un lien suspect mais vous n'avez rien saisi. Faut-il le signaler ?",
+          "choices": [
+            "Oui",
+            "Non"
+          ],
+          "answer": 0,
+          "explanation": "Oui. Un clic, même sans saisie d'identifiants, mérite un signalement rapide. Utilisez le Portail Sécurité afin que l'équipe puisse vérifier la situation et protéger les autres collaborateurs si nécessaire."
+        },
+        {
+          "question": "Vous avez seulement reçu un mail suspect, sans cliquer ni répondre. Quel est le premier réflexe recommandé ?",
+          "choices": [
+            "Utiliser le bouton de signalement intégré à Outlook",
+            "Répondre à l'expéditeur pour vérifier",
+            "Transférer le message à plusieurs collègues",
+            "Supprimer le message sans le signaler"
+          ],
+          "answer": 0,
+          "explanation": "Le bouton Outlook est le premier réflexe pour un message simplement reçu. Si vous avez cliqué, téléchargé un fichier, saisi des identifiants ou validé une demande MFA, ouvrez aussi immédiatement un ticket sur le Portail Sécurité."
+        }
+      ],
+      "recommendations": {
+        "high": "Vous maîtrisez les réflexes mobile. Module suivant suggéré : « Mots de passe et MFA ».",
+        "medium": "Revoyez la section « Les 3 signaux qui restent visibles », puis refaites le quiz.",
+        "low": "Reprenez le micro-cours depuis le début. Une fiche mémo d'une page est disponible sur le portail Sécurité."
+      }
+    },
+    {
+      "id": "cyber-mots-de-passe",
+      "themeId": "cyber",
+      "title": "Mots de passe et MFA",
+      "summary": "Ce qui protège réellement un compte aujourd'hui — et ce qui ne sert plus à rien.",
+      "duration": 5,
+      "level": "Essentiel",
+      "passScore": 80,
+      "aiGenerated": true,
+      "reviewedBy": "Équipe Sécurité",
+      "lessons": [
+        {
+          "title": "La longueur bat la complexité",
+          "vigie": "P@ssw0rd2026! coche toutes les cases… et tombe en quelques secondes.",
+          "body": "Pendant vingt ans, on a demandé des mots de passe « complexes » : majuscules, chiffres, caractères spéciaux. Le résultat a été contre-productif — `P@ssw0rd2026!` coche toutes les cases et se casse en quelques secondes, parce que les outils d'attaque connaissent parfaitement ces substitutions.\n\n**Ce qui compte réellement, c'est la longueur.** Une phrase de passe de 4 ou 5 mots sans lien logique entre eux est à la fois plus résistante et plus facile à retenir : `girafe-tunnel-cactus-42`.\n\nCorollaire important : **cessez de changer vos mots de passe tous les 90 jours** sans raison. Cette pratique, longtemps recommandée, pousse mécaniquement vers des variations prévisibles (`Hiver2026`, `Printemps2026`). On ne change un mot de passe que s'il y a une suspicion de compromission."
+        },
+        {
+          "title": "Le vrai risque : la réutilisation",
+          "vigie": "Un service = un mot de passe. C'est intenable de mémoire, et c'est bien pour ça que le coffre existe.",
+          "body": "Le scénario majoritaire de compromission n'est pas le mot de passe deviné. C'est le mot de passe **réutilisé**.\n\nUn site externe subit une fuite. Votre adresse professionnelle et votre mot de passe se retrouvent dans une base revendue. Un attaquant essaie automatiquement ce couple sur des centaines de services, dont votre messagerie professionnelle. C'est ce qu'on appelle le *credential stuffing*, et c'est entièrement automatisé.\n\n**La règle : un service = un mot de passe unique.** C'est impossible à tenir de mémoire, et c'est exactement pour cela qu'un gestionnaire de mots de passe n'est pas un confort mais une nécessité. Vous ne retenez plus qu'une seule phrase de passe : celle du coffre."
+        },
+        {
+          "title": "Le MFA et sa limite",
+          "vigie": "Une notification que vous n'avez pas déclenchée ? C'est un incident, pas une gêne.",
+          "body": "L'authentification multifacteur est la mesure la plus efficace dont nous disposons. Un mot de passe volé ne suffit plus à entrer.\n\nMais le MFA n'est pas invulnérable, et une attaque le vise directement : **la fatigue MFA**. L'attaquant, qui possède déjà votre mot de passe, déclenche des dizaines de notifications d'approbation. À la vingtième, à 23h, on finit par valider pour que ça s'arrête.\n\n**La règle absolue : une notification d'approbation que vous n'avez pas déclenchée vous-même se refuse, systématiquement, et se signale.** Une notification non sollicitée signifie que votre mot de passe est déjà connu d'un tiers — c'est un incident, pas une gêne.\n\nPrivilégiez l'application d'authentification avec correspondance de numéro plutôt que le SMS, vulnérable au détournement de carte SIM.\n\nPour signaler : <a href=\"https://mind7.atlassian.net/servicedesk/customer/portal/1\" target=\"_blank\" rel=\"noopener noreferrer\">Ouvrir le portail Sécurité</a>."
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Lequel de ces mots de passe est le plus solide ?",
+          "choices": [
+            "P@ssw0rd2026!",
+            "girafe-tunnel-cactus-42",
+            "Mind7!2026",
+            "Xk9$mQ2"
+          ],
+          "answer": 1,
+          "explanation": "La longueur prime sur la complexité. Les substitutions type @ pour a ou 0 pour o sont connues des outils d'attaque. Une phrase longue faite de mots sans lien est plus résistante et plus facile à retenir."
+        },
+        {
+          "question": "Pourquoi ne faut-il jamais réutiliser un mot de passe professionnel sur un site externe ?",
+          "choices": [
+            "Parce que cela ralentit la connexion",
+            "Parce que le mot de passe expirerait plus vite",
+            "Parce qu'une fuite sur le site externe expose directement le compte professionnel",
+            "Parce que c'est interdit par le règlement intérieur"
+          ],
+          "answer": 2,
+          "explanation": "C'est le credential stuffing : après une fuite, des robots testent automatiquement le couple adresse/mot de passe sur des centaines de services, dont la messagerie professionnelle."
+        },
+        {
+          "question": "Vous recevez à 23h une notification MFA que vous n'avez pas déclenchée. Que faites-vous ?",
+          "choices": [
+            "Je refuse, je change mon mot de passe et je signale immédiatement via le Portail Sécurité",
+            "J'ignore la notification et je vais me coucher",
+            "J'attends de voir si elle se répète",
+            "J'approuve pour que les notifications s'arrêtent"
+          ],
+          "answer": 0,
+          "explanation": "Une notification MFA non sollicitée peut indiquer qu'un tiers connaît déjà votre mot de passe. Refusez-la, changez votre mot de passe depuis le portail officiel et signalez immédiatement l'événement via le Portail Sécurité."
+        },
+        {
+          "question": "Faut-il changer son mot de passe tous les 90 jours par principe ?",
+          "choices": [
+            "Oui",
+            "Non"
+          ],
+          "answer": 1,
+          "explanation": ". Cette pratique, longtemps recommandée, pousse vers des variations prévisibles (Hiver2026, Printemps2026). On change un mot de passe en cas de suspicion de compromission, pas selon un calendrier."
+        },
+        {
+          "question": "Quelle méthode MFA est la plus robuste ?",
+          "choices": [
+            "Une question secrète",
+            "Le code reçu par SMS",
+            "Un code envoyé par mail",
+            "L'application d'authentification avec correspondance de numéro"
+          ],
+          "answer": 3,
+          "explanation": "Le SMS est vulnérable au détournement de carte SIM. La correspondance de numéro empêche par ailleurs l'approbation réflexe : il faut saisir un chiffre affiché à l'écran, ce qui neutralise la fatigue MFA."
+        }
+      ],
+      "recommendations": {
+        "high": "Bon niveau. Module suivant suggéré : « Données clients et confidentialité ».",
+        "medium": "Revoyez la section « Le MFA et sa limite », puis refaites le quiz.",
+        "low": "Reprenez le micro-cours et installez le gestionnaire de mots de passe recommandé avant de repasser le quiz."
+      }
+    },
+    {
+      "id": "cyber-signaler-incident",
+      "themeId": "cyber",
+      "title": "Signaler un incident : quoi, à qui, quand",
+      "summary": "Ce qui mérite un signalement, par quel canal, dans quel délai — et pourquoi le doute suffit largement.",
+      "duration": 6,
+      "level": "Essentiel",
+      "passScore": 80,
+      "aiGenerated": true,
+      "reviewedBy": "Équipe Sécurité",
+      "lessons": [
+        {
+          "title": "Le seul chiffre qui compte : le délai",
+          "vigie": "Entre l'incident et le signalement, chaque heure change l'ampleur des dégâts.",
+          "body": "Un incident de sécurité n'est presque jamais grave au moment où il se produit. **Il le devient avec le temps.**\n\nUn identifiant volé à 9h et signalé à 9h15 : on révoque les sessions, on réinitialise, l'affaire est close. Le même identifiant signalé trois semaines plus tard : l'attaquant a eu le temps de lire la messagerie, de repérer les circuits de validation, de préparer une fraude au virement, d'atteindre d'autres comptes.\n\nC'est le même événement. Ce n'est pas le même incident.\n\nD'où une conséquence directe : **mieux vaut un signalement approximatif et rapide qu'un signalement parfait et tardif.** Vous n'avez pas à qualifier, à enquêter, ni à vérifier avant d'alerter. Ce travail est celui de l'équipe sécurité. Le vôtre s'arrête à : *quelque chose me semble anormal, je le dis*.\n\n**Le réflexe Mind7 :** dès que vous avez un doute, ouvrez un signalement dans le <a href=\"https://mind7.atlassian.net/servicedesk/customer/portal/1\" target=\"_blank\" rel=\"noopener noreferrer\">Ouvrir le portail Sécurité</a>. Vous n'avez pas besoin de connaître la cause ni de qualifier la gravité avant d'alerter."
+        },
+        {
+          "title": "Quoi signaler",
+          "vigie": "Dans le doute, signalez. Le doute est précisément le bon critère.",
+          "body": "La question la plus fréquente est « est-ce que cela mérite un signalement ? ». La réponse est oui, dans à peu près tous les cas.\n\n**Toujours signaler :**\n- Un mail suspect, même si vous n'avez pas cliqué\n- Un clic sur un lien douteux, avec ou sans saisie d'identifiants\n- Une notification MFA que vous n'avez pas déclenchée\n- Un poste qui ralentit brutalement, une fenêtre inhabituelle, des fichiers renommés ou inaccessibles\n- La perte ou le vol d'un téléphone, d'un ordinateur, d'un badge\n- Un document envoyé au mauvais destinataire, ou un partage trop large\n- Un appel demandant des informations internes, même poli et crédible\n- Une clé USB trouvée, un visiteur non accompagné dans les locaux\n\n**Les cas qu'on hésite à signaler, et qu'il faut signaler quand même :**\n\n*« C'est probablement rien. »* Peut-être. Trente secondes de vérification côté sécurité valent mieux qu'un angle mort.\n\n*« C'est moi qui ai fait la bêtise. »* C'est justement le cas le plus urgent. Un signalement de bonne foi est encouragé, y compris lorsque l'erreur vient de vous. Ce qui compte est de permettre une prise en charge rapide.\n\n*« Quelqu'un d'autre l'a sûrement déjà signalé. »* Deux signalements ne coûtent rien. Zéro signalement coûte cher."
+        },
+        {
+          "title": "À qui, et par quel canal",
+          "vigie": "Le bon canal dépend de la situation. Le mauvais canal, c'est ne rien dire.",
+          "body": "**Pour un mail simplement suspect, sans action de votre part** : utilisez en priorité le bouton de signalement intégré à Outlook lorsqu'il est disponible. Il transmet le message dans un format plus utile à l'analyse qu'un simple transfert. Ne répondez pas à l'expéditeur et ne diffusez pas le message à vos collègues.\n\n**Pour tout incident ou doute de sécurité** : passez par le **Portail Sécurité**, qui constitue le point d'entrée recommandé pour décrire les faits et permettre leur suivi :\n- <a href=\"https://mind7.atlassian.net/servicedesk/customer/portal/1\" target=\"_blank\" rel=\"noopener noreferrer\">Ouvrir le portail Sécurité</a>\n- Si le portail est indisponible : **support-it@mind7.fr**\n\nOuvrez un signalement notamment si vous avez cliqué, saisi des identifiants, reçu une notification MFA non sollicitée, perdu un équipement ou un badge, envoyé un document au mauvais destinataire, constaté des fichiers chiffrés ou observé un comportement anormal.\n\n**Si la situation est grave ou en cours** (compte compromis, matériel perdu ou volé, fichiers chiffrés, fraude au virement, fuite de données), créez le ticket puis contactez immédiatement le Support IT ou le RSSI par le canal direct interne habituel. Le ticket assure la traçabilité ; le contact direct accélère la prise en charge."
+        },
+        {
+          "title": "Ce que contient un bon signalement",
+          "vigie": "Ce que j'ai vu, quand, ce que j'ai fait. Trois lignes suffisent.",
+          "body": "Un bon signalement peut tenir en quelques lignes. Le plus utile est de rester factuel.\n\n**Indiquez :**\n- **Ce que vous avez observé** : message, fenêtre, perte de matériel, partage erroné, demande inhabituelle\n- **Quand cela s'est produit** : date et heure approximatives\n- **Ce que vous avez fait** : rien, ouverture du message, clic, téléchargement, saisie d'identifiants, validation MFA\n- **Le contexte** : poste ou téléphone, environnement Mind7 ou client, bureau, domicile ou déplacement\n- **Les éléments utiles** : capture d'écran si elle ne contient pas de secret, nom de l'expéditeur, équipement concerné, numéro de ticket ou message d'erreur\n\nN'incluez jamais de mot de passe, de code MFA, de clé API ou de secret dans le ticket. Ne supprimez pas les éléments utiles et n'essayez pas de nettoyer votre poste vous-même. Suivez ensuite les consignes du Support IT ou du RSSI.\n\nAccès direct : <a href=\"https://mind7.atlassian.net/servicedesk/customer/portal/1\" target=\"_blank\" rel=\"noopener noreferrer\">Ouvrir le portail Sécurité</a>."
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Vous avez cliqué sur un lien de phishing et saisi vos identifiants. Quel est le facteur le plus déterminant pour limiter les dégâts ?",
+          "choices": [
+            "La complexité du mot de passe utilisé",
+            "Le fait d'avoir ou non un antivirus à jour",
+            "Le délai entre l'incident et le signalement",
+            "Le nombre de collègues prévenus"
+          ],
+          "answer": 2,
+          "explanation": "Le délai est le seul facteur réellement décisif. Signalé dans le quart d'heure, l'incident se referme par une révocation de sessions. Signalé trois semaines plus tard, l'attaquant a eu le temps de préparer bien autre chose."
+        },
+        {
+          "question": "Vous recevez un mail suspect. Quel canal utiliser ?",
+          "choices": [
+            "Un transfert manuel vers l'adresse du support",
+            "Un transfert aux collègues pour les mettre en garde",
+            "Le bouton de signalement intégré à Outlook",
+            "Une réponse à l'expéditeur pour vérifier son identité"
+          ],
+          "answer": 2,
+          "explanation": "Le bouton intégré préserve les en-têtes techniques nécessaires à l'analyse, qu'un transfert manuel détruit. Répondre confirme que votre adresse est active ; transférer aux collègues diffuse le lien piégé à des personnes non averties."
+        },
+        {
+          "question": "Vous pensez être à l'origine de l'incident par maladresse. Faut-il quand même signaler ?",
+          "choices": [
+            "Oui",
+            "Non"
+          ],
+          "answer": 0,
+          "explanation": "et c'est même le cas le plus urgent. Aucune sanction n'est prise pour un signalement de bonne foi. Le seul comportement qui pose réellement problème est le silence."
+        },
+        {
+          "question": "Quelle information est la plus utile à l'équipe sécurité dans votre signalement ?",
+          "choices": [
+            "Le nombre de collègues ayant reçu le même message",
+            "Ce que vous avez concrètement fait : cliqué, saisi des identifiants, ou rien",
+            "Une analyse technique de l'attaque",
+            "Le nom probable de l'attaquant"
+          ],
+          "answer": 1,
+          "explanation": "Savoir si vous avez cliqué, saisi des identifiants, ou rien fait détermine directement la réponse à déclencher. L'analyse technique n'est pas votre rôle — décrire les faits suffit."
+        },
+        {
+          "question": "Vous avez signalé un incident. Que faut-il éviter de faire ensuite ?",
+          "choices": [
+            "Supprimer le message suspect et nettoyer votre poste vous-même",
+            "Laisser votre machine allumée si on vous le demande",
+            "Suivre les consignes de l'équipe sécurité",
+            "Changer votre mot de passe si on vous le demande"
+          ],
+          "answer": 0,
+          "explanation": "Supprimer le message ou nettoyer le poste détruit les traces dont l'analyse a besoin. Si on vous demande de ne pas éteindre la machine, c'est pour préserver des éléments volatils."
+        },
+        {
+          "question": "Un incident vous semble avéré et urgent. Un ticket de support suffit-il ?",
+          "choices": [
+            "Oui, tous les tickets sont traités en priorité",
+            "Oui, à condition de cocher la case « urgent »",
+            "Non, il faut attendre le lendemain pour ne pas déranger",
+            "Non, il faut doubler par un appel ou un message direct"
+          ],
+          "answer": 3,
+          "explanation": "Un ticket peut rester quelques heures dans une file d'attente. Une compromission active, non. Pour une situation grave — perte de matériel, fichiers chiffrés, demande de virement suspecte — on double par un contact direct."
+        }
+      ],
+      "recommendations": {
+        "high": "Parfait : vous savez quoi signaler, à qui et dans quel délai. Module suivant suggéré : « Ingénierie sociale : au-delà du mail ».",
+        "medium": "Revoyez la section « À qui, et par quel canal », puis refaites le quiz.",
+        "low": "Reprenez le micro-cours depuis le début. Le signalement est le geste qui conditionne tous les autres."
+      }
+    },
+    {
+      "id": "cyber-ingenierie-sociale",
+      "themeId": "cyber",
+      "title": "Ingénierie sociale : au-delà du mail",
+      "summary": "Téléphone, SMS, Teams, LinkedIn, visite sur site : reconnaître la manipulation quel que soit le canal.",
+      "duration": 7,
+      "level": "Intermédiaire",
+      "passScore": 80,
+      "aiGenerated": true,
+      "reviewedBy": "Équipe Sécurité",
+      "lessons": [
+        {
+          "title": "La cible, c'est la confiance",
+          "vigie": "L'ingénierie sociale n'attaque pas vos outils. Elle attaque vos qualités professionnelles.",
+          "body": "On associe spontanément l'hameçonnage au mail. C'est une erreur de périmètre : **le mail n'est qu'un canal parmi d'autres.** Un attaquant appellera, enverra un SMS, écrira sur Teams ou LinkedIn, ou se présentera physiquement à l'accueil.\n\nCe qui ne change pas, c'est le mécanisme. L'ingénierie sociale n'exploite pas une faille technique : **elle exploite des comportements professionnels normaux et souhaitables** — la serviabilité, le respect de la hiérarchie, la réactivité, l'envie de bien faire.\n\nC'est pourquoi elle est si efficace, y compris sur des personnes averties. Refuser d'aider un collègue en difficulté, faire attendre un dirigeant, ou demander à un visiteur de patienter : tout cela va à l'encontre de nos réflexes professionnels.\n\n**Le point clé à intégrer : la vigilance n'est pas de la méfiance.** Vérifier n'est pas accuser. Une demande légitime survit toujours à une vérification."
+        },
+        {
+          "title": "Les quatre leviers, toujours les mêmes",
+          "vigie": "Urgence, autorité, familiarité, curiosité. Quand plusieurs se combinent, méfiez-vous.",
+          "body": "Quel que soit le canal, la manipulation repose sur les mêmes ressorts.\n\n**L'urgence.** « Avant 17h », « le client attend », « c'est bloquant ». L'urgence artificielle vise à supprimer le temps de réflexion — précisément le moment où le doute apparaîtrait.\n\n**L'autorité.** Un dirigeant, un auditeur, un service juridique, un « responsable IT ». L'autorité désamorce la vérification : on ne demande pas ses papiers à un directeur.\n\n**La familiarité.** L'attaquant cite le nom de votre manager, votre outil de gestion, un projet en cours. Ces informations se trouvent sur LinkedIn, dans une signature de mail, ou dans un communiqué. **Connaître des détails internes ne prouve rien.**\n\n**La curiosité ou l'appât.** Une offre de mission très attractive, un colis en attente, une prime à valider.\n\n**Le signal d'alerte le plus fiable : la combinaison.** Un dirigeant que vous ne connaissez pas, qui vous demande quelque chose d'urgent, en insistant sur la confidentialité, par un canal inhabituel. Chaque élément pris isolément serait anodin. Ensemble, ils dessinent un schéma."
+        },
+        {
+          "title": "Téléphone, SMS et messageries",
+          "vigie": "Le numéro affiché ne prouve rien. Il se falsifie aussi facilement qu'un nom d'expéditeur.",
+          "body": "**Le téléphone (vishing).** C'est le canal le plus efficace, parce que la voix humaine crée une pression que l'écrit n'a pas — et qu'il ne laisse aucune trace écrite à relire.\n\nScénario classique : « Bonjour, service informatique. Nous détectons une anomalie sur votre compte, je vais avoir besoin de votre code de validation. » Le ton est courtois, compétent, rassurant.\n\n**Le numéro affiché ne prouve rien** : il se falsifie aussi facilement qu'un nom d'expéditeur. Un appelant peut afficher le standard de l'entreprise.\n\n**La règle, simple et sans exception : on ne communique jamais un mot de passe ni un code MFA par téléphone. Jamais.** Aucun service informatique légitime ne vous le demandera. Si un doute subsiste, on raccroche poliment et on rappelle par un numéro connu — pas celui fourni par l'interlocuteur.\n\n**Le SMS (smishing).** Colis en attente, remboursement, alerte bancaire. Sur mobile, l'URL est tronquée et le contexte est distrait : le taux de réussite y est plus élevé qu'ailleurs.\n\n**Teams et messageries internes.** Un compte de collègue compromis devient un excellent point de départ : le message arrive dans un canal de confiance, avec une photo et un nom familiers. Un collègue qui vous demande soudainement un accès, un fichier sensible ou une manipulation inhabituelle mérite une vérification par un autre canal — un appel suffit.\n\n**LinkedIn.** Faux recruteurs, faux prestataires. Une offre trop belle sert souvent à collecter des informations sur votre environnement de travail, ou à faire ouvrir un fichier."
+        },
+        {
+          "title": "Sur site, et la bonne réaction",
+          "vigie": "Un visiteur non accompagné, ce n'est pas quelqu'un à confronter. C'est quelqu'un à accompagner.",
+          "body": "**L'intrusion physique** est rare mais reste redoutablement efficace. Un badge oublié, une caisse à outils, un gilet de chantier : le simple fait de paraître à sa place suffit souvent.\n\nLe *talonnage* consiste à entrer derrière une personne autorisée. Retenir la porte est un geste de politesse — c'est justement ce qui le rend exploitable. **Laisser chaque personne badger n'est pas un manque de courtoisie**, c'est la règle, et elle vaut pour tout le monde.\n\nFace à une personne inconnue non accompagnée, la bonne réaction n'est pas la confrontation. C'est une question ouverte et courtoise : « Bonjour, vous cherchez quelqu'un ? Je vous accompagne à l'accueil. » Une personne légitime sera ravie d'être aidée. Une personne illégitime abandonnera.\n\n**Le réflexe universel, valable pour tous les canaux :**\n\n**Ralentir.** Une demande urgente est une raison de vérifier, pas de se presser.\n\n**Vérifier par un autre canal.** C'est la contre-mesure la plus efficace, et souvent la seule nécessaire. Un appel sur un numéro connu, un message sur le canal habituel. Jamais en répondant au message reçu.\n\n**Signaler, même si vous avez refusé.** Une tentative repoussée est une information précieuse : elle signifie que d'autres collègues sont probablement ciblés en ce moment même.\n\n**Et surtout : vous avez le droit de dire non.** Aucun dirigeant de cette entreprise ne vous reprochera d'avoir vérifié son identité avant d'exécuter une demande inhabituelle."
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Un appelant se présente comme le support informatique et demande votre code MFA pour « débloquer votre compte ». Que faites-vous ?",
+          "choices": [
+            "Je le communique, le numéro affiché correspond au standard interne",
+            "Je lui demande de m'envoyer un mail de confirmation d'abord",
+            "Je refuse, je raccroche et je rappelle le support par un numéro connu",
+            "Je le communique après avoir vérifié son nom dans l'annuaire"
+          ],
+          "answer": 2,
+          "explanation": "Un code MFA ou un mot de passe ne se communique jamais par téléphone, sans exception. Le numéro affiché se falsifie aussi facilement qu'un nom d'expéditeur : il ne constitue aucune preuve."
+        },
+        {
+          "question": "Quel est le signal d'alerte le plus fiable en ingénierie sociale ?",
+          "choices": [
+            "La combinaison de plusieurs leviers : urgence, autorité, canal inhabituel, confidentialité",
+            "Un expéditeur externe à l'entreprise",
+            "Une faute d'orthographe dans le message",
+            "Une demande formulée en dehors des heures de bureau"
+          ],
+          "answer": 0,
+          "explanation": "Pris isolément, chaque élément peut être anodin. C'est leur combinaison qui dessine un schéma d'attaque. Les fautes d'orthographe, elles, ont largement disparu des campagnes actuelles."
+        },
+        {
+          "question": "Un collègue vous écrit sur Teams et demande un accès inhabituel de manière pressante. Que faites-vous ?",
+          "choices": [
+            "J'accepte, Teams est un canal interne sécurisé",
+            "Je vérifie par un autre canal, par exemple un appel direct",
+            "Je réponds sur Teams pour lui demander de confirmer",
+            "Je transmets la demande à un autre collègue"
+          ],
+          "answer": 1,
+          "explanation": "Un compte compromis devient un excellent point de départ : le message arrive dans un canal de confiance, avec photo et nom familiers. Confirmer sur le même canal ne prouve rien — la vérification doit passer par un canal différent."
+        },
+        {
+          "question": "L'interlocuteur cite le nom de votre manager et un projet en cours. Est-ce une preuve de légitimité ?",
+          "choices": [
+            "Oui",
+            "Non"
+          ],
+          "answer": 1,
+          "explanation": ". Ces informations se trouvent sur LinkedIn, dans une signature de mail ou un communiqué de presse. Connaître des détails internes ne prouve rien — c'est même une technique classique pour installer la familiarité."
+        },
+        {
+          "question": "Une personne inconnue et non accompagnée circule dans les locaux. Quelle est la bonne réaction ?",
+          "choices": [
+            "Prévenir l'IT par ticket en fin de journée",
+            "L'ignorer, ce n'est pas mon rôle",
+            "L'interpeller fermement pour lui demander son badge",
+            "Aller vers elle courtoisement et proposer de l'accompagner à l'accueil"
+          ],
+          "answer": 3,
+          "explanation": "Ni indifférence ni confrontation. Une question ouverte et courtoise suffit : une personne légitime sera ravie d'être aidée, une personne illégitime abandonnera. Et on signale ensuite."
+        },
+        {
+          "question": "Vous avez repoussé une tentative de manipulation. Faut-il la signaler ?",
+          "choices": [
+            "Oui",
+            "Non"
+          ],
+          "answer": 0,
+          "explanation": ". Une tentative repoussée signifie que d'autres collègues sont probablement ciblés au même moment. Votre signalement permet de les prévenir avant qu'ils ne tombent."
+        }
+      ],
+      "recommendations": {
+        "high": "Vous repérez les mécanismes quel que soit le canal. Module suivant suggéré : « Deux environnements, deux jeux de règles ».",
+        "medium": "Revoyez la section « Les quatre leviers, toujours les mêmes », puis refaites le quiz.",
+        "low": "Reprenez le micro-cours depuis le début, en particulier la partie sur le téléphone et les messageries."
+      }
+    },
+    {
+      "id": "cyber-ia-generative",
+      "themeId": "cyber",
+      "title": "IA générative : ce qu'on peut y mettre, ce qu'on ne peut pas",
+      "summary": "Copilot d'entreprise ou outil public : comprendre la différence, et savoir ce qui ne doit jamais être saisi dans une IA.",
+      "duration": 7,
+      "level": "Essentiel",
+      "passScore": 80,
+      "aiGenerated": true,
+      "reviewedBy": "Équipe Sécurité",
+      "lessons": [
+        {
+          "title": "Un canal de fuite qui ne ressemble pas à une fuite",
+          "vigie": "Coller du code client dans une IA publique, c'est l'envoyer à un tiers. Sans pièce jointe, sans destinataire.",
+          "body": "L'IA générative est devenue un outil de travail quotidien, et c'est une bonne chose : elle fait gagner un temps réel sur la rédaction, la synthèse, la relecture de code.\n\nMais elle a créé un canal de fuite qui ne ressemble à rien de connu. Envoyer un fichier client par mail à une adresse externe **ressemble** à une fuite : il y a un destinataire, une pièce jointe, un envoi. Coller le même contenu dans une IA n'y ressemble pas du tout — c'est un champ de texte, une conversation, quelque chose qui se rapproche d'une recherche web.\n\n**Pourtant, c'est exactement la même chose : une transmission de données à un tiers.**\n\nEt c'est aujourd'hui l'un des premiers risques de fuite en entreprise, presque toujours involontaire. Personne ne colle un fichier d'utilisateurs dans une IA en pensant mal faire. On veut juste déboguer un script, reformuler un mail, comprendre un message d'erreur.\n\nLe reste de ce module tient en une distinction : **quel outil, et quel contenu.**"
+        },
+        {
+          "title": "Copilot d'entreprise : ce qui change vraiment",
+          "vigie": "Connecté à votre compte pro, Copilot travaille dans notre périmètre. Ce n'est pas le cas des versions publiques.",
+          "body": "Il faut distinguer deux mondes qui portent parfois le même nom.\n\n**Microsoft Copilot connecté à votre compte professionnel** bénéficie de la protection des données d'entreprise. Concrètement :\n- **Vos données ne sont pas utilisées pour entraîner les modèles.**\n- Les échanges restent dans le périmètre contractuel de l'entreprise, avec les mêmes engagements que le reste de Microsoft 365.\n- Les permissions existantes sont respectées : Copilot ne vous montre que ce à quoi vous avez déjà accès. Il ne « débloque » aucun document.\n- **Un administrateur IT ne dispose pas d'un bouton lui permettant de parcourir librement vos conversations.** Comme pour d'autres données Microsoft 365, des personnes spécifiquement habilitées peuvent toutefois rechercher des interactions dans Microsoft Purview ou eDiscovery, uniquement dans un cadre de conformité, d'enquête ou d'obligation légale.\n\n**Comment vérifier que vous êtes au bon endroit ?** Assurez-vous d'être connecté avec votre compte professionnel et cherchez l'indicateur de protection des données affiché par l'outil. Si vous ne le voyez pas, vous êtes probablement sur une version grand public.\n\n**Les outils publics et les comptes personnels** — quels qu'ils soient — n'offrent aucune de ces garanties. Selon les cas, les contenus saisis peuvent être conservés, analysés, ou utilisés pour l'amélioration des modèles. **Ils sont à proscrire pour tout contenu professionnel**, y compris depuis un poste personnel.\n\n**Attention aussi aux extensions et outils intégrés** — plugin de navigateur, assistant intégré à un éditeur de code, service de transcription automatique. La question à se poser est toujours : *où part le contenu, et sous quel contrat ?*"
+        },
+        {
+          "title": "Ce qui ne se saisit jamais",
+          "vigie": "Le test : est-ce que je publierais ce contenu sur un site public ? Si non, il n'entre pas dans une IA non validée.",
+          "body": "Même avec un outil validé, tout ne se saisit pas. La règle de proportionnalité reste : on ne fournit que ce qui est nécessaire.\n\n**Ne jamais saisir, quel que soit l'outil :**\n- Des identifiants, mots de passe, clés d'API, jetons ou certificats\n- Des données personnelles réelles : listes de collaborateurs, CV, données RH, coordonnées de clients\n- Des données client sous contrat : extractions, exports, jeux de données de production\n- Des éléments d'architecture sensibles : schémas réseau détaillés, configurations de sécurité, adressage interne\n- Des documents marqués confidentiels, contrats, éléments juridiques en cours\n- Des informations relatives à un incident de sécurité en cours\n\n**Le cas du code.** C'est le plus fréquent chez nous. Coller un extrait de code appartenant à un client pour le déboguer est une transmission de données à un tiers — **et ni l'anonymisation partielle ni la petite taille de l'extrait n'y changent quoi que ce soit.** Retirer le nom du client ne suffit pas : la logique métier, les noms de tables, la structure sont eux-mêmes des informations.\n\nEn mission, la règle est simple : **les outils d'IA autorisés sont ceux que le client autorise.** Certains clients les interdisent totalement dans leur environnement. Vérifiez avant, pas après.\n\n**Le test qui tranche à peu près tous les cas :** *est-ce que je publierais ce contenu sur un site web public ?* Si la réponse est non, il n'a pas sa place dans une IA non validée."
+        },
+        {
+          "title": "Ce que l'IA produit vous engage",
+          "vigie": "L'IA propose. Vous validez. Et c'est votre nom qui figure sur le livrable.",
+          "body": "Le risque ne s'arrête pas à ce qu'on saisit. Il porte aussi sur ce qui sort.\n\n**L'IA se trompe avec assurance.** Elle produit des références qui n'existent pas, des chiffres plausibles mais faux, des affirmations juridiques ou techniques erronées — le tout dans un style parfaitement crédible. C'est précisément ce qui rend l'erreur difficile à repérer.\n\n**Vous restez responsable de ce que vous livrez.** Un chiffre, une référence normative, un extrait de code, une clause : cela se vérifie avant d'être transmis à un client ou intégré à un livrable. « C'est l'IA qui l'a écrit » n'est pas une explication recevable devant un client, ni devant un auditeur.\n\n**Le code généré se relit.** Il peut contenir des vulnérabilités, des dépendances obsolètes, ou des bibliothèques qui n'existent pas. Ne l'intégrez pas sans relecture, et surtout pas dans un environnement client.\n\n**Les licences.** Le contenu généré peut s'inspirer de sources sous licence contraignante. Pour du code destiné à un livrable, la question mérite d'être posée.\n\n**La transparence.** Selon le contexte, l'usage de l'IA dans un livrable peut devoir être mentionné — certains clients l'exigent contractuellement. Dans le doute, demandez à votre manager plutôt que de supposer.\n\n**En résumé : l'IA est un excellent assistant et un mauvais garant.** Elle accélère votre travail ; elle ne le valide pas."
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Quelle est la principale différence entre Copilot connecté à votre compte professionnel et un outil d'IA public ?",
+          "choices": [
+            "Vos données ne servent pas à entraîner les modèles et restent dans le périmètre contractuel de l'entreprise",
+            "Il n'y a pas de différence réelle, seulement l'interface",
+            "Copilot est plus rapide",
+            "Copilot ne conserve aucun historique"
+          ],
+          "answer": 0,
+          "explanation": "C'est la garantie contractuelle qui change tout : avec la protection des données d'entreprise, vos contenus ne sont pas utilisés pour entraîner les modèles et restent dans le périmètre couvert. Un outil public n'offre aucune de ces garanties."
+        },
+        {
+          "question": "Peut-on coller un extrait de code d'un client dans un outil d'IA public pour le déboguer ?",
+          "choices": [
+            "Oui, si on retire le nom du client",
+            "Oui, l'IA ne conserve rien",
+            "Non, c'est une transmission de données à un tiers non contractualisé",
+            "Oui, si l'extrait fait moins de 20 lignes"
+          ],
+          "answer": 2,
+          "explanation": "Ni l'anonymisation partielle ni la taille de l'extrait ne changent la nature de l'acte. La logique métier, les noms de tables et la structure sont eux-mêmes des informations. Seuls les outils validés offrent une garantie contractuelle."
+        },
+        {
+          "question": "Un administrateur IT peut-il parcourir librement vos conversations Copilot depuis les consoles d'administration usuelles ?",
+          "choices": [
+            "Oui",
+            "Non"
+          ],
+          "answer": 1,
+          "explanation": "Non. Il n'existe pas de vue d'administration permettant de lire librement les conversations. Des personnes spécifiquement habilitées peuvent néanmoins rechercher des interactions via Microsoft Purview ou eDiscovery dans un cadre de conformité, d'enquête ou d'obligation légale."
+        },
+        {
+          "question": "Vous utilisez Copilot d'entreprise, validé par Mind7. Pouvez-vous y saisir une liste de collaborateurs avec leurs coordonnées ?",
+          "choices": [
+            "Oui, l'outil est validé donc tout contenu est autorisé",
+            "Oui, si la liste ne dépasse pas dix personnes",
+            "Oui, à condition de supprimer la conversation ensuite",
+            "Non : même avec un outil validé, on ne saisit pas de données personnelles réelles sans nécessité"
+          ],
+          "answer": 3,
+          "explanation": "L'outil validé règle la question du périmètre contractuel, pas celle de la proportionnalité. On ne fournit que ce qui est nécessaire : identifiants, données personnelles réelles et extractions client restent exclus."
+        },
+        {
+          "question": "En mission, quels outils d'IA pouvez-vous utiliser ?",
+          "choices": [
+            "Ceux que le client autorise : certains les interdisent dans leur environnement",
+            "Ceux que Mind7 a validés, dans tous les cas",
+            "N'importe lequel, tant que je ne saisis pas de données",
+            "Uniquement ceux installés sur le poste client"
+          ],
+          "answer": 0,
+          "explanation": "En mission, c'est le cadre du client qui prime. Certains interdisent totalement l'IA générative dans leur environnement. La vérification se fait avant usage, pas après."
+        },
+        {
+          "question": "L'IA vous fournit une référence normative précise pour un livrable client. Que faites-vous ?",
+          "choices": [
+            "Je demande à l'IA de confirmer sa propre réponse",
+            "Je l'intègre en précisant qu'elle vient de l'IA",
+            "Je l'intègre, l'IA est fiable sur les normes",
+            "Je vérifie la référence avant de la transmettre"
+          ],
+          "answer": 3,
+          "explanation": "L'IA se trompe avec assurance : elle produit des références inexistantes dans un style crédible. Vous restez responsable de ce que vous livrez — « c'est l'IA qui l'a écrit » n'est recevable ni devant un client, ni devant un auditeur."
+        }
+      ],
+      "recommendations": {
+        "high": "Vous distinguez bien les outils et les contenus. Module suivant suggéré : « En cas de crise : mon rôle ».",
+        "medium": "Revoyez la section « Ce qui ne se saisit jamais », puis refaites le quiz.",
+        "low": "Reprenez le micro-cours depuis le début : c'est le risque qui progresse le plus vite actuellement."
+      }
+    },
+    {
+      "id": "cyber-donnees-clients",
+      "themeId": "cyber",
+      "title": "Données clients et confidentialité",
+      "summary": "En mission comme en interne : où circulent les données, et où elles ne doivent jamais aller.",
+      "duration": 6,
+      "level": "Intermédiaire",
+      "passScore": 80,
+      "aiGenerated": true,
+      "reviewedBy": "Équipe Sécurité",
+      "lessons": [
+        {
+          "title": "Le contexte du consultant",
+          "vigie": "Deux postes, deux messageries, deux jeux de règles. C'est dans l'entre-deux que ça dérape.",
+          "body": "Notre métier crée une situation particulière : vous travaillez sur le système d'information d'un client, avec parfois deux postes, deux messageries et deux jeux de règles. C'est dans cet entre-deux que naissent la plupart des incidents de confidentialité — rarement par malveillance, presque toujours par commodité.\n\n**La règle de base : les données du client restent chez le client.** Pas de copie sur le poste personnel, pas d'envoi vers l'adresse professionnelle « pour finir ce soir », pas de dépôt sur un service cloud personnel.\n\nSi vous avez besoin d'un élément pour une réunion interne, la bonne pratique est de produire une **synthèse anonymisée** : pas d'extraction brute, pas de capture d'écran contenant des données réelles."
+        },
+        {
+          "title": "L'IA générative : le nouveau canal de fuite",
+          "vigie": "La bonne question : est-ce que je publierais ce contenu sur un site public ?",
+          "body": "C'est aujourd'hui un risque émergent important, et il est presque toujours involontaire. Coller un extrait de code client, une architecture réseau ou un fichier d'utilisateurs dans un outil d'IA public constitue une **transmission de données à un tiers**, au même titre qu'un envoi par mail.\n\nLa distinction à retenir :\n\n**Outils validés par l'entreprise** (Copilot avec la protection des données d'entreprise, connecté à votre compte professionnel) : vos données ne sont pas utilisées pour entraîner les modèles et restent dans le périmètre contractuel.\n\n**Outils publics et comptes personnels** : aucune garantie contractuelle. À proscrire pour tout contenu professionnel.\n\nEn cas de doute, la question à se poser est simple : **est-ce que je publierais ce contenu sur un site public ?** Si la réponse est non, il n'a pas sa place dans un outil d'IA non validé.\n\n> Ce sujet est approfondi dans le module dédié « IA générative : ce qu'on peut y mettre, ce qu'on ne peut pas »."
+        },
+        {
+          "title": "Partage, mobilité et bon sens",
+          "vigie": "Un lien « toute personne disposant du lien », c'est une fuite avec un délai de déclenchement.",
+          "body": "**Le partage.** Avant d'envoyer un lien, vérifiez le périmètre. Un lien « toute personne disposant du lien » sur un document contenant des données client est une fuite en attente. Privilégiez le partage nominatif et posez une date d'expiration.\n\n**La mobilité.** Le train et l'open space client sont des environnements ouverts. Écran visible depuis le siège voisin, conversation téléphonique où l'on cite un nom de client, document laissé sur l'imprimante : ce sont des fuites sans aucune dimension technique.\n\n**Le départ de mission.** À la fin d'une mission, les accès doivent être révoqués et les données locales supprimées. Ce n'est pas seulement une bonne pratique : c'est un engagement contractuel vis-à-vis du client, et un point systématiquement contrôlé en audit."
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Vous devez finir une analyse ce soir. Le fichier est sur le poste client. Que faites-vous ?",
+          "choices": [
+            "Je le termine depuis l'environnement client, ou je demande un accès distant validé",
+            "Je le dépose sur mon espace cloud personnel, c'est temporaire",
+            "Je me l'envoie sur mon adresse professionnelle",
+            "Je fais des captures d'écran, c'est moins risqué qu'un fichier"
+          ],
+          "answer": 0,
+          "explanation": "Les données du client restent dans l'environnement du client. Le transfert vers un autre périmètre, même professionnel et même temporaire, constitue une sortie de données non autorisée. Une capture d'écran est une copie comme une autre."
+        },
+        {
+          "question": "Peut-on coller un extrait de code d'un client dans un outil d'IA public pour le déboguer ?",
+          "choices": [
+            "Oui, si on retire le nom du client",
+            "Oui, l'IA ne conserve rien",
+            "Oui, si l'extrait fait moins de 20 lignes",
+            "Non, c'est une transmission de données à un tiers non contractualisé"
+          ],
+          "answer": 3,
+          "explanation": "Ni l'anonymisation partielle ni la taille de l'extrait ne changent la nature de l'acte. Seuls les outils validés par l'entreprise, connectés à votre compte professionnel, offrent une garantie contractuelle sur le traitement des données."
+        },
+        {
+          "question": "Quel mode de partage est adapté pour un document contenant des données client ?",
+          "choices": [
+            "Un lien « toute personne disposant du lien »",
+            "Un dépôt sur un espace public interne",
+            "Un partage nominatif avec date d'expiration",
+            "Une pièce jointe envoyée à une liste de diffusion"
+          ],
+          "answer": 2,
+          "explanation": "Le partage nominatif limite l'accès aux personnes identifiées et permet la traçabilité. La date d'expiration évite qu'un accès accordé pour une réunion reste ouvert des mois plus tard."
+        },
+        {
+          "question": "Travailler sur un dossier client dans le train est acceptable si l'on est attentif.",
+          "choices": [
+            "Vrai",
+            "Faux"
+          ],
+          "answer": 1,
+          "explanation": "Faux. L'attention ne protège pas d'un écran visible depuis le siège voisin ni d'une conversation entendue. Sans filtre de confidentialité et sans maîtrise de l'environnement, un espace public n'est pas adapté aux données sensibles."
+        },
+        {
+          "question": "À la fin d'une mission, que faut-il faire des données locales du client ?",
+          "choices": [
+            "Les transférer à l'équipe qui reprend le sujet",
+            "Les conserver le temps de la période de garantie",
+            "Les supprimer et faire révoquer les accès",
+            "Les archiver, elles pourront resservir sur une mission similaire"
+          ],
+          "answer": 2,
+          "explanation": "Suppression des données locales et révocation des accès. C'est un engagement contractuel vis-à-vis du client, systématiquement vérifié en audit. Toute transmission à une autre équipe passe par le canal officiel du client."
+        }
+      ],
+      "recommendations": {
+        "high": "Excellent. Vous êtes à jour sur ce module. Poursuivez avec « Deux environnements, deux jeux de règles » pour approfondir.",
+        "medium": "Revoyez la section « Partage, mobilité et bon sens », puis refaites le quiz.",
+        "low": "Reprenez le micro-cours depuis le début et rapprochez-vous de l'équipe sécurité en cas de doute sur une situation concrète."
+      }
+    },
+    {
+      "id": "cyber-en-cas-de-crise",
+      "themeId": "cyber",
+      "title": "En cas de crise : mon rôle",
+      "summary": "Quand l'entreprise bascule en cellule de crise, ce qu'on attend de vous — et surtout ce qu'on ne vous demande pas de faire.",
+      "duration": 6,
+      "level": "Essentiel",
+      "passScore": 80,
+      "aiGenerated": true,
+      "reviewedBy": "Équipe Sécurité",
+      "lessons": [
+        {
+          "title": "Un incident, une crise : ce n'est pas pareil",
+          "vigie": "En crise, votre rôle n'est pas d'agir. Il est de ne pas aggraver, et de rester joignable.",
+          "body": "Un **incident**, c'est un événement isolé : un poste infecté, un mail de phishing, un compte compromis. Il se traite par la procédure habituelle.\n\nUne **crise**, c'est autre chose : l'activité de l'entreprise est significativement affectée. Messagerie indisponible pendant des heures, outil de gestion inaccessible, données de plusieurs clients potentiellement exposées, locaux inaccessibles. L'entreprise bascule alors dans un dispositif dédié, avec une cellule de crise, un pilote désigné et des rôles définis à l'avance.\n\n**Ce dispositif existe, il est formalisé et il est testé.** Vous n'avez donc rien à improviser, et c'est le message principal de ce module.\n\nL'expérience montre que **la plupart des dégâts collatéraux en situation de crise ne viennent pas de l'attaque elle-même**, mais des initiatives individuelles bien intentionnées : une information relayée trop vite, un client prévenu maladroitement, un poste redémarré qui efface des traces d'analyse.\n\nVotre rôle tient en trois mots : **ne pas aggraver.**"
+        },
+        {
+          "title": "Les trois premiers réflexes",
+          "vigie": "Si M365 est indisponible, ne cherchez pas les consignes dans Teams. Elles arriveront autrement.",
+          "body": "**1. Signaler, si c'est vous qui découvrez.** Une crise commence souvent par un signalement de collaborateur. Si vous constatez quelque chose de massif — fichiers inaccessibles ou renommés, service indisponible pour toute l'équipe, message de rançon — ouvrez immédiatement un ticket dans le **Portail Sécurité**, puis contactez le Support IT ou le RSSI par le canal direct interne habituel. Le ticket assure la traçabilité ; le contact direct accélère l'escalade.\n\n**2. Ne rien manipuler.** Si votre poste est concerné : ne l'éteignez pas, ne le redémarrez pas, ne tentez pas de supprimer un fichier suspect ou de « nettoyer ». Une grande partie des éléments d'analyse est volatile et disparaît à l'extinction. Débranchez le réseau **uniquement si on vous le demande**.\n\n**3. Anticiper la perte des canaux habituels.** Si Microsoft 365 est indisponible, Teams et Outlook le sont aussi. Les consignes passeront alors par d'autres voies : appel téléphonique, SMS, ou message sur un canal de secours.\n\n**Conséquence pratique, à préparer dès maintenant :** assurez-vous que votre numéro de téléphone est à jour et que vous savez joindre votre manager sans passer par la messagerie professionnelle. **En pleine crise, il est trop tard pour chercher un numéro dans un annuaire inaccessible.**\n\nPortail : <a href=\"https://mind7.atlassian.net/servicedesk/customer/portal/1\" target=\"_blank\" rel=\"noopener noreferrer\">Ouvrir le portail Sécurité</a>."
+        },
+        {
+          "title": "La communication : le point le plus sensible",
+          "vigie": "Une crise mal communiquée coûte souvent plus cher que la crise elle-même.",
+          "body": "C'est ici que les dégâts les plus durables se produisent, et c'est la partie où votre discipline compte le plus.\n\n**Vous ne communiquez pas à l'extérieur.** Ni aux clients, ni aux partenaires, ni aux fournisseurs, ni sur les réseaux sociaux — même pour rassurer, même de façon vague, même dans un message privé. La communication de crise est centralisée : elle est arbitrée par la direction, souvent avec un conseil juridique et l'assureur.\n\n**Pourquoi une telle rigueur ?** Trois raisons concrètes :\n- Les premières informations en crise sont presque toujours partiellement fausses. Ce qui est affirmé à J+0 est régulièrement démenti à J+2.\n- Une déclaration prématurée peut engager juridiquement l'entreprise et compliquer la relation d'assurance.\n- Une information publique peut renseigner l'attaquant sur l'efficacité de son action.\n\n**Si un client vous interroge directement** — cas fréquent quand vous êtes en mission — la bonne réponse est simple et honnête : *« Je remonte votre question, quelqu'un va vous répondre rapidement. »* Puis vous remontez immédiatement. **Ce n'est pas de l'esquive : c'est le seul moyen d'éviter de dire une chose qui sera démentie demain.**\n\n**Si un journaliste vous contacte**, vous ne répondez pas et vous transmettez à la direction. Sans exception.\n\n**En interne**, restez sur les canaux officiels. Les rumeurs internes finissent systématiquement à l'extérieur."
+        },
+        {
+          "title": "Pendant, et après",
+          "vigie": "Le retour à la normale est décidé, pas constaté. Attendez le signal.",
+          "body": "**Restez joignable et disponible.** On peut avoir besoin de vous pour une vérification, un témoignage sur ce que vous avez observé, ou une action précise. Une crise mobilise peu de personnes activement, mais elle a besoin que les autres soient atteignables.\n\n**Notez ce que vous avez constaté**, avec les horaires : ce que vous avez vu, à quelle heure, ce que vous avez fait. Ces éléments alimentent l'analyse et, souvent, le dossier d'assurance ou la notification réglementaire. Notez sur papier si les outils sont indisponibles.\n\n**Appliquez les consignes sans les réinterpréter.** Si on vous demande de ne pas vous reconnecter à un service, de changer un mot de passe depuis un autre appareil, ou de ne pas rallumer votre poste, il y a une raison technique — même si elle n'est pas expliquée sur le moment.\n\n**Le retour à la normale est annoncé, pas deviné.** Ne vous reconnectez pas à un service parce qu'il « a l'air de remarcher ». Un retour prématuré peut relancer une propagation à peine contenue.\n\n**Après la crise**, un retour d'expérience est organisé. **Il n'a aucune vocation à désigner un responsable.** Son objectif est de comprendre ce qui a fonctionné et ce qui a manqué. Votre témoignage y a de la valeur, y compris — et surtout — s'il porte sur ce qui vous a semblé confus ou mal coordonné.\n\n**Un dernier point.** Si la crise est partie d'une erreur humaine, le collaborateur concerné n'est pas mis en cause. **Une organisation qui cherche un coupable obtient surtout un silence général la fois suivante.**"
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Vous découvrez que vos fichiers sont inaccessibles et renommés. Quel est le premier réflexe ?",
+          "choices": [
+            "Je tente de restaurer les fichiers depuis la corbeille",
+            "J'ouvre un ticket et j'attends la réponse du support",
+            "J'éteins le poste pour stopper la propagation",
+            "J'ouvre immédiatement un ticket sécurité, puis je contacte directement le Support IT, sans éteindre ni manipuler"
+          ],
+          "answer": 3,
+          "explanation": "N'éteignez pas et ne manipulez pas le poste. Ouvrez immédiatement un ticket via le Portail Sécurité pour assurer la traçabilité, puis contactez directement le Support IT ou le RSSI afin d'accélérer la prise en charge."
+        },
+        {
+          "question": "Un client vous interroge directement sur l'incident en cours. Que répondez-vous ?",
+          "choices": [
+            "Je lui dis qu'il n'y a aucun problème",
+            "Je l'oriente vers les réseaux sociaux de l'entreprise",
+            "Je remonte sa question et lui indique que quelqu'un va le recontacter rapidement",
+            "Je lui explique ce que je sais pour le rassurer"
+          ],
+          "answer": 2,
+          "explanation": "La communication de crise est centralisée et arbitrée par la direction. Les premières informations sont presque toujours partiellement fausses : ce qui est affirmé à J+0 est souvent démenti à J+2."
+        },
+        {
+          "question": "Microsoft 365 est indisponible. Où chercher les consignes ?",
+          "choices": [
+            "Sur le site web public de l'entreprise",
+            "J'attends que la messagerie revienne",
+            "Dans Teams, qui reste accessible en mode dégradé",
+            "Par les canaux de secours : téléphone, SMS, ou canal alternatif prévu"
+          ],
+          "answer": 3,
+          "explanation": "Si M365 est indisponible, Teams et Outlook le sont aussi. D'où l'importance d'avoir un numéro à jour et de savoir joindre son manager sans passer par la messagerie professionnelle — cela se prépare avant, pas pendant."
+        },
+        {
+          "question": "Le service semble refonctionner. Pouvez-vous vous reconnecter ?",
+          "choices": [
+            "Oui",
+            "Non"
+          ],
+          "answer": 1,
+          "explanation": ". Le retour à la normale est annoncé, pas constaté. Une reconnexion prématurée peut relancer une propagation à peine contenue. On attend le signal officiel."
+        },
+        {
+          "question": "Un journaliste vous contacte au sujet de l'incident. Que faites-vous ?",
+          "choices": [
+            "Je ne réponds pas et je transmets immédiatement à la direction",
+            "Je réponds de façon factuelle et prudente",
+            "Je réponds en demandant à ne pas être cité",
+            "Je le renvoie vers un collègue mieux informé"
+          ],
+          "answer": 0,
+          "explanation": "Aucune exception : on ne répond pas et on transmet à la direction. Une déclaration prématurée peut engager juridiquement l'entreprise et compliquer la relation avec l'assureur."
+        },
+        {
+          "question": "Le retour d'expérience organisé après la crise a pour objectif principal :",
+          "choices": [
+            "De valider que personne n'a commis d'erreur",
+            "De rédiger un rapport pour l'assureur uniquement",
+            "D'identifier le collaborateur à l'origine de l'incident",
+            "De comprendre ce qui a fonctionné et ce qui a manqué, pour améliorer le dispositif"
+          ],
+          "answer": 3,
+          "explanation": "Le retour d'expérience ne cherche pas de responsable. Une organisation qui cherche un coupable obtient surtout un silence général la fois suivante — c'est-à-dire exactement ce qui rend la crise suivante plus grave."
+        }
+      ],
+      "recommendations": {
+        "high": "Vous savez quoi faire — et surtout quoi ne pas faire. Vérifiez simplement que vos coordonnées sont à jour dans l'annuaire.",
+        "medium": "Revoyez la section « La communication : le point le plus sensible », puis refaites le quiz.",
+        "low": "Reprenez le micro-cours depuis le début : en crise, c'est la discipline collective qui limite les dégâts."
+      }
+    },
+    {
+      "id": "mission-deux-environnements",
+      "themeId": "mission",
+      "title": "Deux environnements, deux jeux de règles",
+      "summary": "Poste client, poste Mind7, deux messageries : où circulent les données, et où elles ne doivent jamais aller.",
+      "duration": 7,
+      "level": "Essentiel",
+      "passScore": 80,
+      "aiGenerated": true,
+      "reviewedBy": "Équipe Sécurité",
+      "lessons": [
+        {
+          "title": "La situation qui nous est propre",
+          "vigie": "Deux postes, deux messageries, deux jeux de règles. C'est dans l'entre-deux que ça dérape.",
+          "body": "Notre métier crée une situation que peu d'entreprises connaissent : **vous travaillez quotidiennement sur le système d'information de quelqu'un d'autre.**\n\nConcrètement, cela signifie souvent deux postes, deux messageries, deux annuaires, deux jeux de règles — et parfois deux cultures de sécurité très différentes. Vous êtes le point de contact entre les deux.\n\nC'est précisément dans cet entre-deux que naissent de nombreux incidents de confidentialité. **Presque jamais par malveillance. Presque toujours par commodité** : il fallait finir un livrable, le fichier était sur l'autre poste, le partage a été fait « juste pour cette fois ».\n\nCe module ne traite donc pas d'attaques. Il traite de ces moments où la solution la plus pratique est aussi celle qui vous met en défaut vis-à-vis d'un engagement contractuel."
+        },
+        {
+          "title": "La règle des deux périmètres",
+          "vigie": "Les données du client restent chez le client. Y compris vers votre adresse Mind7.",
+          "body": "Une seule règle à retenir, et elle est plus stricte qu'on ne l'imagine.\n\n**Les données du client restent dans l'environnement du client.**\n\nLe piège, c'est de croire que le périmètre autorisé s'arrête au « personnel ». Non : **envoyer un document client vers votre adresse Mind7 est déjà une sortie de données.** Même si l'adresse est professionnelle. Même si c'est temporaire. Même si c'est vous qui l'avez produit.\n\nSont donc à proscrire, sauf autorisation formelle du client :\n- L'envoi vers votre messagerie Mind7 ou personnelle\n- Le dépôt sur un OneDrive, SharePoint ou espace cloud non prévu au contrat\n- La copie sur clé USB ou disque personnel\n- **La capture d'écran contenant des données réelles** — c'est une copie comme une autre\n\n**Dans l'autre sens aussi.** Introduire un outil, un script ou un document Mind7 dans l'environnement client sans validation pose le problème symétrique : vous ajoutez un élément non contrôlé dans un SI dont vous n'êtes pas responsable.\n\n**Et si j'ai vraiment besoin de finir ce soir ?** La réponse est : accès distant validé par le client, ou report. Ce n'est pas de la rigidité administrative — c'est l'engagement que Mind7 a signé, et que vous portez en mission."
+        },
+        {
+          "title": "Ce qui circule légitimement",
+          "vigie": "Ce qui remonte en interne, c'est votre analyse. Pas les données qui l'ont produite.",
+          "body": "Cette règle ne vous interdit évidemment pas de travailler, ni de faire remonter l'information en interne. Elle porte sur **la matière**, pas sur le fond.\n\n**Ce qui circule légitimement vers Mind7 :**\n- Votre analyse, vos conclusions, vos recommandations\n- Un point d'avancement, une alerte sur un risque projet\n- Une synthèse **anonymisée** : les volumétries, les tendances, les enseignements — sans extraction brute ni identifiants réels\n- Votre retour d'expérience méthodologique\n\n**Ce qui ne circule pas :**\n- Les extractions de données, jeux de test issus de la production, exports d'utilisateurs\n- Les captures d'écran non caviardées\n- Les schémas d'architecture détaillés, configurations, adresses techniques\n- Les documents marqués confidentiels par le client\n\n**Un cas fréquent : la réunion interne.** Vous devez présenter l'avancement à votre manager. La bonne pratique est de préparer un support **construit pour Mind7**, pas de reprendre le livrable client tel quel. C'est un peu plus de travail. C'est aussi la différence entre une présentation et une fuite.\n\n**Cas particulier : les incidents.** Si vous constatez un problème de sécurité chez le client, vous le signalez selon **la procédure du client**, et vous informez votre manager Mind7 du fait qu'un incident a eu lieu — sans en détailler le contenu technique."
+        },
+        {
+          "title": "Cas concrets et fin de mission",
+          "vigie": "À la fin, on rend les clés : accès révoqués, données locales supprimées.",
+          "body": "**Le poste client est-il surveillé ?** Souvent, oui. Vos actions y sont journalisées, comme celles de n'importe quel utilisateur du SI client. Ce n'est ni anormal ni dirigé contre vous — mais cela signifie qu'un transfert de fichier laisse une trace, et qu'une explication pourra être demandée. Raison de plus pour rester dans le cadre.\n\n**Les outils personnels.** Utiliser son téléphone personnel pour photographier un tableau blanc contenant l'architecture client, ou un service de conversion en ligne pour un document client : ce sont des sorties de données, même bien intentionnées.\n\n**Le multi-clients.** Si vous intervenez chez plusieurs clients, la séparation doit être **totale**. Réutiliser un livrable, un script ou une méthode formalisée développée chez un client A pour un client B expose Mind7 à un risque contractuel sérieux. En cas de doute sur ce qui vous appartient, posez la question avant.\n\n**La fin de mission.** C'est le moment le plus souvent négligé, et pourtant systématiquement contrôlé en audit :\n- Suppression des données client sur tout support Mind7 ou personnel\n- Demande explicite de révocation de vos accès (ne comptez pas sur l'automatisme)\n- Restitution du matériel prêté, badge inclus\n- Aucun compte laissé actif « au cas où on rappellerait »\n\n**Le principe qui résume tout :** en fin de mission, il ne doit rien rester du client chez vous, et rien de vous chez le client."
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Vous devez terminer une analyse ce soir. Le fichier est sur le poste client. Que faites-vous ?",
+          "choices": [
+            "Je me l'envoie sur mon adresse Mind7, c'est une adresse professionnelle",
+            "Je le termine via un accès distant validé par le client, ou je reporte",
+            "Je le dépose sur mon espace cloud personnel, c'est temporaire",
+            "Je fais des captures d'écran, c'est moins risqué qu'un fichier"
+          ],
+          "answer": 1,
+          "explanation": "L'adresse Mind7 est un autre périmètre : l'envoi constitue déjà une sortie de données. Une capture d'écran est une copie comme une autre. La seule voie acceptable est l'accès distant validé, ou le report."
+        },
+        {
+          "question": "Vous devez présenter l'avancement de la mission en réunion interne Mind7. Quelle est la bonne pratique ?",
+          "choices": [
+            "Je reprends le livrable client tel quel, c'est plus rapide",
+            "J'envoie le livrable en pièce jointe avant la réunion",
+            "Je projette directement depuis le poste client",
+            "Je prépare un support Mind7 avec une synthèse anonymisée"
+          ],
+          "answer": 3,
+          "explanation": "Ce qui remonte en interne, c'est votre analyse — pas la matière qui l'a produite. Un support construit pour Mind7 demande un peu plus de travail : c'est la différence entre une présentation et une fuite."
+        },
+        {
+          "question": "Envoyer un document client vers votre adresse professionnelle Mind7 est acceptable puisqu'elle est professionnelle.",
+          "choices": [
+            "Vrai",
+            "Faux"
+          ],
+          "answer": 1,
+          "explanation": "Faux. Le caractère professionnel de l'adresse ne change rien : c'est un périmètre différent de celui du client. Le transfert constitue une sortie de données non autorisée, contraire à nos engagements contractuels."
+        },
+        {
+          "question": "Vous intervenez chez le client B. Pouvez-vous réutiliser un script développé chez le client A ?",
+          "choices": [
+            "Oui, c'est moi qui l'ai écrit",
+            "Non, sauf validation explicite : la séparation entre clients doit être totale",
+            "Oui, à condition d'en informer le client B",
+            "Oui, si je retire le nom du client A"
+          ],
+          "answer": 1,
+          "explanation": "La séparation entre clients est totale. Réutiliser un livrable ou un script produit dans le cadre d'une mission expose Mind7 à un risque contractuel sérieux. En cas de doute sur la propriété, on demande avant."
+        },
+        {
+          "question": "Vous constatez un problème de sécurité dans le SI du client. Que faites-vous ?",
+          "choices": [
+            "Je le corrige moi-même si j'en ai les droits",
+            "Je le signale selon la procédure du client, et j'informe mon manager qu'un incident a eu lieu",
+            "J'attends la fin de mission pour le mentionner dans le rapport",
+            "Je le signale au support IT Mind7 avec le détail technique"
+          ],
+          "answer": 1,
+          "explanation": "Le SI du client relève de la procédure d'incident du client. Votre manager Mind7 doit savoir qu'un incident a eu lieu, mais le détail technique n'a pas à sortir de l'environnement client."
+        },
+        {
+          "question": "En fin de mission, que faut-il faire des accès et des données locales ?",
+          "choices": [
+            "Attendre que le client les désactive de lui-même",
+            "Supprimer les données locales et demander explicitement la révocation des accès",
+            "Archiver les livrables, ils pourront resservir sur une mission similaire",
+            "Les conserver le temps de la période de garantie"
+          ],
+          "answer": 1,
+          "explanation": "Ne comptez jamais sur l'automatisme de la révocation : demandez-la explicitement. Le principe : il ne doit rien rester du client chez vous, et rien de vous chez le client. C'est un point systématiquement vérifié en audit."
+        }
+      ],
+      "recommendations": {
+        "high": "Vous maîtrisez la frontière entre les deux périmètres. Module suivant suggéré : « Télétravail et mobilité en mission ».",
+        "medium": "Revoyez la section « La règle des deux périmètres », puis refaites le quiz.",
+        "low": "Reprenez le micro-cours depuis le début : c'est le module le plus important de votre parcours consultant."
+      }
+    },
+    {
+      "id": "mission-teletravail-mobilite",
+      "themeId": "mission",
+      "title": "Télétravail et mobilité en mission",
+      "summary": "Travailler depuis chez soi, un train ou un espace partagé, sans exposer les données du client ni sortir du cadre autorisé.",
+      "duration": 6,
+      "level": "Essentiel",
+      "passScore": 80,
+      "aiGenerated": true,
+      "reviewedBy": "Équipe Sécurité",
+      "lessons": [
+        {
+          "title": "Le télétravail en mission n'est pas un droit acquis",
+          "vigie": "En mission, c'est le client qui décide. Votre accord Mind7 ne suffit pas.",
+          "body": "Point de départ souvent mal compris, et qui crée régulièrement des situations gênantes.\n\n**Quand vous êtes en mission, les modalités de télétravail dépendent du client**, pas uniquement de votre accord avec Mind7. Certains contrats l'interdisent purement et simplement, d'autres l'encadrent (nombre de jours, validation préalable, dispositifs techniques imposés).\n\nUn accord de télétravail Mind7 ne vous autorise donc pas automatiquement à travailler à distance sur une mission client. **La règle : on vérifie avant, on ne suppose pas.** En cas de doute, votre manager tranche.\n\n**Et l'étranger ?** C'est le cas le plus sensible. Travailler depuis un autre pays, même quelques jours, même en Europe, soulève des questions de conformité, de localisation des données et parfois de fiscalité. **Cela suppose toujours une validation préalable explicite** — jamais une décision individuelle prise depuis un aéroport.\n\nCe n'est pas de la bureaucratie : c'est ce que Mind7 a signé auprès du client, et que vous portez en son nom."
+        },
+        {
+          "title": "Le domicile : le poste et les autres",
+          "vigie": "Chez vous, les deux vrais sujets sont le partage du poste et ce qu'on entend de vos réunions.",
+          "body": "Le domicile est un environnement de confiance, mais pas un environnement contrôlé.\n\n**Le poste professionnel reste professionnel.** Il ne se prête pas — ni au conjoint pour une démarche administrative, ni aux enfants pour un devoir. Une session ouverte utilisée par un tiers, c'est un accès non maîtrisé à vos données client. Verrouillez dès que vous quittez la pièce : **Windows + L** est un réflexe qui vaut aussi chez soi.\n\n**Le réseau domestique.** Deux points suffisent : ne pas rester sur les identifiants d'administration par défaut de votre box, et appliquer ses mises à jour. Ce sont les deux seules choses vraiment attendues de vous.\n\n**L'environnement sonore.** C'est le risque le plus concret et le plus sous-estimé. Une visioconférence où l'on cite un nom de client, un montant, une architecture — dans une pièce de vie ou une fenêtre ouverte. Utilisez un casque, fermez la porte pour les sujets sensibles.\n\n**Et l'arrière-plan.** Un tableau blanc, des notes, un second écran visible en visio : floutez ou utilisez un arrière-plan neutre lorsque vous présentez.\n\n**Le papier.** Les impressions à domicile ne disparaissent pas dans une benne sécurisée. Le mieux est de ne pas imprimer ; sinon, on détruit, on ne jette pas."
+        },
+        {
+          "title": "Trains, cafés et espaces partagés",
+          "vigie": "Dans un train, votre voisin lit votre écran mieux que vous ne le croyez.",
+          "body": "**L'écran.** Dans un train, une salle d'attente ou un espace partagé, une personne voisine peut voir des noms, des messages ou des données affichées. Utilisez un **filtre de confidentialité**, placez-vous dos au mur lorsque c'est possible et reportez la consultation des documents sensibles.\n\n**La conversation téléphonique.** Une discussion professionnelle peut être entendue autour de vous. Si l'appel concerne un client, un incident ou des informations confidentielles, attendez d'être dans un endroit adapté.\n\n**Le réseau.** Pour un usage professionnel hors des locaux, privilégiez le **partage de connexion de votre téléphone** plutôt qu'un Wi-Fi public. Chez un client, respectez ses consignes et utilisez uniquement les moyens d'accès qu'il met à disposition ou qu'il impose.\n\nMéfiez-vous des réseaux dont le nom imite celui du lieu. Vérifiez le nom du réseau officiel et, en cas de doute, ne vous connectez pas.\n\n**Les bornes de recharge USB** peuvent permettre des échanges de données, et pas seulement fournir du courant. Utilisez votre propre chargeur sur une prise secteur ou une batterie externe."
+        },
+        {
+          "title": "Le matériel, et la perte",
+          "vigie": "Un portable volé et signalé dans l'heure, c'est un incident. Signalé trois jours après, c'est une crise.",
+          "body": "**En déplacement, le matériel ne se quitte pas des yeux.** Pas dans un coffre de voiture, même verrouillé — c'est le scénario de vol le plus courant. Pas en soute lors d'un vol. Pas sur une table pendant qu'on commande au comptoir.\n\n**Ce qui vous protège réellement en cas de perte**, ce n'est ni la chance ni la discrétion : c'est le chiffrement du disque, le verrouillage automatique et la capacité de l'IT à effacer l'appareil à distance. Ces trois dispositifs sont en place sur les postes administrés — à condition que vous ne les contourniez pas et que le poste soit resté à jour.\n\n**En cas de perte ou de vol : signalez immédiatement.** Pas à la fin du déplacement, pas le lundi suivant. Immédiatement, y compris un dimanche. Le délai est le seul facteur qui détermine si l'IT peut effacer l'appareil avant qu'il ne soit exploité.\n\nCela vaut pour l'ordinateur, mais aussi pour **le téléphone professionnel, le badge d'accès et les documents papier**. Un badge perdu est un accès physique en circulation.\n\n**Et si l'appareil réapparaît ?** Ne le remettez pas en service vous-même : signalez-le, l'IT vérifiera qu'il n'a pas été altéré pendant son absence.\n\nDéclarez la perte ou le vol via le <a href=\"https://mind7.atlassian.net/servicedesk/customer/portal/1\" target=\"_blank\" rel=\"noopener noreferrer\">Ouvrir le portail Sécurité</a>, puis contactez directement le Support IT si l'appareil ou le badge peut encore être utilisé."
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Vous êtes en mission et souhaitez télétravailler deux jours par semaine. Que faut-il vérifier ?",
+          "choices": [
+            "Seulement l'accord verbal d'un collègue de l'équipe client",
+            "Les modalités autorisées par le client, qui priment en mission",
+            "Uniquement que ma charge de travail le permet",
+            "Rien, mon accord de télétravail Mind7 s'applique partout"
+          ],
+          "answer": 1,
+          "explanation": "En mission, les modalités de télétravail dépendent du client : certains contrats l'interdisent, d'autres l'encadrent strictement. Un accord Mind7 ne vaut pas autorisation automatique. On vérifie avant, on ne suppose pas."
+        },
+        {
+          "question": "Vous devez consulter un document client pendant un trajet en train. Quelle est la bonne pratique ?",
+          "choices": [
+            "J'utilise le partage de connexion, un filtre de confidentialité et je reporte si le document est sensible",
+            "Le Wi-Fi du train convient si le site utilise HTTPS",
+            "Aucune précaution n'est nécessaire pour un trajet court",
+            "Je me connecte au réseau dont le nom ressemble à celui de l'opérateur"
+          ],
+          "answer": 0,
+          "explanation": "Privilégiez le partage de connexion, protégez l'écran des regards et reportez la consultation lorsque le document est sensible. Si vous travaillez dans l'environnement du client, respectez aussi ses consignes et les moyens d'accès qu'il fournit."
+        },
+        {
+          "question": "Votre conjoint vous demande d'utiliser votre poste professionnel pour une démarche administrative. Est-ce acceptable ?",
+          "choices": [
+            "Oui",
+            "Non"
+          ],
+          "answer": 1,
+          "explanation": ". Le poste professionnel ne se prête pas, même à domicile et même brièvement. Une session utilisée par un tiers constitue un accès non maîtrisé à vos données client."
+        },
+        {
+          "question": "Votre ordinateur professionnel est volé un vendredi soir. Quand signalez-vous ?",
+          "choices": [
+            "Après avoir déposé plainte, pour transmettre le récépissé",
+            "À la fin du déplacement",
+            "Immédiatement, y compris le week-end",
+            "Le lundi matin, à l'ouverture du support"
+          ],
+          "answer": 2,
+          "explanation": "Immédiatement, sans attendre. Le délai détermine si l'IT peut effacer l'appareil à distance avant qu'il ne soit exploité. La plainte se dépose ensuite — elle ne conditionne pas le signalement."
+        },
+        {
+          "question": "Vous souhaitez travailler une semaine depuis l'étranger pendant une mission. Que faire ?",
+          "choices": [
+            "Y aller, le poste fonctionne partout",
+            "Obtenir une validation préalable explicite avant le départ",
+            "Prévenir simplement mon manager une fois sur place",
+            "C'est autorisé si le pays est dans l'Union européenne"
+          ],
+          "answer": 1,
+          "explanation": "Le travail depuis l'étranger soulève des questions de conformité, de localisation des données et parfois de fiscalité — y compris en Europe. Il suppose toujours une validation préalable explicite, jamais une décision prise sur place."
+        },
+        {
+          "question": "Vous n'avez plus de batterie dans une gare. Que faites-vous ?",
+          "choices": [
+            "J'emprunte le câble d'un autre voyageur",
+            "J'utilise la borne de recharge USB publique",
+            "Je branche mon téléphone sur mon poste professionnel via un câble trouvé sur place",
+            "J'utilise mon propre chargeur sur une prise secteur, ou une batterie externe"
+          ],
+          "answer": 3,
+          "explanation": "Une borne USB publique peut transporter des données, pas seulement du courant. Votre propre chargeur sur prise secteur, ou une batterie externe, supprime le risque."
+        }
+      ],
+      "recommendations": {
+        "high": "Vos réflexes en mobilité sont solides. Module suivant suggéré : « IA générative : ce qu'on peut y mettre ».",
+        "medium": "Revoyez la section « Trains, cafés et espaces partagés », puis refaites le quiz.",
+        "low": "Reprenez le micro-cours, en particulier la partie sur le cadre du télétravail en mission."
+      }
+    }
+  ]
+}

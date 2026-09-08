@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reflex7 — Fiches mémo</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="icon" href="/assets/img/vigie-guide.png">
+</head>
+<body>
+<header class="topbar" id="topbar"></header>
+
+<main>
+  <div class="workspace-layout">
+    <aside class="side-nav" aria-label="Navigation du parcours">
+      <div class="side-nav-label">Mon espace</div>
+      <a class="side-nav-link" href="/"><span class="side-nav-icon">▦</span> Modules</a>
+      <a class="side-nav-link active" href="/fiches.html" aria-current="page"><span class="side-nav-icon">▤</span> Fiches mémo</a>
+      <a class="side-nav-link" href="/quiz.html"><span class="side-nav-icon">?</span> Quiz situations</a>
+    </aside>
+    <div class="workspace-content">
+      <div class="page-head">
+        <h1>Fiches mémo</h1>
+        <p>Retrouvez les réflexes essentiels après avoir validé un module.</p>
+      </div>
+
+      <div class="recap-toolbar">
+        <label class="search-field"><span aria-hidden="true">⌕</span><input type="search" id="recap-search" placeholder="Rechercher une fiche…" aria-label="Rechercher une fiche mémo"></label>
+        <div class="segmented" role="group" aria-label="Filtrer les fiches mémo">
+          <button class="filter-btn active" data-filter="all">Toutes <span id="count-all"></span></button>
+          <button class="filter-btn" data-filter="unlocked">Débloquées <span id="count-unlocked"></span></button>
+          <button class="filter-btn" data-filter="locked">Verrouillées <span id="count-locked"></span></button>
+        </div>
+        <p class="small muted" id="filter-summary" aria-live="polite"></p>
+      </div>
+      <section class="grid grid-2" id="recaps"></section>
+    </div>
+  </div>
+</main>
+<nav class="mobile-bottom-nav" aria-label="Navigation mobile">
+  <a href="/"><span>▦</span>Modules</a>
+  <a class="active" href="/fiches.html" aria-current="page"><span>▤</span>Fiches</a>
+  <a href="/quiz.html"><span>?</span>Quiz</a>
+</nav>
+
+<footer>Reflex7 · Fiches mémo personnelles · Usage pédagogique uniquement</footer>
+
+<script src="/assets/js/api.js"></script>
+<script>
+(async function () {
+  const user = await LMS.renderHeader('home');
+  if (!user) return;
+
+  const content = await LMS.getContent();
+  const recapContent = await LMS.getRecaps();
+  const progress = await LMS.getMyProgress();
+  const bravo = await LMS.pose('bravo');
+  const guide = await LMS.pose('guide');
+  const recapDefaults = recapContent.defaults || {};
+
+  const unlocked = module => !!(progress[module.id] && progress[module.id].passed);
+
+  function paint(filter) {
+    const query = document.getElementById('recap-search').value.toLowerCase().trim();
+    const visible = content.modules.filter(module => {
+      const isUnlocked = unlocked(module);
+      const recap = Object.assign({}, recapDefaults, (recapContent.modules || {})[module.id] || {});
+      const searchable = `${module.title} ${module.summary} ${recap.summary || ''}`.toLowerCase();
+      return (filter === 'all' || (filter === 'unlocked' && isUnlocked) || (filter === 'locked' && !isUnlocked)) && (!query || searchable.includes(query));
+    });
+
+    document.getElementById('recaps').innerHTML = visible.length ? visible.map(module => {
+      const isUnlocked = unlocked(module);
+      const recap = Object.assign({}, recapDefaults, (recapContent.modules || {})[module.id] || {});
+      return isUnlocked
+        ? `<a class="recap-card" href="/recap.html?m=${encodeURIComponent(module.id)}">
+            <div class="recap-card-art"><img src="${bravo}" alt=""></div>
+            <div><span class="badge ok">Débloquée</span><h3>${module.title}</h3><p>${recap.summary || 'Les réflexes essentiels, en une page.'}</p></div><span class="recap-arrow">→</span>
+          </a>`
+        : `<div class="recap-card locked">
+            <div class="recap-card-art"><img src="${guide}" alt=""></div>
+            <div><span class="badge">Verrouillée</span><h3>${module.title}</h3><p>${recap.lockedSummary || 'Validez le module pour débloquer votre fiche.'}</p></div><span class="recap-lock">⌑</span>
+          </div>`;
+    }).join('') : '<div class="card empty grid-empty">Aucune fiche ne correspond à ce filtre.</div>';
+
+    document.getElementById('filter-summary').textContent = `${visible.length} fiche${visible.length > 1 ? 's' : ''} affichée${visible.length > 1 ? 's' : ''}`;
+  }
+
+  const unlockedCount = content.modules.filter(unlocked).length;
+  document.getElementById('count-all').textContent = `(${content.modules.length})`;
+  document.getElementById('count-unlocked').textContent = `(${unlockedCount})`;
+  document.getElementById('count-locked').textContent = `(${content.modules.length - unlockedCount})`;
+  document.querySelectorAll('.filter-btn').forEach(button => {
+    button.onclick = () => {
+      document.querySelectorAll('.filter-btn').forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+      paint(button.dataset.filter);
+    };
+  });
+  document.getElementById('recap-search').oninput = () => {
+    const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+    paint(activeFilter);
+  };
+  paint('all');
+})();
+</script>
+</body>
+</html>
